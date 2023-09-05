@@ -30,6 +30,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		// 背景
+		Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
+
 		// 自機
 		player->Upadate(keys/*, preKeys*/);
 
