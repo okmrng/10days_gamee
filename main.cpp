@@ -34,7 +34,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
 
 		// 自機
-		player->Upadate(keys/*, preKeys*/);
+		player->Upadate(keys, preKeys);
 
 		///
 		/// ↑更新処理ここまで

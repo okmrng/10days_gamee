@@ -12,6 +12,11 @@ void PlayerBullet::Update()
 {
 	// 移動
 	pos_.x += velocity_;
+
+	// デス
+	if (pos_.x >= 1280.0f + radius_) {
+		isDead_ = true;
+	}
 }
 
 void PlayerBullet::Draw()
