@@ -2,8 +2,8 @@
 
 void Player::Initialize()
 {
-	radius_ = 10.0f;
-	pos_ = Vector2{ radius_ + 10.0f,360.0f };
+	radius_ = 20.0f;
+	pos_ = Vector2{ radius_ + 30.0f,360.0f };
 	velocity_ = 5.0f;
 }
 
