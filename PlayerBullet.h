@@ -3,6 +3,7 @@
 #include <Vector2.h>
 #include <Novice.h>
 #include "MathUtility.h"
+#include <stdint.h>
 
 /// <summary>
 /// 自機に弾
@@ -13,7 +14,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 pos, float velocity);
+	void Initialize(Vector2 pos, float velocity, int32_t power);
 
 	/// <summary>
 	/// 更新
@@ -34,6 +35,7 @@ public:
 	bool GetIsDead() { return isDead_; }
 	Vector2 GetCollisionPos() { return collisionPos_; }
 	Vector2 GetSize() { return size_; }
+	int32_t GetPower() { return power_; }
 	
 private:
 	float radius_;         // 半径
@@ -42,5 +44,6 @@ private:
 	Vector2 collisionPos_; // 当たり判定様の四角形の座標
 	Vector2 size_;         // 当たり判定用の四角形の幅
 	bool isDead_;          // デスフラグ
+	int32_t power_;        // パワー
 };
 

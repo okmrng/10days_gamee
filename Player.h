@@ -44,9 +44,10 @@ private:
 	float radius_;   // 半径
 	Vector2 pos_;    // 座標
 	float velocity_; // 速度
-	int32_t charge_; // 弾のチャージ
 
 	// 弾
 	std::list<PlayerBullet*> bullet_; // 弾のリスト
+	int32_t charge_;                  // 弾のチャージ
+	int32_t power_;                   // 弾のパワー
 };
 

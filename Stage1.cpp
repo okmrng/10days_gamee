@@ -103,6 +103,8 @@ void Stage1::AddBox(Vector2 pos, Vector2 size)
 	Box* obj = new Box();
 	// 初期化
 	obj->Initialize(pos, size);
+	// 自機をセット
+	obj->SetPlayer(player_);
 
 	box_.push_back(obj);
 }

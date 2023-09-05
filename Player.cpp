@@ -14,6 +14,7 @@ void Player::Initialize()
 	velocity_ = 5.0f;
 
 	charge_ = 0;
+	power_ = 0;
 }
 
 void Player::Upadate(char* keys, char* preKeys)
@@ -69,23 +70,28 @@ void Player::Attack(char* keys, char* preKeys)
 		float velocity = 0;
 		if (charge_ < 30) {
 			velocity = 4;
+			power_ = 1;
 		}
-		if ((charge_ >= 30) && (charge_ < 60)) {
-			velocity = 8;
+		else if ((charge_ >= 30) && (charge_ < 60)) {
+				velocity = 8;
+				power_ = 2;
 		}
-		if ((charge_ >= 60) && (charge_ < 90)) {
-			velocity = 12;
+		else if ((charge_ >= 60) && (charge_ < 90)) {
+				velocity = 12;
+				power_ = 3;
 		}
-		if ((charge_ >= 90) && (charge_ < 120)) {
-			velocity = 16;
+		else if ((charge_ >= 90) && (charge_ < 120)) {
+				velocity = 16;
+				power_ = 4;
 		}
-		if (charge_ >= 120) {
-			velocity = 20;
+		else if (charge_ >= 120) {
+				velocity = 20;
+				power_ = 5;
 		}
 
 		// 弾の生成と初期化
 		PlayerBullet* newBullet = new PlayerBullet();
-		newBullet->Initialize(pos_, velocity);
+		newBullet->Initialize(pos_, velocity, power_);
 		bullet_.push_back(newBullet);
 
 		// チャージ量リセット

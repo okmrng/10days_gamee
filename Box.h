@@ -3,6 +3,9 @@
 #include <Vector2.h>
 #include <Novice.h>
 
+// 前方宣言
+class Player;
+
 /// <summary>
 /// 押す箱
 /// </summary>
@@ -33,9 +36,19 @@ public:
 	Vector2 GetPos() { return pos_; }
 	Vector2 GetSize() { return size_; }
 
+	// セッター
+	void SetPlayer(Player* player) { player_ = player; }
+
 private:
-	Vector2 pos_;    // 座標
-	Vector2 size_;   // 横幅と縦幅
-	float velocity_; // 速度
+	// 箱
+	Vector2 pos_;        // 座標
+	Vector2 size_;       // 横幅と縦幅
+	float velocity_;     // 速度
+	float acceleration_; // 加速度
+	bool hit_;           // 当たったかの判定
+	bool stop_;          // 他の箱に当てた時にも動くのを防止
+
+	// 自機
+	Player* player_ = nullptr;
 };
 
