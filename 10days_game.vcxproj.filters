@@ -20,6 +20,12 @@
     <Filter Include="ヘッダー">
       <UniqueIdentifier>{a29ed95e-c319-4afb-bbff-9e4b039d9d01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー\自機">
+      <UniqueIdentifier>{5434e268-eeec-43b5-9b84-ddb1bca85347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース\自機">
+      <UniqueIdentifier>{750372f2-a8c1-40ef-b5ea-9deaac30170a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -42,7 +48,10 @@
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース</Filter>
+      <Filter>ソース\自機</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>ソース\自機</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +124,10 @@
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector4.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.h" />
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー</Filter>
+      <Filter>ヘッダー\自機</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>ヘッダー\自機</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
