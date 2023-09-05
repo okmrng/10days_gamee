@@ -53,7 +53,7 @@ void Player::Upadate(char* keys, char* preKeys)
 
 void Player::Attack(char* keys, char* preKeys)
 {
-	if (keys[DIK_SPACE] && (preKeys[DIK_SPACE] == 0)) {
+	if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
 		// 弾の生成と初期化
 		PlayerBullet* newBullet = new PlayerBullet();
 		newBullet->Initialize(pos_);
