@@ -53,6 +53,9 @@
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>ソース\自機</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>ヘッダー\自機</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
