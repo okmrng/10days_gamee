@@ -12,6 +12,8 @@ void Player::Initialize()
 	radius_ = 20.0f;
 	pos_ = Vector2{ radius_ + 30.0f,360.0f };
 	velocity_ = 5.0f;
+
+	charge_ = 0;
 }
 
 void Player::Upadate(char* keys, char* preKeys)
@@ -30,6 +32,15 @@ void Player::Upadate(char* keys, char* preKeys)
 	}
 	if (pos_.y <= radius_) {
 		pos_.y = radius_;
+	}
+
+	if (keys[DIK_SPACE]) {
+		if (charge_ <= 120) {
+			charge_++;
+		}
+		if (charge_ >= 120) {
+			charge_ = 120;
+		}
 	}
 
 	// 弾
@@ -54,10 +65,31 @@ void Player::Upadate(char* keys, char* preKeys)
 void Player::Attack(char* keys, char* preKeys)
 {
 	if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
+		// 弾の速度
+		float velocity = 0;
+		if (charge_ < 30) {
+			velocity = 4;
+		}
+		if ((charge_ >= 30) && (charge_ < 60)) {
+			velocity = 8;
+		}
+		if ((charge_ >= 60) && (charge_ < 90)) {
+			velocity = 12;
+		}
+		if ((charge_ >= 90) && (charge_ < 120)) {
+			velocity = 16;
+		}
+		if (charge_ >= 120) {
+			velocity = 20;
+		}
+
 		// 弾の生成と初期化
 		PlayerBullet* newBullet = new PlayerBullet();
-		newBullet->Initialize(pos_);
+		newBullet->Initialize(pos_, velocity);
 		bullet_.push_back(newBullet);
+
+		// チャージ量リセット
+		charge_ = 0;
 	}
 }
 
@@ -70,4 +102,6 @@ void Player::Draw()
 
 	// 自機
 	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, BLUE, kFillModeSolid);
+
+	Novice::ScreenPrintf(0, 0, "charge:%d", charge_);
 }

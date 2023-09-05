@@ -12,7 +12,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 pos);
+	void Initialize(Vector2 pos, float velocity);
 
 	/// <summary>
 	/// 更新
