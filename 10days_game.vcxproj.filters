@@ -26,6 +26,12 @@
     <Filter Include="ソース\自機">
       <UniqueIdentifier>{750372f2-a8c1-40ef-b5ea-9deaac30170a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー\シーン">
+      <UniqueIdentifier>{76bc326b-e70a-4c92-bc19-488a65067d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース\シーン">
+      <UniqueIdentifier>{964d58d0-55a8-4f03-a3e8-764b4789b3f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -55,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>ソース</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1.cpp">
+      <Filter>ソース\シーン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1.h">
+      <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

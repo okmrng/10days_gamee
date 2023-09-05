@@ -1,5 +1,5 @@
 #include <Novice.h>
-#include "Player.h"
+#include "Stage1.h"
 
 const char kWindowTitle[] = "10days_game";
 
@@ -13,9 +13,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
-	// 自機
-	Player* player = new Player();
-	player->Initialize();
+	// ステージ1
+	Stage1* stage1 = new Stage1();
+	stage1->Initialize();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -30,11 +30,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
-		// 背景
-		Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
-
-		// 自機
-		player->Upadate(keys, preKeys);
+		// ステージ1
+		stage1->Update(keys, preKeys);
 
 		///
 		/// ↑更新処理ここまで
@@ -44,8 +41,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
-		// 自機
-		player->Draw();
+		// ステージ1
+		stage1->Draw();
 
 		///
 		/// ↑描画処理ここまで
