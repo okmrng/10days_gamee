@@ -2,6 +2,10 @@
 
 #include <Novice.h>
 #include "Player.h"
+#include "Box.h"
+#include <list>
+#include <sstream>
+#include <cassert>
 
 /// <summary>
 /// ステージ1
@@ -25,9 +29,26 @@ public:
 	void Initialize();
 
 	/// <summary>
+	/// 箱発生データの読み込み
+	/// </summary>
+	void LoadData(const std::string& filename, std::stringstream& targetStream);
+
+	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update(char* keys, char* preKeys);
+
+	/// <summary>
+	/// 敵生成
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <param name="size">大きさ</param>
+	void AddBox(Vector2 pos, Vector2 size);
+
+	/// <summary>
+	/// 敵発生コマンドの更新
+	/// </summary>
+	void UpdateBoxComands();
 
 	/// <summary>
 	/// 描画
@@ -36,5 +57,9 @@ public:
 
 private:
 	Player* player_ = nullptr; // 自機
+	std::list<Box*> box_;      // 箱
+
+	// 発生コマンド
+	std::stringstream boxPopComands_;
 };
 
