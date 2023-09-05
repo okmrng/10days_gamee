@@ -39,6 +39,11 @@ public:
 	void Update(char* keys, char* preKeys);
 
 	/// <summary>
+	/// 当たり判定
+	/// </summary>
+	void CheckAllCollision();
+
+	/// <summary>
 	/// 敵生成
 	/// </summary>
 	/// <param name="pos">座標</param>

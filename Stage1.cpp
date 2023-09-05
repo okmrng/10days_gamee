@@ -60,6 +60,41 @@ void Stage1::Update(char* keys, char* preKeys)
 	for (Box* box : box_) {
 		box->Update();
 	}
+
+	CheckAllCollision();
+}
+
+void Stage1::CheckAllCollision()
+{
+	// 判定用の変数
+	Vector2 posA, posB;   // 座標
+	Vector2 sizeA, sizeB; // 幅
+
+	// 自弾リストの取得
+	const std::list<PlayerBullet*>& playerBullet = player_->GetBullet();
+
+	// 自弾と箱の当たり判定
+	#pragma region
+	for (Box* box : box_) {
+		for (PlayerBullet* pBullet : playerBullet) {
+			// 箱
+			posA = box->GetPos();   // 座標
+			sizeA = box->GetSize(); // 幅
+
+			// 自弾
+			posB = pBullet->GetCollisionPos(); // 座標
+			sizeB = pBullet->GetSize();		   // 幅
+
+			if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x && 
+				posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+				// 箱
+				box->OnCollision();
+				// 自弾
+				pBullet->OnCollision();
+			}
+		}
+	}
+	#pragma endregion
 }
 
 void Stage1::AddBox(Vector2 pos, Vector2 size)

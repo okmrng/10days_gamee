@@ -65,6 +65,9 @@
     <ClCompile Include="Stage1.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
+    <ClCompile Include="MathUtility.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -146,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="Stage1.h">
       <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtility.h">
+      <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

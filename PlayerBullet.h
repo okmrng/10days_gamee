@@ -2,6 +2,7 @@
 
 #include <Vector2.h>
 #include <Novice.h>
+#include "MathUtility.h"
 
 /// <summary>
 /// 自機に弾
@@ -20,17 +21,26 @@ public:
 	void Update();
 
 	/// <summary>
+	/// 当たり判定が働いたときの処理
+	/// </summary>
+	void OnCollision();
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
 
 	//ゲッター
 	bool GetIsDead() { return isDead_; }
+	Vector2 GetCollisionPos() { return collisionPos_; }
+	Vector2 GetSize() { return size_; }
 	
 private:
-	float radius_;   // 半径
-	Vector2 pos_;    // 座標
-	float velocity_; // 速度
-	bool isDead_;    // デスフラグ
+	float radius_;         // 半径
+	Vector2 pos_;          // 座標
+	float velocity_;       // 速度
+	Vector2 collisionPos_; // 当たり判定様の四角形の座標
+	Vector2 size_;         // 当たり判定用の四角形の幅
+	bool isDead_;          // デスフラグ
 };
 

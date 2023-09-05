@@ -36,6 +36,9 @@ public:
 	/// </summary>
 	void Draw();
 
+	// ゲッター
+	std::list<PlayerBullet*>& GetBullet() { return bullet_; }
+
 private:
 	// 自機情報
 	float radius_;   // 半径

@@ -12,6 +12,11 @@ void Box::Update()
 
 }
 
+void Box::OnCollision()
+{
+
+}
+
 void Box::Draw()
 {
 	Novice::DrawBox(int(pos_.x), int(pos_.y), int(size_.x), int(size_.y), 0.0f, GREEN, kFillModeSolid);

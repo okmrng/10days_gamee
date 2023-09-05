@@ -20,9 +20,18 @@ public:
 	void Update();
 
 	/// <summary>
+	/// 当たり判定が働いたときの処理
+	/// </summary>
+	void OnCollision();
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
+
+	// ゲッター
+	Vector2 GetPos() { return pos_; }
+	Vector2 GetSize() { return size_; }
 
 private:
 	Vector2 pos_;    // 座標
