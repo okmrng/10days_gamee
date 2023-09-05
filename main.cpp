@@ -57,6 +57,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 	}
 
+	// 解放
+	delete stage1;
+
 	// ライブラリの終了
 	Novice::Finalize();
 	return 0;
