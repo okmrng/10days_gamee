@@ -1,4 +1,4 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 
 void Player::Initialize()
 {
@@ -7,9 +7,9 @@ void Player::Initialize()
 	velocity_ = 5.0f;
 }
 
-void Player::Upadate(char* keys, char* preKeys)
+void Player::Upadate(char* keys/*, char* preKeys*/)
 {
-	// ˆÚ“®
+	// ç§»å‹•
 	if (keys[DIK_DOWN]) {
 		pos_.y += velocity_;
 	}
@@ -17,7 +17,7 @@ void Player::Upadate(char* keys, char* preKeys)
 		pos_.y -= velocity_;
 	}
 
-	// ”ÍˆÍ§ŒÀ
+	// ç¯„å›²åˆ¶é™
 	if (pos_.y >= 720.0f - radius_) {
 		pos_.y = 720.0f - radius_;
 	}

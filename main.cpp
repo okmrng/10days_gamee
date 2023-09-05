@@ -1,4 +1,5 @@
 #include <Novice.h>
+#include "Player.h"
 
 const char kWindowTitle[] = "10days_game";
 
@@ -11,6 +12,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
 	char preKeys[256] = {0};
+
+	// 自機
+	Player* player = new Player();
+	player->Initialize();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -25,6 +30,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		// 自機
+		player->Upadate(keys/*, preKeys*/);
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -32,6 +40,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
+
+		// 自機
+		player->Draw();
 
 		///
 		/// ↑描画処理ここまで

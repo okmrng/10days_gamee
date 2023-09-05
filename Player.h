@@ -1,33 +1,33 @@
-#pragma once
+ï»¿#pragma once
 
 #include <Vector2.h>
 #include <Novice.h>
 
 /// <summary>
-/// ©‹@ƒNƒ‰ƒX
+/// è‡ªæ©Ÿã‚¯ãƒ©ã‚¹
 /// </summary>
 class Player
 {
 public:
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	///  XV
+	///  æ›´æ–°
 	/// </summary>
-	void Upadate(char* keys, char* preKeys);
+	void Upadate(char* keys/*, char* preKeys*/);
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
 private:
-	// ©‹@î•ñ
-	float radius_;     // ”¼Œa
-	Vector2 pos_;      // À•W
-	float velocity_;   // ‘¬“x
+	// è‡ªæ©Ÿæƒ…å ±
+	float radius_;     // åŠå¾„
+	Vector2 pos_;      // åº§æ¨™
+	float velocity_;   // é€Ÿåº¦
 };
 
