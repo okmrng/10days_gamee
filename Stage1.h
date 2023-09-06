@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Box.h"
 #include "MetalBox.h"
+#include "IceBox.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -59,6 +60,13 @@ public:
 	void AddMetalBox(Vector2 pos, Vector2 size);
 
 	/// <summary>
+	/// 氷生成
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <param name="size">大きさ</param>
+	void AddIceBox(Vector2 pos, Vector2 size);
+
+	/// <summary>
 	/// 敵発生コマンドの更新
 	/// </summary>
 	void UpdateBoxComands();
@@ -72,8 +80,9 @@ private:
 	Player* player_ = nullptr; // 自機
 
 	// 箱
-	std::list<Box*> box_;      // 木箱
-	std::list<MetalBox*> metalBox_;      // 金属製の箱
+	std::list<Box*> box_;           // 木箱
+	std::list<MetalBox*> metalBox_; // 金属製の箱
+	std::list<IceBox*> iceBox_;     // 氷
 
 	// 発生コマンド
 	std::stringstream boxPopComands_;
