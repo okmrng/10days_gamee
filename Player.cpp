@@ -14,6 +14,7 @@ void Player::Initialize(int32_t canShoot)
 	charge_ = 0;
 	power_ = 0;
 	canShoot_ = canShoot;
+	isBullet_ = true;
 }
 
 void Player::Upadate(char* keys, char* preKeys)
@@ -73,34 +74,36 @@ void Player::Upadate(char* keys, char* preKeys)
 void Player::Attack(char* keys, char* preKeys)
 {
 	if (!bullet_) {
-		if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
-			// パワー
-			if (charge_ < 30) {
-				power_ = 1;
-			}
-			else if ((charge_ >= 30) && (charge_ < 60)) {
-				power_ = 2;
-			}
-			else if ((charge_ >= 60) && (charge_ < 90)) {
-				power_ = 3;
-			}
-			else if ((charge_ >= 90) && (charge_ < 120)) {
-				power_ = 4;
-			}
-			else if (charge_ >= 120) {
-				power_ = 5;
-			}
+		if (isBullet_) {
+			if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
+				// パワー
+				if (charge_ < 30) {
+					power_ = 1;
+				}
+				else if ((charge_ >= 30) && (charge_ < 60)) {
+					power_ = 2;
+				}
+				else if ((charge_ >= 60) && (charge_ < 90)) {
+					power_ = 3;
+				}
+				else if ((charge_ >= 90) && (charge_ < 120)) {
+					power_ = 4;
+				}
+				else if (charge_ >= 120) {
+					power_ = 5;
+				}
 
-			// 弾の生成と初期化
-			PlayerBullet* newBullet = new PlayerBullet();
-			newBullet->Initialize(pos_, power_);
-			bullet_ = newBullet;
+				// 弾の生成と初期化
+				PlayerBullet* newBullet = new PlayerBullet();
+				newBullet->Initialize(pos_, power_);
+				bullet_ = newBullet;
 
-			// チャージ量リセット
-			charge_ = 0;
+				// チャージ量リセット
+				charge_ = 0;
 
-			// 弾が撃てる数を減らす
-			canShoot_ -= 1;
+				// 弾が撃てる数を減らす
+				canShoot_ -= 1;
+			}
 		}
 	}
 }

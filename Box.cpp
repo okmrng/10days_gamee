@@ -37,8 +37,12 @@ void Box::Update()
 		velocity_ -= acceleration_;
 		if (velocity_ <= 0) {
 			velocity_ = 0;
+
 			stop_ = true;
+
+			player_->SetIsBullet(true);
 		}
+
 		// 移動
 		if (!stop_) {
 			pos_.x += velocity_;
@@ -51,6 +55,7 @@ void Box::OnCollision()
 {
 	hit_ = true;
 	stop_ = false;
+	player_->SetIsBullet(false);
 }
 
 void Box::Draw()

@@ -46,6 +46,9 @@ public:
 	Vector2 GetBulletSize();
 	int32_t GetBulletPower();
 
+	// セッター
+	void SetIsBullet(bool isBullet) { isBullet_ = isBullet; }
+
 private:
 	// 自機情報
 	float radius_;   // 半径
@@ -57,5 +60,6 @@ private:
 	int32_t charge_;                  // 弾のチャージ
 	int32_t power_;                   // 弾のパワー
 	int32_t canShoot_;                // 弾を撃つことができる回数
+	bool isBullet_;                   // 弾フラグ
 };
 
