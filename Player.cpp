@@ -34,12 +34,14 @@ void Player::Upadate(char* keys, char* preKeys)
 		pos_.y = radius_;
 	}
 
-	if (keys[DIK_SPACE]) {
-		if (charge_ <= 120) {
-			charge_++;
-		}
-		if (charge_ >= 120) {
-			charge_ = 120;
+	if (!bullet_) {
+		if (keys[DIK_SPACE]) {
+			if (charge_ <= 120) {
+				charge_++;
+			}
+			if (charge_ >= 120) {
+				charge_ = 120;
+			}
 		}
 	}
 
@@ -70,34 +72,36 @@ void Player::Upadate(char* keys, char* preKeys)
 
 void Player::Attack(char* keys, char* preKeys)
 {
-	if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
-		// パワー
-		if (charge_ < 30) {
-			power_ = 1;
-		}
-		else if ((charge_ >= 30) && (charge_ < 60)) {
+	if (!bullet_) {
+		if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
+			// パワー
+			if (charge_ < 30) {
+				power_ = 1;
+			}
+			else if ((charge_ >= 30) && (charge_ < 60)) {
 				power_ = 2;
-		}
-		else if ((charge_ >= 60) && (charge_ < 90)) {
+			}
+			else if ((charge_ >= 60) && (charge_ < 90)) {
 				power_ = 3;
-		}
-		else if ((charge_ >= 90) && (charge_ < 120)) {
+			}
+			else if ((charge_ >= 90) && (charge_ < 120)) {
 				power_ = 4;
-		}
-		else if (charge_ >= 120) {
+			}
+			else if (charge_ >= 120) {
 				power_ = 5;
+			}
+
+			// 弾の生成と初期化
+			PlayerBullet* newBullet = new PlayerBullet();
+			newBullet->Initialize(pos_, power_);
+			bullet_ = newBullet;
+
+			// チャージ量リセット
+			charge_ = 0;
+
+			// 弾が撃てる数を減らす
+			canShoot_ -= 1;
 		}
-
-		// 弾の生成と初期化
-		PlayerBullet* newBullet = new PlayerBullet();
-		newBullet->Initialize(pos_, power_);
-		bullet_ = newBullet;
-
-		// チャージ量リセット
-		charge_ = 0;
-
-		// 弾が撃てる数を減らす
-		canShoot_ -= 1;
 	}
 }
 
