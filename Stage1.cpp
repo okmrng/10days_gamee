@@ -17,6 +17,9 @@ Stage1::~Stage1()
 	for (IceBox* iceBox : iceBox_) {
 		delete iceBox;
 	}
+	for (TvBox* tvBox : tvBox_) {
+		delete tvBox;
+	}
 }
 
 void Stage1::Initialize()
@@ -76,6 +79,11 @@ void Stage1::Update(char* keys, char* preKeys)
 	// 氷
 	for (IceBox* iceBox : iceBox_) {
 		iceBox->Update();
+	}
+
+	// tv
+	for (TvBox* tvBox : tvBox_) {
+		tvBox->Update();
 	}
 
 	// 当たり判定
@@ -147,6 +155,26 @@ void Stage1::CheckAllCollision()
 		}
 	}
 	#pragma endregion
+
+	// 自弾とtvの当たり判定
+	#pragma region
+	// 自弾
+	posB = player_->GetBulletCollisionPos(); // 座標
+	sizeB = player_->GetBulletSize();		   // 幅
+	for (TvBox* tvBox : tvBox_) {
+		// 箱
+		posA = tvBox->GetPos();   // 座標
+		sizeA = tvBox->GetSize(); // 幅
+
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			// 箱
+			tvBox->OnCollision();
+			// 自弾
+			player_->BulletOnCollision();
+		}
+	}
+	#pragma endregion
 }
 
 void Stage1::AddBox(Vector2 pos, Vector2 size)
@@ -183,6 +211,18 @@ void Stage1::AddIceBox(Vector2 pos, Vector2 size)
 	obj->SetPlayer(player_);
 
 	iceBox_.push_back(obj);
+}
+
+void Stage1::AddTvBox(Vector2 pos, Vector2 size)
+{
+	// 弾の生成
+	TvBox* obj = new TvBox();
+	// 初期化
+	obj->Initialize(pos, size);
+	// 自機をセット
+	obj->SetPlayer(player_);
+
+	tvBox_.push_back(obj);
 }
 
 void Stage1::UpdateBoxComands()
@@ -238,6 +278,9 @@ void Stage1::UpdateBoxComands()
 			if (kinds == 3) {
 				AddIceBox(Vector2(posX, posY), Vector2(width, height));
 			}
+			if (kinds == 4) {
+				AddTvBox(Vector2(posX, posY), Vector2(width, height));
+			}
 		}
 	}
 }
@@ -264,5 +307,10 @@ void Stage1::Draw()
 	// 氷
 	for (IceBox* iceBox : iceBox_) {
 		iceBox->Draw();
+	}
+
+	// tv
+	for (TvBox* tvBox : tvBox_) {
+		tvBox->Draw();
 	}
 }

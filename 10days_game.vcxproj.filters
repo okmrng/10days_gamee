@@ -80,6 +80,9 @@
     <ClCompile Include="IceBox.cpp">
       <Filter>ソース\箱</Filter>
     </ClCompile>
+    <ClCompile Include="TvBox.cpp">
+      <Filter>ソース\箱</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -169,6 +172,9 @@
       <Filter>ヘッダー\箱</Filter>
     </ClInclude>
     <ClInclude Include="IceBox.h">
+      <Filter>ヘッダー\箱</Filter>
+    </ClInclude>
+    <ClInclude Include="TvBox.h">
       <Filter>ヘッダー\箱</Filter>
     </ClInclude>
   </ItemGroup>

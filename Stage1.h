@@ -5,6 +5,7 @@
 #include "Box.h"
 #include "MetalBox.h"
 #include "IceBox.h"
+#include "TvBox.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -67,6 +68,13 @@ public:
 	void AddIceBox(Vector2 pos, Vector2 size);
 
 	/// <summary>
+	/// tv生成
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <param name="size">大きさ</param>
+	void AddTvBox(Vector2 pos, Vector2 size);
+
+	/// <summary>
 	/// 敵発生コマンドの更新
 	/// </summary>
 	void UpdateBoxComands();
@@ -83,6 +91,7 @@ private:
 	std::list<Box*> box_;           // 木箱
 	std::list<MetalBox*> metalBox_; // 金属製の箱
 	std::list<IceBox*> iceBox_;     // 氷
+	std::list<TvBox*> tvBox_;       // tv
 
 	// 発生コマンド
 	std::stringstream boxPopComands_;
