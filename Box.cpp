@@ -10,6 +10,7 @@ void Box::Initialize(Vector2 pos, Vector2 size)
 	acceleration_ = 1;
 	hit_ = false;
 	stop_ = false;
+	texture_ = Novice::LoadTexture("./resource/sprite/wood-Box.png");
 }
 
 void Box::Update()
@@ -60,5 +61,5 @@ void Box::OnCollision()
 
 void Box::Draw()
 {
-	Novice::DrawBox(int(pos_.x), int(pos_.y), int(size_.x), int(size_.y), 0.0f, GREEN, kFillModeSolid);
+	Novice::DrawSprite(int(pos_.x), int(pos_.y), texture_, 1, 1, 0.0f, WHITE);
 }
