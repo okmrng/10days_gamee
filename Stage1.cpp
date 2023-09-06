@@ -11,6 +11,9 @@ Stage1::~Stage1()
 	for (Box* box : box_) {
 		delete box;
 	}
+	for (MetalBox* metalBox : metalBox_) {
+		delete metalBox;
+	}
 }
 
 void Stage1::Initialize()
@@ -57,10 +60,17 @@ void Stage1::Update(char* keys, char* preKeys)
 
 	// 箱
 	UpdateBoxComands();
+	// 木箱
 	for (Box* box : box_) {
 		box->Update();
 	}
 
+	//	金属製の箱
+	for (MetalBox* metalBox : metalBox_) {
+		metalBox->Update();
+	}
+
+	// 当たり判定
 	CheckAllCollision();
 }
 
@@ -70,7 +80,7 @@ void Stage1::CheckAllCollision()
 	Vector2 posA, posB;   // 座標
 	Vector2 sizeA, sizeB; // 幅
 
-	// 自弾と箱の当たり判定
+	// 自弾と木箱の当たり判定
 	#pragma region
 	// 自弾
 	posB = player_->GetBulletCollisionPos(); // 座標
@@ -89,6 +99,26 @@ void Stage1::CheckAllCollision()
 		}
 	}
 	#pragma endregion
+
+	// 自弾と金属製の箱の当たり判定
+	#pragma region
+	// 自弾
+	posB = player_->GetBulletCollisionPos(); // 座標
+	sizeB = player_->GetBulletSize();		   // 幅
+	for (MetalBox* metalBox : metalBox_) {
+		// 箱
+		posA = metalBox->GetPos();   // 座標
+		sizeA = metalBox->GetSize(); // 幅
+
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			// 箱
+			metalBox->OnCollision();
+			// 自弾
+			player_->BulletOnCollision();
+		}
+	}
+	#pragma endregion
 }
 
 void Stage1::AddBox(Vector2 pos, Vector2 size)
@@ -101,6 +131,18 @@ void Stage1::AddBox(Vector2 pos, Vector2 size)
 	obj->SetPlayer(player_);
 
 	box_.push_back(obj);
+}
+
+void Stage1::AddMetalBox(Vector2 pos, Vector2 size)
+{
+	// 弾の生成
+	MetalBox* obj = new MetalBox();
+	// 初期化
+	obj->Initialize(pos, size);
+	// 自機をセット
+	obj->SetPlayer(player_);
+
+	metalBox_.push_back(obj);
 }
 
 void Stage1::UpdateBoxComands()
@@ -143,7 +185,16 @@ void Stage1::UpdateBoxComands()
 			getline(line_stream, word, ',');
 			float height = (float)std::atof(word.c_str());
 
-			AddBox(Vector2(posX, posY), Vector2(width, height));
+			// 敵の種類
+			getline(line_stream, word, ',');
+			int32_t kinds = atoi(word.c_str());
+
+			if(kinds == 1){
+				AddBox(Vector2(posX, posY), Vector2(width, height));
+			}
+			if (kinds == 2) {
+				AddMetalBox(Vector2(posX, posY), Vector2(width, height));
+			}
 		}
 	}
 }
@@ -157,7 +208,13 @@ void Stage1::Draw()
 	player_->Draw();
 
 	// 箱
+	// 木箱
 	for (Box* box : box_) {
 		box->Draw();
+	}
+
+	// 金属製の箱
+	for (MetalBox* metalBox : metalBox_) {
+		metalBox->Draw();
 	}
 }

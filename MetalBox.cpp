@@ -7,7 +7,7 @@ void MetalBox::Initialize(Vector2 pos, Vector2 size)
 	pos_ = pos;
 	size_ = size;
 	velocity_ = 0;
-	acceleration_ = 1;
+	acceleration_ = 1.5;
 	hit_ = false;
 	stop_ = false;
 	texture_ = Novice::LoadTexture("./resource/sprite/metal-Box.png");

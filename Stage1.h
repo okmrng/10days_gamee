@@ -3,6 +3,7 @@
 #include <Novice.h>
 #include "Player.h"
 #include "Box.h"
+#include "MetalBox.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -44,11 +45,18 @@ public:
 	void CheckAllCollision();
 
 	/// <summary>
-	/// 敵生成
+	/// 木箱生成
 	/// </summary>
 	/// <param name="pos">座標</param>
 	/// <param name="size">大きさ</param>
 	void AddBox(Vector2 pos, Vector2 size);
+
+	/// <summary>
+	/// 金属製の箱生成
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <param name="size">大きさ</param>
+	void AddMetalBox(Vector2 pos, Vector2 size);
 
 	/// <summary>
 	/// 敵発生コマンドの更新
@@ -62,7 +70,10 @@ public:
 
 private:
 	Player* player_ = nullptr; // 自機
-	std::list<Box*> box_;      // 箱
+
+	// 箱
+	std::list<Box*> box_;      // 木箱
+	std::list<MetalBox*> metalBox_;      // 金属製の箱
 
 	// 発生コマンド
 	std::stringstream boxPopComands_;
