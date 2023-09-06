@@ -14,26 +14,21 @@ void Box::Initialize(Vector2 pos, Vector2 size)
 
 void Box::Update()
 {
-	// 自弾リストの取得
-	const std::list<PlayerBullet*>& playerBullet = player_->GetBullet();
-
 	// パワーによって速度を変える
-	for (PlayerBullet* pBullet : playerBullet) {
-		if (pBullet->GetPower() == 1) {
-			velocity_ = 10;
-		}
-		else if (pBullet->GetPower() == 2) {
-			velocity_ = 20;
-		}
-		else if (pBullet->GetPower() == 3) {
-			velocity_ = 30;
-		}
-		else if (pBullet->GetPower() == 4) {
-			velocity_ = 40;
-		}
-		else if (pBullet->GetPower() == 5) {
-			velocity_ = 50;
-		}
+	if (player_->GetBulletPower() == 1) {
+		velocity_ = 10;
+	}
+	else if (player_->GetBulletPower() == 2) {
+		velocity_ = 20;
+	}
+	else if (player_->GetBulletPower() == 3) {
+		velocity_ = 30;
+	}
+	else if (player_->GetBulletPower() == 4) {
+		velocity_ = 40;
+	}
+	else if (player_->GetBulletPower() == 5) {
+		velocity_ = 50;
 	}
 
 	// 当たった時の処理

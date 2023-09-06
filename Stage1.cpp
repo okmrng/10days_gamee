@@ -70,28 +70,22 @@ void Stage1::CheckAllCollision()
 	Vector2 posA, posB;   // 座標
 	Vector2 sizeA, sizeB; // 幅
 
-	// 自弾リストの取得
-	const std::list<PlayerBullet*>& playerBullet = player_->GetBullet();
-
 	// 自弾と箱の当たり判定
 	#pragma region
+	// 自弾
+	posB = player_->GetBulletCollisionPos(); // 座標
+	sizeB = player_->GetBulletSize();		   // 幅
 	for (Box* box : box_) {
-		for (PlayerBullet* pBullet : playerBullet) {
+		// 箱
+		posA = box->GetPos();   // 座標
+		sizeA = box->GetSize(); // 幅
+
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			// 箱
-			posA = box->GetPos();   // 座標
-			sizeA = box->GetSize(); // 幅
-
+			box->OnCollision();
 			// 自弾
-			posB = pBullet->GetCollisionPos(); // 座標
-			sizeB = pBullet->GetSize();		   // 幅
-
-			if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x && 
-				posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
-				// 箱
-				box->OnCollision();
-				// 自弾
-				pBullet->OnCollision();
-			}
+			player_->BulletOnCollision();
 		}
 	}
 	#pragma endregion

@@ -14,7 +14,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 pos, float velocity, int32_t power);
+	void Initialize(Vector2 pos, int32_t power);
 
 	/// <summary>
 	/// 更新

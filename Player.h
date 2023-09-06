@@ -32,12 +32,19 @@ public:
 	void Attack(char* keys, char* preKeys);
 
 	/// <summary>
+	/// 弾の当たった時の処理
+	/// </summary>
+	void BulletOnCollision();
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
 
 	// ゲッター
-	std::list<PlayerBullet*>& GetBullet() { return bullet_; }
+	Vector2 GetBulletCollisionPos();
+	Vector2 GetBulletSize();
+	int32_t GetBulletPower();
 
 private:
 	// 自機情報
@@ -46,7 +53,7 @@ private:
 	float velocity_; // 速度
 
 	// 弾
-	std::list<PlayerBullet*> bullet_; // 弾のリスト
+	PlayerBullet* bullet_ = nullptr;  // 弾のリスト
 	int32_t charge_;                  // 弾のチャージ
 	int32_t power_;                   // 弾のパワー
 	int32_t canShoot_;                // 弾を撃つことができる回数

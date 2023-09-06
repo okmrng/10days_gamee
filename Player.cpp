@@ -2,9 +2,7 @@
 
 Player::~Player()
 {
-	for (PlayerBullet* bullet : bullet_) {
-		delete bullet;
-	}
+	delete bullet_;
 }
 
 void Player::Initialize(int32_t canShoot)
@@ -52,18 +50,17 @@ void Player::Upadate(char* keys, char* preKeys)
 	}
 
 	// 更新
-	for (PlayerBullet* bullet : bullet_) {
-		bullet->Update();
+	if (bullet_) {
+		bullet_->Update();
 	}
 
 	// デスフラグ立ったら弾削除
-	bullet_.remove_if([](PlayerBullet* bullet) {
-		if (bullet->GetIsDead()) {
-			delete bullet;
-			return true;
+	if (bullet_) {
+		if (bullet_->GetIsDead()) {
+			delete bullet_;
+			bullet_ = nullptr;
 		}
-		return false;
-	});
+	}
 
 	// 弾が撃てなくなった後にチャージリセット
 	if (canShoot_ <= 0) {
@@ -74,33 +71,27 @@ void Player::Upadate(char* keys, char* preKeys)
 void Player::Attack(char* keys, char* preKeys)
 {
 	if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
-		// 弾の速度
-		float velocity = 0;
+		// パワー
 		if (charge_ < 30) {
-			velocity = 4;
 			power_ = 1;
 		}
 		else if ((charge_ >= 30) && (charge_ < 60)) {
-				velocity = 8;
 				power_ = 2;
 		}
 		else if ((charge_ >= 60) && (charge_ < 90)) {
-				velocity = 12;
 				power_ = 3;
 		}
 		else if ((charge_ >= 90) && (charge_ < 120)) {
-				velocity = 16;
 				power_ = 4;
 		}
 		else if (charge_ >= 120) {
-				velocity = 20;
 				power_ = 5;
 		}
 
 		// 弾の生成と初期化
 		PlayerBullet* newBullet = new PlayerBullet();
-		newBullet->Initialize(pos_, velocity, power_);
-		bullet_.push_back(newBullet);
+		newBullet->Initialize(pos_, power_);
+		bullet_ = newBullet;
 
 		// チャージ量リセット
 		charge_ = 0;
@@ -110,11 +101,16 @@ void Player::Attack(char* keys, char* preKeys)
 	}
 }
 
+void Player::BulletOnCollision()
+{
+	bullet_->OnCollision();
+}
+
 void Player::Draw()
 {
 	// 弾
-	for (PlayerBullet* bullet : bullet_) {
-		bullet->Draw();
+	if (bullet_) {
+		bullet_->Draw();
 	}
 
 	// 自機
@@ -125,4 +121,28 @@ void Player::Draw()
 	Novice::ScreenPrintf(0, 0, "charge:%d", charge_);
 	Novice::ScreenPrintf(0, 20, "canShoot:%d", canShoot_);
 #endif // _DEBUG
+}
+
+Vector2 Player::GetBulletCollisionPos()
+{
+	if (bullet_) {
+		return bullet_->GetCollisionPos();
+	}
+	else { return { -1000,-1000 }; }
+}
+
+Vector2 Player::GetBulletSize()
+{
+	if (bullet_) {
+		return bullet_->GetSize();
+	}
+	else { return { 0,0 }; }
+}
+
+int32_t Player::GetBulletPower()
+{
+	if(bullet_){
+		return bullet_->GetPower();
+	}
+	else{ return 0; }
 }

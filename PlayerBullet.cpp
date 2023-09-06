@@ -1,10 +1,10 @@
 ﻿#include "PlayerBullet.h"
 
-void PlayerBullet::Initialize(Vector2 pos, float velocity, int32_t power)
+void PlayerBullet::Initialize(Vector2 pos, int32_t power)
 {
 	radius_ = 10.0f;
 	pos_ = pos;
-	velocity_ = velocity;
+	velocity_ = 10.0f;
 	collisionPos_ = pos_;
 	size_ = Vector2(20.0f, 20.0f);
 	isDead_ = false;
