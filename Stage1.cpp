@@ -17,7 +17,7 @@ void Stage1::Initialize()
 {
 	// 自機
 	player_ = new Player();
-	player_->Initialize();
+	player_->Initialize(5);
 
 	// コマンド
 	LoadData("resource/csv/boxData.csv", boxPopComands_);

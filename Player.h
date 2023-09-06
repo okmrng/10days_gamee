@@ -19,7 +19,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize(int32_t canShoot);
 
 	/// <summary>
 	///  更新
@@ -49,5 +49,6 @@ private:
 	std::list<PlayerBullet*> bullet_; // 弾のリスト
 	int32_t charge_;                  // 弾のチャージ
 	int32_t power_;                   // 弾のパワー
+	int32_t canShoot_;                // 弾を撃つことができる回数
 };
 

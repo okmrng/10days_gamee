@@ -7,7 +7,7 @@ Player::~Player()
 	}
 }
 
-void Player::Initialize()
+void Player::Initialize(int32_t canShoot)
 {
 	radius_ = 20.0f;
 	pos_ = Vector2{ radius_ + 30.0f,360.0f };
@@ -15,6 +15,7 @@ void Player::Initialize()
 
 	charge_ = 0;
 	power_ = 0;
+	canShoot_ = canShoot;
 }
 
 void Player::Upadate(char* keys, char* preKeys)
@@ -46,7 +47,9 @@ void Player::Upadate(char* keys, char* preKeys)
 
 	// 弾
 	// 生成
-	Attack(keys, preKeys);
+	if (canShoot_ > 0) {
+		Attack(keys, preKeys);
+	}
 
 	// 更新
 	for (PlayerBullet* bullet : bullet_) {
@@ -61,6 +64,11 @@ void Player::Upadate(char* keys, char* preKeys)
 		}
 		return false;
 	});
+
+	// 弾が撃てなくなった後にチャージリセット
+	if (canShoot_ <= 0) {
+		charge_ = 0;
+	}
 }
 
 void Player::Attack(char* keys, char* preKeys)
@@ -96,6 +104,9 @@ void Player::Attack(char* keys, char* preKeys)
 
 		// チャージ量リセット
 		charge_ = 0;
+
+		// 弾が撃てる数を減らす
+		canShoot_ -= 1;
 	}
 }
 
@@ -109,5 +120,9 @@ void Player::Draw()
 	// 自機
 	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, BLUE, kFillModeSolid);
 
+	// デバッグテキスト
+#ifdef _DEBUG
 	Novice::ScreenPrintf(0, 0, "charge:%d", charge_);
+	Novice::ScreenPrintf(0, 20, "canShoot:%d", canShoot_);
+#endif // _DEBUG
 }
