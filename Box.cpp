@@ -20,16 +20,16 @@ void Box::Update()
 		velocity_ = 10;
 	}
 	else if (player_->GetBulletPower() == 2) {
-		velocity_ = 20;
+		velocity_ = 15;
 	}
 	else if (player_->GetBulletPower() == 3) {
-		velocity_ = 30;
+		velocity_ = 20;
 	}
 	else if (player_->GetBulletPower() == 4) {
-		velocity_ = 40;
+		velocity_ = 25;
 	}
 	else if (player_->GetBulletPower() == 5) {
-		velocity_ = 50;
+		velocity_ = 30;
 	}
 
 	// 当たった時の処理
