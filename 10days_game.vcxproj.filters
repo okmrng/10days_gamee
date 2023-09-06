@@ -32,6 +32,12 @@
     <Filter Include="ソース\シーン">
       <UniqueIdentifier>{964d58d0-55a8-4f03-a3e8-764b4789b3f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース\箱">
+      <UniqueIdentifier>{0319d83e-3262-4f2d-9eb8-6fba3de6e1ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー\箱">
+      <UniqueIdentifier>{d9f1ea19-faf2-4989-9de9-e059c8ad3657}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -59,14 +65,17 @@
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>ソース\自機</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>ソース</Filter>
-    </ClCompile>
     <ClCompile Include="Stage1.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
     <ClCompile Include="MathUtility.cpp">
       <Filter>ソース</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>ソース\箱</Filter>
+    </ClCompile>
+    <ClCompile Include="MetalBox.cpp">
+      <Filter>ソース\箱</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,14 +153,17 @@
     <ClInclude Include="PlayerBullet.h">
       <Filter>ヘッダー\自機</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>ヘッダー</Filter>
-    </ClInclude>
     <ClInclude Include="Stage1.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
     <ClInclude Include="MathUtility.h">
       <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>ヘッダー\箱</Filter>
+    </ClInclude>
+    <ClInclude Include="MetalBox.h">
+      <Filter>ヘッダー\箱</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
