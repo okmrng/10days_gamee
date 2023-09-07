@@ -10,6 +10,7 @@ void Player::Initialize(int32_t canShoot)
 	radius_ = 20.0f;
 	pos_ = Vector2{ radius_ + 30.0f,360.0f };
 	velocity_ = 5.0f;
+	color_ = BLUE;
 
 	charge_ = 0;
 	power_ = 0;
@@ -46,6 +47,23 @@ void Player::Upadate(char* keys, char* preKeys)
 		}
 	}
 
+	// パワーによって自機の色を変化
+	if (charge_ < 30) {
+		color_ = BLUE;
+	}
+	else if ((charge_ >= 30) && (charge_ < 60)) {
+		color_ = 0x00bfff;
+	}
+	else if ((charge_ >= 60) && (charge_ < 90)) {
+		color_ = 0x87cefa;
+	}
+	else if ((charge_ >= 90) && (charge_ < 120)) {
+		color_ = 0xafeeee;
+	}
+	else if (charge_ >= 120) {
+		color_ = WHITE;
+	}
+
 	// 弾
 	// 生成
 	if (canShoot_ > 0) {
@@ -79,18 +97,23 @@ void Player::Attack(char* keys, char* preKeys)
 				// パワー
 				if (charge_ < 30) {
 					power_ = 1;
+					color_ = 0x1e90ff;
 				}
 				else if ((charge_ >= 30) && (charge_ < 60)) {
 					power_ = 2;
+					color_ = 0x00bfff;
 				}
 				else if ((charge_ >= 60) && (charge_ < 90)) {
 					power_ = 3;
+					color_ = 0x87cefa;
 				}
 				else if ((charge_ >= 90) && (charge_ < 120)) {
 					power_ = 4;
+					color_ = 0xafeeee;
 				}
 				else if (charge_ >= 120) {
 					power_ = 5;
+					color_ = WHITE;
 				}
 
 				// 弾の生成と初期化
@@ -121,7 +144,7 @@ void Player::Draw()
 	}
 
 	// 自機
-	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, BLUE, kFillModeSolid);
+	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, color_, kFillModeSolid);
 
 	// デバッグテキスト
 #ifdef _DEBUG

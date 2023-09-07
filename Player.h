@@ -54,6 +54,7 @@ private:
 	float radius_;   // 半径
 	Vector2 pos_;    // 座標
 	float velocity_; // 速度
+	uint32_t color_; // 色
 
 	// 弾
 	PlayerBullet* bullet_ = nullptr;  // 弾のリスト

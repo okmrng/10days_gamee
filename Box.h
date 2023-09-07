@@ -49,6 +49,11 @@ private:
 	bool hit_;           // 当たったかの判定
 	bool stop_;          // 他の箱に当てた時にも動くのを防止
 	uint32_t texture_;   // テクスチャハンドル
+
+	// ゴール
+	Vector2 goalPos_; // 座標
+	Vector2 goalSize_; // 幅
+
 	
 	// 自機
 	Player* player_ = nullptr;
