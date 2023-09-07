@@ -16,6 +16,10 @@ void TvBox::Initialize(Vector2 pos, Vector2 size)
 	texture1_ = Novice::LoadTexture("./resource/sprite/tv-count_1.png");
 	texture2_ = Novice::LoadTexture("./resource/sprite/tv-count_2.png");
 	texture3_ = Novice::LoadTexture("./resource/sprite/tv-count_3.png");
+
+	// ゴール
+	goal_ = new Goal();
+	goal_->Initialize(pos_.y);
 }
 
 void TvBox::Update()
@@ -72,6 +76,9 @@ void TvBox::OnCollision()
 
 void TvBox::Draw()
 {
+	// ゴール
+	goal_->Draw();
+
 	// 本体
 	Novice::DrawSprite(int(pos_.x), int(pos_.y), texture_, 1, 1, 0.0f, WHITE);
 

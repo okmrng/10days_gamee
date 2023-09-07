@@ -11,6 +11,10 @@ void IceBox::Initialize(Vector2 pos, Vector2 size)
 	hit_ = false;
 	stop_ = false;
 	texture_ = Novice::LoadTexture("./resource/sprite/ice-Box.png");
+
+	// ゴール
+	goal_ = new Goal();
+	goal_->Initialize(pos_.y);
 }
 
 void IceBox::Update()
@@ -61,5 +65,9 @@ void IceBox::OnCollision()
 
 void IceBox::Draw()
 {
+	// ゴール
+	goal_->Draw();
+
+	// 本体
 	Novice::DrawSprite(int(pos_.x), int(pos_.y), texture_, 1, 1, 0.0f, WHITE);
 }

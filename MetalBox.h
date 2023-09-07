@@ -3,6 +3,7 @@
 #include <Vector2.h>
 #include <Novice.h>
 #include <stdint.h>
+#include "Goal.h"
 
 // 前方宣言
 class Player;
@@ -49,6 +50,9 @@ private:
 	bool hit_;           // 当たったかの判定
 	bool stop_;          // 他の箱に当てた時にも動くのを防止
 	uint32_t texture_;   // テクスチャハンドル
+	
+	// ゴール
+	Goal* goal_ = nullptr;
 
 	// 自機
 	Player* player_ = nullptr;

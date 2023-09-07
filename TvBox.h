@@ -3,6 +3,7 @@
 #include <Vector2.h>
 #include <Novice.h>
 #include <stdint.h>
+#include "Goal.h"
 
 // 前方宣言
 class Player;
@@ -54,6 +55,9 @@ private:
 	uint32_t texture1_;  // 1のテクスチャハンドル
 	uint32_t texture2_;  // 2のテクスチャハンドル
 	uint32_t texture3_;  // 3のテクスチャハンドル
+	
+	// ゴール
+	Goal* goal_ = nullptr;
 
 	// 自機
 	Player* player_ = nullptr;

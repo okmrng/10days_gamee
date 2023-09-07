@@ -8,5 +8,5 @@ void Goal::Initialize(float posY)
 
 void Goal::Draw()
 {
-	Novice::DrawBox(int(pos_.x), int(pos_.y), int(size_.x), int(size_.y), 0.0f, WHITE, kFillModeWireFrame);
+	Novice::DrawBox(int(pos_.x), int(pos_.y), int(size_.x), int(size_.y), 0.0f, GREEN, kFillModeWireFrame);
 }
