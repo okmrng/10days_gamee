@@ -58,6 +58,7 @@ private:
 	float acceleration_; // 加速度
 	bool hit_;           // 当たったかの判定
 	bool stop_;          // 他の箱に当てた時にも動くのを防止
+	bool count0_;        // 0になったら固定
 	int32_t count_;      // tvのカウント
 	uint32_t texture_;   // テクスチャハンドル
 	uint32_t texture0_;  // 0のテクスチャハンドル

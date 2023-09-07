@@ -10,6 +10,7 @@ void TvBox::Initialize(Vector2 pos, Vector2 size)
 	acceleration_ = 1;
 	hit_ = false;
 	stop_ = false;
+	count0_ = false;
 	count_ = 3;
 	texture_ = Novice::LoadTexture("./resource/sprite/tv-Box.png");
 	texture0_ = Novice::LoadTexture("./resource/sprite/tv-count_0.png");
@@ -58,17 +59,16 @@ void TvBox::Update()
 		}
 
 		// 移動
-		if (!stop_) {
+		if (!stop_ && count_ >= 0) {
 			pos_.x += velocity_;
 		}
 	}
 
 	if (count_ <= 0) {
-		// 0で固定
-		count_ = 0;
-
-		// 位置固定
-		velocity_ = 0.0f;
+		if(velocity_<=0){
+			// 0で固定
+			count_ = -1;
+		}
 	}
 
 	// ゴールするまで始点を箱の座標に合わせる
