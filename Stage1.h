@@ -103,6 +103,10 @@ private:
 
 	int32_t clearCount_; // クリア判定
 
+	//	クリア関連
+	bool isClear_;		   // クリアフラグ
+	int32_t toClearCount_; // クリアに入るまでの時間
+
 	bool isGameOver_; // ゲームオーバーフラグ
 
 	bool canPlay_; // プレイフラグ

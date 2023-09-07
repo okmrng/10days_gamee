@@ -28,7 +28,7 @@ void Stage1::Initialize()
 {
 	// 自機
 	player_ = new Player();
-	player_->Initialize(1);
+	player_->Initialize(100);
 
 	// クリア
 	clear_ = new Clear();
@@ -41,6 +41,10 @@ void Stage1::Initialize()
 	 
 	// クリア判定
 	clearCount_ = 0;
+
+	// クリア関連
+	isClear_ = false;
+	toClearCount_ = 30;
 
 	// ゲームオーバーフラグ
 	isGameOver_ = false;
@@ -106,6 +110,14 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// 当たり判定
 		CheckAllCollision();
+
+		// クリア
+		if (clearCount_ == 5) {
+			if(--toClearCount_<=0){
+				canPlay_ = false;
+			}
+			isClear_ = true;
+		}
 
 		// ゲームオーバー
 		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead()) {
@@ -439,7 +451,7 @@ void Stage1::Draw()
 	}
 
 	// クリア
-	if (clearCount_ == 5) {
+	if (isClear_) {
 		clear_->Draw();
 	}
 
