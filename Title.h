@@ -10,6 +10,16 @@ class Title
 {
 public:
 	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	Title();
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	~Title();
+
+	/// <summary>
 	/// 初期化
 	/// </summary>
 	void Initialize();
@@ -35,6 +45,8 @@ private:
 	uint32_t alpha_;   // 透明度
 	bool isFade_;      // フェードアウトフラグ
 
-	bool toNext_; // 次のシーンへ遷移するためのフラグ
+	// シーン遷移
+	int32_t nextCount_; // 次のシーンへ遷移するまでのカウント
+	bool toNext_;       // 次のシーンへ遷移するためのフラグ
 };
 

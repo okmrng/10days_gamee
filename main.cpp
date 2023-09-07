@@ -1,4 +1,5 @@
 #include <Novice.h>
+#include "Title.h"
 #include "Stage1.h"
 
 const char kWindowTitle[] = "10days_game";
@@ -12,6 +13,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
 	char preKeys[256] = {0};
+
+	// シーン列挙体
+	enum class Scene {
+		TITLE, // タイトル
+		STAGE1 // ステージ1
+	};
+	Scene scene = Scene::TITLE;
+
+	// タイトル
+	Title* title = new Title();
+	title->Initialize();
 
 	// ステージ1
 	Stage1* stage1 = new Stage1();
@@ -30,8 +42,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		// タイトル
+		if (scene == Scene::TITLE) {
+			title->Update(keys);
+
+			// 次のシーンへ
+			if (title->GetToNext()) {
+				scene = Scene::STAGE1;
+			}
+		}
+
 		// ステージ1
-		stage1->Update(keys, preKeys);
+		if(scene==Scene::STAGE1){
+			stage1->Update(keys, preKeys);
+		}
 
 		///
 		/// ↑更新処理ここまで
@@ -41,8 +65,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
+		// タイトル
+		if (scene == Scene::TITLE) {
+			title->Draw();
+		}
+
 		// ステージ1
-		stage1->Draw();
+		if(scene==Scene::STAGE1){
+			stage1->Draw();
+		}
 
 		///
 		/// ↑描画処理ここまで
@@ -58,6 +89,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 
 	// 解放
+	delete title;
 	delete stage1;
 
 	// ライブラリの終了

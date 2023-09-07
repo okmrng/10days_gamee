@@ -93,7 +93,7 @@
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
-      <Filter>KamataEngine</Filter>
+      <Filter>ソース\シーン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +194,8 @@
     </ClInclude>
     <ClInclude Include="Clear.h" />
     <ClInclude Include="GameOver.h" />
-    <ClInclude Include="Title.h" />
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
