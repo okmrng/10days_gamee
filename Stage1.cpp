@@ -369,6 +369,9 @@ void Stage1::Draw()
 	// 自機
 	player_->Draw();
 
+	// ゴール上の直線
+	Novice::DrawBox(1047, 0, 5, 720, 0.0f, GREEN, kFillModeSolid);
+
 	// 箱
 	// 木箱
 	for (Box* box : box_) {
