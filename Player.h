@@ -39,12 +39,14 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	void Draw(bool gameOver);
 
 	// ゲッター
 	Vector2 GetBulletCollisionPos();
 	Vector2 GetBulletSize();
 	int32_t GetBulletPower();
+	int32_t GetCanShoot() { return canShoot_; }
+	bool GetBulletIsDead();
 
 	// セッター
 	void SetIsBullet(bool isBullet) { isBullet_ = isBullet; }

@@ -136,11 +136,13 @@ void Player::BulletOnCollision()
 	bullet_->OnCollision();
 }
 
-void Player::Draw()
+void Player::Draw(bool gameOver)
 {
 	// 弾
 	if (bullet_) {
-		bullet_->Draw();
+		if(!gameOver){
+			bullet_->Draw();
+		}
 	}
 
 	// 自機
@@ -175,4 +177,12 @@ int32_t Player::GetBulletPower()
 		return bullet_->GetPower();
 	}
 	else{ return 0; }
+}
+
+bool Player::GetBulletIsDead()
+{
+	if (bullet_) {
+		return bullet_->GetIsDead();
+	}
+	else { return 0; }
 }

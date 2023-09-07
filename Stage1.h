@@ -7,6 +7,7 @@
 #include "IceBox.h"
 #include "TvBox.h"
 #include "Clear.h"
+#include "GameOver.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -96,10 +97,14 @@ private:
 
 	Clear* clear_; // クリア
 
-	// 発生コマンド
-	std::stringstream boxPopComands_;
+	GameOver* gameOver_; // ゲームオーバー
 
-	// クリア判定
-	int32_t clearCount_;
+	std::stringstream boxPopComands_; // 発生コマンド
+
+	int32_t clearCount_; // クリア判定
+
+	bool isGameOver_; // ゲームオーバーフラグ
+
+	bool canPlay_; // プレイフラグ
 };
 

@@ -20,22 +20,33 @@ Stage1::~Stage1()
 	for (TvBox* tvBox : tvBox_) {
 		delete tvBox;
 	}
+	delete clear_;
+	delete gameOver_;
 }
 
 void Stage1::Initialize()
 {
 	// 自機
 	player_ = new Player();
-	player_->Initialize(500);
+	player_->Initialize(1);
 
 	// クリア
 	clear_ = new Clear();
+
+	// ゲームオーバー
+	gameOver_ = new GameOver();
 
 	// コマンド
 	LoadData("resource/csv/boxData1.csv", boxPopComands_);
 	 
 	// クリア判定
 	clearCount_ = 0;
+
+	// ゲームオーバーフラグ
+	isGameOver_ = false;
+
+	// プレイフラグ
+	canPlay_ = true;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -67,33 +78,41 @@ void Stage1::LoadData(const std::string& filename, std::stringstream& targetStre
 
 void Stage1::Update(char* keys, char* preKeys)
 {
-	// 自機
-	player_->Upadate(keys, preKeys);
+	if(canPlay_){
+		// 自機
+		player_->Upadate(keys, preKeys);
 
-	// 箱
-	UpdateBoxComands();
-	// 木箱
-	for (Box* box : box_) {
-		box->Update();
+		// 箱
+		UpdateBoxComands();
+		// 木箱
+		for (Box* box : box_) {
+			box->Update();
+		}
+
+		//	金属製の箱
+		for (MetalBox* metalBox : metalBox_) {
+			metalBox->Update();
+		}
+
+		// 氷
+		for (IceBox* iceBox : iceBox_) {
+			iceBox->Update();
+		}
+
+		// tv
+		for (TvBox* tvBox : tvBox_) {
+			tvBox->Update();
+		}
+
+		// 当たり判定
+		CheckAllCollision();
+
+		// ゲームオーバー
+		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead()) {
+			canPlay_ = false;
+			isGameOver_ = true;
+		}
 	}
-
-	//	金属製の箱
-	for (MetalBox* metalBox : metalBox_) {
-		metalBox->Update();
-	}
-
-	// 氷
-	for (IceBox* iceBox : iceBox_) {
-		iceBox->Update();
-	}
-
-	// tv
-	for (TvBox* tvBox : tvBox_) {
-		tvBox->Update();
-	}
-
-	// 当たり判定
-	CheckAllCollision();
 }
 
 void Stage1::CheckAllCollision()
@@ -393,7 +412,7 @@ void Stage1::Draw()
 	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
 
 	// 自機
-	player_->Draw();
+	player_->Draw(isGameOver_);
 
 	// ゴール上の直線
 	Novice::DrawBox(1047, 0, 5, 720, 0.0f, GREEN, kFillModeSolid);
@@ -422,6 +441,10 @@ void Stage1::Draw()
 	// クリア
 	if (clearCount_ == 5) {
 		clear_->Draw();
+	}
+
+	if (isGameOver_) {
+		gameOver_->Draw();
 	}
 
 	// デバッグテキスト

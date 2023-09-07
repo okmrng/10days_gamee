@@ -89,6 +89,9 @@
     <ClCompile Include="Clear.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -187,5 +190,6 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="Clear.h" />
+    <ClInclude Include="GameOver.h" />
   </ItemGroup>
 </Project>
