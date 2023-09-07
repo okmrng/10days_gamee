@@ -125,10 +125,10 @@ void Stage1::CheckAllCollision()
 		sizeA = box->GetSize(); // 幅
 
 		// ゴール
-		posB = box->GetGoalPos();	//座標
-		sizeB = box->GetGoalSize(); // 幅
+		posB = box->GetGoalCollisionPos();	//座標
+		sizeB = box->GetGoalCollisionSize(); // 幅
 
-		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			box->IsGoal();
 		}
@@ -164,10 +164,10 @@ void Stage1::CheckAllCollision()
 		sizeA = metalBox->GetSize(); // 幅
 
 		// ゴール
-		posB = metalBox->GetGoalPos();	//座標
-		sizeB = metalBox->GetGoalSize(); // 幅
+		posB = metalBox->GetGoalCollisionPos();	//座標
+		sizeB = metalBox->GetGoalCollisionSize(); // 幅
 
-		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			metalBox->IsGoal();
 		}
@@ -203,10 +203,10 @@ void Stage1::CheckAllCollision()
 		sizeA = iceBox->GetSize(); // 幅
 
 		// ゴール
-		posB = iceBox->GetGoalPos();	//座標
-		sizeB = iceBox->GetGoalSize(); // 幅
+		posB = iceBox->GetGoalCollisionPos();	//座標
+		sizeB = iceBox->GetGoalCollisionSize(); // 幅
 
-		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			iceBox->IsGoal();
 		}
@@ -242,10 +242,10 @@ void Stage1::CheckAllCollision()
 		sizeA = tvBox->GetSize(); // 幅
 
 		// ゴール
-		posB = tvBox->GetGoalPos();	//座標
-		sizeB = tvBox->GetGoalSize(); // 幅
+		posB = tvBox->GetGoalCollisionPos();	//座標
+		sizeB = tvBox->GetGoalCollisionSize(); // 幅
 
-		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			tvBox->IsGoal();
 		}
