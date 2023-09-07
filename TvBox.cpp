@@ -61,12 +61,14 @@ void TvBox::Update()
 		if (!stop_) {
 			pos_.x += velocity_;
 		}
-
 	}
 
-	// カウントが0になったら0で固定
 	if (count_ <= 0) {
+		// 0で固定
 		count_ = 0;
+
+		// 位置固定
+		velocity_ = 0.0f;
 	}
 
 	// ゴールするまで始点を箱の座標に合わせる
@@ -121,7 +123,7 @@ void TvBox::Draw()
 	if (count_ == 1) {
 		Novice::DrawSprite(int(pos_.x + 25), int(pos_.y + 15), texture1_, 1, 1, 0.0f, WHITE);
 	}
-	if (count_ == 0) {
+	if (count_ <= 0) {
 		Novice::DrawSprite(int(pos_.x + 25), int(pos_.y + 15), texture0_, 1, 1, 0.0f, WHITE);
 	}
 }
