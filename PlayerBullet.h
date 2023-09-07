@@ -45,5 +45,6 @@ private:
 	Vector2 size_;         // 当たり判定用の四角形の幅
 	bool isDead_;          // デスフラグ
 	int32_t power_;        // パワー
+	uint32_t texture_;     // テクスチャハンドル
 };
 

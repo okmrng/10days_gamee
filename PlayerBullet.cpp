@@ -6,9 +6,10 @@ void PlayerBullet::Initialize(Vector2 pos, int32_t power)
 	pos_ = pos;
 	velocity_ = 10.0f;
 	collisionPos_ = pos_;
-	size_ = Vector2(20.0f, 20.0f);
+	size_ = Vector2(68.0f, 60.0f);
 	isDead_ = false;
 	power_ = power;
+	texture_ = Novice::LoadTexture("./resource/sprite/fist.png");
 }
 
 void PlayerBullet::Update()
@@ -32,8 +33,12 @@ void PlayerBullet::OnCollision()
 
 void PlayerBullet::Draw()
 {
-	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, RED, kFillModeSolid);
+	Novice::DrawSprite(int(pos_.x - 90), int(pos_.y - 30), texture_, 1, 1, 0.0f, WHITE);
 
+	// デバッグ用
+	#ifdef _DEBUG
 	// 当たり判定チェック用
-	Novice::DrawBox(int(collisionPos_.x), int(collisionPos_.y), int(size_.x), int(size_.y), 0.0f, WHITE, kFillModeWireFrame);
+	Novice::DrawBox(int(collisionPos_.x), int(collisionPos_.y), int(size_.x), int(size_.y), 
+		0.0f, RED, kFillModeWireFrame);
+	#endif // _DEBUG
 }
