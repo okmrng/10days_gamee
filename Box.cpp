@@ -4,6 +4,7 @@
 
 void Box::Initialize(Vector2 pos, Vector2 size)
 {
+	// 本体
 	pos_ = pos;
 	size_ = size;
 	velocity_ = 0;
@@ -11,6 +12,10 @@ void Box::Initialize(Vector2 pos, Vector2 size)
 	hit_ = false;
 	stop_ = false;
 	texture_ = Novice::LoadTexture("./resource/sprite/wood-Box.png");
+
+	// ゴール
+	goal_ = new Goal();
+	goal_->Initialize(pos_.y);
 }
 
 void Box::Update()
@@ -61,5 +66,9 @@ void Box::OnCollision()
 
 void Box::Draw()
 {
+	// ゴール
+	goal_->Draw();
+
+	// 本体
 	Novice::DrawSprite(int(pos_.x), int(pos_.y), texture_, 1, 1, 0.0f, WHITE);
 }
