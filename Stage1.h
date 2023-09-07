@@ -6,6 +6,7 @@
 #include "MetalBox.h"
 #include "IceBox.h"
 #include "TvBox.h"
+#include "Clear.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -92,6 +93,8 @@ private:
 	std::list<MetalBox*> metalBox_; // 金属製の箱
 	std::list<IceBox*> iceBox_;     // 氷
 	std::list<TvBox*> tvBox_;       // tv
+
+	Clear* clear_; // クリア
 
 	// 発生コマンド
 	std::stringstream boxPopComands_;

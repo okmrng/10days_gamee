@@ -28,6 +28,9 @@ void Stage1::Initialize()
 	player_ = new Player();
 	player_->Initialize(500);
 
+	// クリア
+	clear_ = new Clear();
+
 	// コマンド
 	LoadData("resource/csv/boxData.csv", boxPopComands_);
 	 
@@ -414,6 +417,11 @@ void Stage1::Draw()
 	// tv
 	for (TvBox* tvBox : tvBox_) {
 		tvBox->Draw();
+	}
+
+	// クリア
+	if (clearCount_ == 5) {
+		clear_->Draw();
 	}
 
 	// デバッグテキスト
