@@ -26,7 +26,7 @@ void Stage1::Initialize()
 {
 	// 自機
 	player_ = new Player();
-	player_->Initialize(5);
+	player_->Initialize(500);
 
 	// コマンド
 	LoadData("resource/csv/boxData.csv", boxPopComands_);
@@ -96,7 +96,8 @@ void Stage1::CheckAllCollision()
 	Vector2 posA, posB;   // 座標
 	Vector2 sizeA, sizeB; // 幅
 
-	// 自弾と木箱の当たり判定
+	// 木箱
+	// 自弾との当たり判定
 	#pragma region
 	// 自弾
 	posB = player_->GetBulletCollisionPos(); // 座標
@@ -116,7 +117,26 @@ void Stage1::CheckAllCollision()
 	}
 	#pragma endregion
 
-	// 自弾と金属製の箱の当たり判定
+	// ゴールとの当たり判定
+	#pragma region
+	for (Box* box : box_) {
+		// 箱
+		posA = box->GetPos();   // 座標
+		sizeA = box->GetSize(); // 幅
+
+		// ゴール
+		posB = box->GetGoalPos();	//座標
+		sizeB = box->GetGoalSize(); // 幅
+
+		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			
+		}
+	}
+	#pragma endregion
+
+	// 金属製の箱
+	// 自弾との当たり判定
 	#pragma region
 	// 自弾
 	posB = player_->GetBulletCollisionPos(); // 座標
@@ -136,7 +156,26 @@ void Stage1::CheckAllCollision()
 	}
 	#pragma endregion
 
-	// 自弾と氷の当たり判定
+	// ゴールとの当たり判定
+	#pragma region
+	for (MetalBox* metalBox : metalBox_) {
+		// 箱
+		posA = metalBox->GetPos();   // 座標
+		sizeA = metalBox->GetSize(); // 幅
+
+		// ゴール
+		posB = metalBox->GetGoalPos();	//座標
+		sizeB = metalBox->GetGoalSize(); // 幅
+
+		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+
+		}
+	}
+	#pragma endregion
+
+	// 氷
+	// 自弾との当たり判定
 	#pragma region
 	// 自弾
 	posB = player_->GetBulletCollisionPos(); // 座標
@@ -156,7 +195,26 @@ void Stage1::CheckAllCollision()
 	}
 	#pragma endregion
 
-	// 自弾とtvの当たり判定
+	// ゴールとの当たり判定
+	#pragma region
+	for (IceBox* iceBox : iceBox_) {
+		// 箱
+		posA = iceBox->GetPos();   // 座標
+		sizeA = iceBox->GetSize(); // 幅
+
+		// ゴール
+		posB = iceBox->GetGoalPos();	//座標
+		sizeB = iceBox->GetGoalSize(); // 幅
+
+		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+
+		}
+	}
+	#pragma endregion
+
+	// tv
+	// 自弾との当たり判定
 	#pragma region
 	// 自弾
 	posB = player_->GetBulletCollisionPos(); // 座標
@@ -172,6 +230,24 @@ void Stage1::CheckAllCollision()
 			tvBox->OnCollision();
 			// 自弾
 			player_->BulletOnCollision();
+		}
+	}
+	#pragma endregion
+
+	// ゴールとの当たり判定
+	#pragma region
+	for (TvBox* tvBox : tvBox_) {
+		// 箱
+		posA = tvBox->GetPos();   // 座標
+		sizeA = tvBox->GetSize(); // 幅
+
+		// ゴール
+		posB = tvBox->GetGoalPos();	//座標
+		sizeB = tvBox->GetGoalSize(); // 幅
+
+		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+
 		}
 	}
 	#pragma endregion

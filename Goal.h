@@ -17,6 +17,10 @@ public:
 	/// </summary>
 	void Draw();
 
+	// ゲッター
+	Vector2 GetPos() { return pos_; }
+	Vector2 GetSize() { return size_; }
+
 private:
 	// ゴール
 	Vector2 pos_;  // 座標
