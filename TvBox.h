@@ -44,6 +44,7 @@ public:
 	Vector2 GetSize() { return size_; }
 	Vector2 GetGoalCollisionPos() { return goal_->GetCollisionPos(); }
 	Vector2 GetGoalCollisionSize() { return goal_->GetCollisionSize(); }
+	float GetVelocity() { return velocity_; }
 
 	// セッター
 	void SetPlayer(Player* player) { player_ = player; }
