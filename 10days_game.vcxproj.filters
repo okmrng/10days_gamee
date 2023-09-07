@@ -86,6 +86,9 @@
     <ClCompile Include="Goal.cpp">
       <Filter>ソース\箱</Filter>
     </ClCompile>
+    <ClCompile Include="Clear.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -183,5 +186,6 @@
     <ClInclude Include="MathUtility.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
+    <ClInclude Include="Clear.h" />
   </ItemGroup>
 </Project>
