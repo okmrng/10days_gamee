@@ -12,6 +12,9 @@ void Box::Initialize(Vector2 pos, Vector2 size)
 	hit_ = false;
 	stop_ = false;
 	texture_ = Novice::LoadTexture("./resource/sprite/wood-Box.png");
+	startPoint_ = pos_.x;
+	isGoal_ = false;
+	t_ = 0.0f;
 
 	// ゴール
 	goal_ = new Goal();
@@ -55,6 +58,25 @@ void Box::Update()
 		}
 		
 	}
+
+	// ゴールするまで始点を箱の座標に合わせる
+	if (!isGoal_) {
+		startPoint_ = pos_.x;
+	}
+
+	// ゴールしたらゴールにイージング
+	if (isGoal_) {
+		if (t_ < 1.0f) {
+			t_ += 1.0f / 30.0f;
+		}
+		if (t_ >= 1.0f) {
+			t_ = 1.0f;
+		}
+
+		float easedT_ = sqrt(1.0f - pow(t_ - 1.0f, 2.0f));
+
+		pos_.x = (1.0f - easedT_) * startPoint_ + easedT_ * (goal_->GetPos().x);
+	}
 }
 
 void Box::OnCollision()
@@ -62,6 +84,11 @@ void Box::OnCollision()
 	hit_ = true;
 	stop_ = false;
 	player_->SetIsBullet(false);
+}
+
+void Box::IsGoal()
+{
+	isGoal_ = true;
 }
 
 void Box::Draw()

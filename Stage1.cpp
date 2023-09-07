@@ -128,9 +128,9 @@ void Stage1::CheckAllCollision()
 		posB = box->GetGoalPos();	//座標
 		sizeB = box->GetGoalSize(); // 幅
 
-		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
+		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
-			
+			box->IsGoal();
 		}
 	}
 	#pragma endregion

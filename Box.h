@@ -4,6 +4,7 @@
 #include <Novice.h>
 #include <stdint.h>
 #include "Goal.h"
+#include "MathUtility.h"
 
 // 前方宣言
 class Player;
@@ -30,6 +31,11 @@ public:
 	void OnCollision();
 
 	/// <summary>
+	/// ゴール
+	/// </summary>
+	void IsGoal();
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
@@ -52,6 +58,9 @@ private:
 	bool hit_;           // 当たったかの判定
 	bool stop_;          // 他の箱に当てた時にも動くのを防止
 	uint32_t texture_;   // テクスチャハンドル
+	float startPoint_;   // 始点
+	bool isGoal_;        // ゴールフラグ
+	float t_;            // フレーム
 	
 	// ゴール
 	Goal* goal_ = nullptr;
