@@ -83,6 +83,9 @@
     <ClCompile Include="TvBox.cpp">
       <Filter>ソース\箱</Filter>
     </ClCompile>
+    <ClCompile Include="Goal.cpp">
+      <Filter>ソース\箱</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -162,9 +165,6 @@
     <ClInclude Include="Stage1.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
-    <ClInclude Include="MathUtility.h">
-      <Filter>ヘッダー</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>ヘッダー\箱</Filter>
     </ClInclude>
@@ -176,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="TvBox.h">
       <Filter>ヘッダー\箱</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
+      <Filter>ヘッダー\箱</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtility.h">
+      <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
