@@ -23,6 +23,7 @@ void TvBox::Initialize(Vector2 pos, Vector2 size)
 	// ゴール
 	goal_ = new Goal();
 	goal_->Initialize(pos_.y);
+	addStop_ = false;
 }
 
 void TvBox::Update()
@@ -99,6 +100,7 @@ void TvBox::OnCollision()
 void TvBox::IsGoal()
 {
 	isGoal_ = true;
+	addStop_ = true;
 }
 
 void TvBox::Draw()

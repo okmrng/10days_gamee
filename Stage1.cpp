@@ -30,6 +30,9 @@ void Stage1::Initialize()
 
 	// コマンド
 	LoadData("resource/csv/boxData.csv", boxPopComands_);
+	 
+	// クリア判定
+	clearCount_ = 0;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -131,6 +134,9 @@ void Stage1::CheckAllCollision()
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (box->GetVelocity() <= 15) {
+				if (!box->GetAddStop()) {
+					clearCount_++;
+				}
 				box->IsGoal();
 			}
 		}
@@ -172,6 +178,9 @@ void Stage1::CheckAllCollision()
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (metalBox->GetVelocity() <= 15) {
+				if (!metalBox->GetAddStop()) {
+					clearCount_++;
+				}
 				metalBox->IsGoal();
 			}
 		}
@@ -213,6 +222,9 @@ void Stage1::CheckAllCollision()
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (iceBox->GetVelocity() <= 15) {
+				if (!iceBox->GetAddStop()) {
+					clearCount_++;
+				}
 				iceBox->IsGoal();
 			}
 		}
@@ -254,6 +266,9 @@ void Stage1::CheckAllCollision()
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (tvBox->GetVelocity() <= 15) {
+				if (!tvBox->GetAddStop()) {
+					clearCount_++;
+				}
 				tvBox->IsGoal();
 			}
 		}
@@ -400,4 +415,10 @@ void Stage1::Draw()
 	for (TvBox* tvBox : tvBox_) {
 		tvBox->Draw();
 	}
+
+	// デバッグテキスト
+	#ifdef _DEBUG
+	Novice::ScreenPrintf(0, 60, "clearCount:%d", clearCount_);
+	#endif // _DEBUG
+
 }

@@ -45,6 +45,7 @@ public:
 	Vector2 GetGoalCollisionPos() { return goal_->GetCollisionPos(); }
 	Vector2 GetGoalCollisionSize() { return goal_->GetCollisionSize(); }
 	float GetVelocity() { return velocity_; }
+	bool GetAddStop() { return addStop_; }
 
 	// セッター
 	void SetPlayer(Player* player) { player_ = player; }
@@ -69,6 +70,7 @@ private:
 	
 	// ゴール
 	Goal* goal_ = nullptr;
+	bool addStop_ = false; // クリア判定カウント増加停止フラグ
 
 	// 自機
 	Player* player_ = nullptr;

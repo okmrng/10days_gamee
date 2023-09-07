@@ -95,5 +95,8 @@ private:
 
 	// 発生コマンド
 	std::stringstream boxPopComands_;
+
+	// クリア判定
+	int32_t clearCount_;
 };
 

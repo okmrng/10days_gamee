@@ -19,6 +19,7 @@ void MetalBox::Initialize(Vector2 pos, Vector2 size)
 	// ゴール
 	goal_ = new Goal();
 	goal_->Initialize(pos_.y);
+	addStop_ = false;
 }
 
 void MetalBox::Update()
@@ -89,6 +90,7 @@ void MetalBox::OnCollision()
 void MetalBox::IsGoal()
 {
 	isGoal_ = true;
+	addStop_ = true;
 }
 
 void MetalBox::Draw()

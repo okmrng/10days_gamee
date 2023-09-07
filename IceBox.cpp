@@ -18,6 +18,7 @@ void IceBox::Initialize(Vector2 pos, Vector2 size)
 	// ゴール
 	goal_ = new Goal();
 	goal_->Initialize(pos_.y);
+	addStop_ = false;
 }
 
 void IceBox::Update()
@@ -88,6 +89,7 @@ void IceBox::OnCollision()
 void IceBox::IsGoal()
 {
 	isGoal_ = true;
+	addStop_ = true;
 }
 
 void IceBox::Draw()
