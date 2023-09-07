@@ -16,6 +16,9 @@ void TvBox::Initialize(Vector2 pos, Vector2 size)
 	texture1_ = Novice::LoadTexture("./resource/sprite/tv-count_1.png");
 	texture2_ = Novice::LoadTexture("./resource/sprite/tv-count_2.png");
 	texture3_ = Novice::LoadTexture("./resource/sprite/tv-count_3.png");
+	startPoint_ = pos_.x;
+	isGoal_ = false;
+	t_ = 0.0f;
 
 	// ゴール
 	goal_ = new Goal();
@@ -64,6 +67,25 @@ void TvBox::Update()
 	if (count_ <= 0) {
 		count_ = 0;
 	}
+
+	// ゴールするまで始点を箱の座標に合わせる
+	if (!isGoal_) {
+		startPoint_ = pos_.x;
+	}
+
+	// ゴールしたらゴールにイージング
+	if (isGoal_) {
+		if (t_ < 1.0f) {
+			t_ += 1.0f / 30.0f;
+		}
+		if (t_ >= 1.0f) {
+			t_ = 1.0f;
+		}
+
+		float easedT_ = sqrt(1.0f - pow(t_ - 1.0f, 2.0f));
+
+		pos_.x = (1.0f - easedT_) * startPoint_ + easedT_ * (goal_->GetPos().x);
+	}
 }
 
 void TvBox::OnCollision()
@@ -72,6 +94,11 @@ void TvBox::OnCollision()
 	stop_ = false;
 	player_->SetIsBullet(false);
 	count_ -= 1;
+}
+
+void TvBox::IsGoal()
+{
+	isGoal_ = true;
 }
 
 void TvBox::Draw()

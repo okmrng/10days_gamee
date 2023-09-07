@@ -169,7 +169,7 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
-
+			metalBox->IsGoal();
 		}
 	}
 	#pragma endregion
@@ -208,7 +208,7 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
-
+			iceBox->IsGoal();
 		}
 	}
 	#pragma endregion
@@ -247,7 +247,7 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x + 70 < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
-
+			tvBox->IsGoal();
 		}
 	}
 	#pragma endregion

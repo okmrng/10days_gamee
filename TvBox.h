@@ -30,6 +30,11 @@ public:
 	void OnCollision();
 
 	/// <summary>
+	/// ゴール
+	/// </summary>
+	void IsGoal();
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
@@ -57,6 +62,9 @@ private:
 	uint32_t texture1_;  // 1のテクスチャハンドル
 	uint32_t texture2_;  // 2のテクスチャハンドル
 	uint32_t texture3_;  // 3のテクスチャハンドル
+	float startPoint_;   // 始点
+	bool isGoal_;        // ゴールフラグ
+	float t_;            // フレーム
 	
 	// ゴール
 	Goal* goal_ = nullptr;
