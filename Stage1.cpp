@@ -32,7 +32,7 @@ void Stage1::Initialize()
 	clear_ = new Clear();
 
 	// コマンド
-	LoadData("resource/csv/boxData.csv", boxPopComands_);
+	LoadData("resource/csv/boxData1.csv", boxPopComands_);
 	 
 	// クリア判定
 	clearCount_ = 0;
