@@ -86,17 +86,20 @@
     <ClCompile Include="Goal.cpp">
       <Filter>ソース\箱</Filter>
     </ClCompile>
-    <ClCompile Include="Clear.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOver.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
+    <ClCompile Include="Clear.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
     <ClCompile Include="Pause.cpp">
-      <Filter>KamataEngine</Filter>
+      <Filter>ソース</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelect.cpp">
+      <Filter>ソース\シーン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -195,11 +198,20 @@
     <ClInclude Include="MathUtility.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
-    <ClInclude Include="Clear.h" />
-    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Title.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
-    <ClInclude Include="Pause.h" />
+    <ClInclude Include="Clear.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelect.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

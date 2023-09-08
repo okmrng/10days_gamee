@@ -53,8 +53,9 @@ void Stage1::Initialize()
 	// ゲームオーバーフラグ
 	isGameOver_ = false;
 
-	// プレイフラグ
-	canPlay_ = true;
+	// プレイ
+	canPlay_ = false;
+	playCount_ = 5;
 
 	// ポーズフラグ
 	isPause_ = false;
@@ -89,6 +90,10 @@ void Stage1::LoadData(const std::string& filename, std::stringstream& targetStre
 
 void Stage1::Update(char* keys, char* preKeys)
 {
+	if (--playCount_ <= 0) {
+		canPlay_ = true;
+	}
+
 	if(canPlay_){
 		// 自機
 		player_->Upadate(keys, preKeys);
@@ -120,22 +125,22 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// クリア
 		if (clearCount_ == 5) {
+			isClear_ = true;
 			if(--toClearCount_<=0){
 				canPlay_ = false;
 			}
-			isClear_ = true;
 		}
 
 		// ゲームオーバー
 		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead()) {
-			canPlay_ = false;
 			isGameOver_ = true;
+			canPlay_ = false;
 		}
 
 		// ポーズ
 		if (keys[DIK_P] && preKeys[DIK_P] == 0) {
-			canPlay_ = false;
 			isPause_ = true;
+			canPlay_ = false;
 		}
 	}
 }

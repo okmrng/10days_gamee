@@ -13,7 +13,7 @@ void Title::Initialize()
 	// 画像
 	texture_ = Novice::LoadTexture("./resource/background/title.png");
 	color_ = 0xffffff;
-	alpha_ = 0x000002;
+	alpha_ = 0x000004;
 	isFade_ = false;
 
 	// シーン遷移
