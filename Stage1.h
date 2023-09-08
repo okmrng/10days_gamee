@@ -128,7 +128,9 @@ private:
 	bool isClear_;		   // クリアフラグ
 	int32_t toClearCount_; // クリアに入るまでの時間
 
-	bool isGameOver_; // ゲームオーバーフラグ
+	// ゲームオーバー
+	bool isGameOver_;		  // ゲームオーバーフラグ
+	int32_t inGameOverCount_; // ゲームオーバーに入るまでのカウント
 
 	// プレイ
 	bool canPlay_;	    // プレイフラグ

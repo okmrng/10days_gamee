@@ -50,8 +50,9 @@ void Stage1::Initialize()
 	isClear_ = false;
 	toClearCount_ = 30;
 
-	// ゲームオーバーフラグ
+	// ゲームオーバー
 	isGameOver_ = false;
+	inGameOverCount_ = 60 * 3;
 
 	// プレイ
 	canPlay_ = false;
@@ -148,7 +149,10 @@ void Stage1::Update(char* keys, char* preKeys)
 		}
 
 		// ゲームオーバー
-		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead() || timeLimit_ <= 0) {
+		if (player_->GetCanShoot() <= 0) {
+			--inGameOverCount_;
+		}
+		if (inGameOverCount_ <= 0) {
 			isGameOver_ = true;
 			canPlay_ = false;
 		}
@@ -545,6 +549,7 @@ void Stage1::Draw()
 	Novice::ScreenPrintf(0, 60, "clearCount:%d", clearCount_);
 	Novice::ScreenPrintf(0, 80, "playCount:%d", playCount_);
 	Novice::ScreenPrintf(0, 140, "time:%d", timeLimit_);
+	Novice::ScreenPrintf(0, 160, "inGameOverCount:%d", inGameOverCount_);
 	#endif // _DEBUG
 
 }
