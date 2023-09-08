@@ -141,5 +141,6 @@ private:
 
 	// テクスチャハンドル
 	uint32_t metalHitEffect_; // 金属製の箱のヒットエフェクト
+	uint32_t iceHitEffect_; // 氷のヒットエフェクト
 };
 

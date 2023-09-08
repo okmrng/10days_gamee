@@ -63,6 +63,7 @@ void Stage1::Initialize()
 
 	// テクスチャハンドル
 	metalHitEffect_ = Novice::LoadTexture("./resource/effect/metal-Effect.png");
+	iceHitEffect_ = Novice::LoadTexture("./resource/effect/ice-Effect.png");
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -156,6 +157,13 @@ void Stage1::Update(char* keys, char* preKeys)
 		// ヒットエフェクト
 		if(hitEffect_){
 			hitEffect_->Update();
+		}
+		
+		// 解放
+		if(hitEffect_){
+			if (hitEffect_->getIsDead()) {
+				delete hitEffect_;
+			}
 		}
 	}
 }
@@ -269,6 +277,8 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			// ヒットエフェクト
+			AddHitEffect(iceHitEffect_, 0, 3, 0, 3, Vector2(posB.x, posB.y - 42), Vector2(50, 100));
 			// 箱
 			iceBox->OnCollision();
 			// 自弾
