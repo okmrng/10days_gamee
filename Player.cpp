@@ -11,6 +11,7 @@ void Player::Initialize()
 	pos_ = Vector2{ radius_ + 30.0f,360.0f };
 	velocity_ = 5.0f;
 	color_ = BLUE;
+	texture_ = Novice::LoadTexture("./resource/sprite/player.png");
 
 	charge_ = 0;
 	power_ = 0;
@@ -29,11 +30,11 @@ void Player::Upadate(char* keys, char* preKeys)
 	}
 
 	// 範囲制限
-	if (pos_.y >= 720.0f - radius_) {
-		pos_.y = 720.0f - radius_;
+	if (pos_.y >= 670.0f) {
+		pos_.y = 670.0f;
 	}
-	if (pos_.y <= radius_) {
-		pos_.y = radius_;
+	if (pos_.y <= radius_ + 5) {
+		pos_.y = radius_ + 5;
 	}
 
 	if (!bullet_) {
@@ -146,10 +147,12 @@ void Player::Draw(bool gameOver)
 	}
 
 	// 自機
-	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, color_, kFillModeSolid);
+	Novice::DrawSprite(int(pos_.x - 55), int(pos_.y - 33), texture_, 0.5, 0.5, 0.0f, WHITE);
 
-	// デバッグテキスト
+	// デバッグ用
 #ifdef _DEBUG
+	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, color_, kFillModeWireFrame);
+
 	Novice::ScreenPrintf(0, 0, "charge:%d", charge_);
 	Novice::ScreenPrintf(0, 20, "canShoot:%d", canShoot_);
 #endif // _DEBUG

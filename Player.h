@@ -54,10 +54,11 @@ public:
 
 private:
 	// 自機情報
-	float radius_;   // 半径
-	Vector2 pos_;    // 座標
-	float velocity_; // 速度
-	uint32_t color_; // 色
+	float radius_;     // 半径
+	Vector2 pos_;      // 座標
+	float velocity_;   // 速度
+	uint32_t color_;   // 色
+	uint32_t texture_; // テクスチャハンドル
 
 	// 弾
 	PlayerBullet* bullet_ = nullptr;  // 弾のリスト
