@@ -130,7 +130,7 @@ void Stage1::Update(char* keys, char* preKeys)
 		CheckAllCollision();
 
 		// クリア
-		if (clearCount_ == 5) {
+		if (clearCount_ == boxCount_) {
 			isClear_ = true;
 			if(--toClearCount_<=0){
 				canPlay_ = false;
@@ -438,6 +438,11 @@ void Stage1::UpdateBoxComands()
 			if (kinds == 4) {
 				AddTvBox(Vector2(posX, posY), Vector2(width, height));
 			}
+		}
+		// COUNTコマンド
+		else if (word.find("COUNT") == 0) {
+			getline(line_stream, word, ',');
+			boxCount_ = atoi(word.c_str());
 		}
 	}
 }

@@ -104,6 +104,8 @@ private:
 
 	std::stringstream boxPopComands_; // 発生コマンド
 
+	int32_t boxCount_; // 箱の数
+
 	int32_t clearCount_; // クリア判定
 
 	//	クリア
