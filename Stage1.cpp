@@ -64,6 +64,10 @@ void Stage1::Initialize()
 	// テクスチャハンドル
 	metalHitEffect_ = Novice::LoadTexture("./resource/effect/metal-Effect.png");
 	iceHitEffect_ = Novice::LoadTexture("./resource/effect/ice-Effect.png");
+
+	// 制限時間
+	time_ = 9999999;
+	timeLimit_ = time_;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -98,6 +102,7 @@ void Stage1::Update(char* keys, char* preKeys)
 	if(isStart_){
 		--playCount_;
 		player_->SetCanShoot(bulletCount_);
+		timeLimit_ = time_;
 		if (playCount_ <= 0) {
 			canPlay_ = true;
 			isStart_ = false;
@@ -143,7 +148,7 @@ void Stage1::Update(char* keys, char* preKeys)
 		}
 
 		// ゲームオーバー
-		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead()) {
+		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead() || timeLimit_ <= 0) {
 			isGameOver_ = true;
 			canPlay_ = false;
 		}
@@ -159,12 +164,8 @@ void Stage1::Update(char* keys, char* preKeys)
 			hitEffect_->Update();
 		}
 		
-		// 解放
-		if(hitEffect_){
-			if (hitEffect_->getIsDead()) {
-				delete hitEffect_;
-			}
-		}
+		// 制限時間減らす
+		--timeLimit_;
 	}
 }
 
@@ -479,6 +480,11 @@ void Stage1::UpdateBoxComands()
 			getline(line_stream, word, ',');
 			bulletCount_ = atoi(word.c_str());
 		}
+		// TIMEコマンド
+		else if (word.find("TIME") == 0) {
+			getline(line_stream, word, ',');
+			time_ = atoi(word.c_str());
+		}
 	}
 }
 
@@ -538,6 +544,7 @@ void Stage1::Draw()
 	#ifdef _DEBUG
 	Novice::ScreenPrintf(0, 60, "clearCount:%d", clearCount_);
 	Novice::ScreenPrintf(0, 80, "playCount:%d", playCount_);
+	Novice::ScreenPrintf(0, 140, "time:%d", timeLimit_);
 	#endif // _DEBUG
 
 }

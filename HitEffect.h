@@ -33,9 +33,6 @@ public:
 	/// </summary>
 	void Draw();
 
-	// ゲッター
-	bool getIsDead() { return isDead_; }
-
 private:
 	uint32_t texture_;	  // テクスチャハンドル
 	uint32_t anim_;		  // アニメーション
