@@ -120,5 +120,7 @@ private:
 	bool isStart_;      // スタートフラグ
 
 	bool isPause_; // ポーズ
+
+	int32_t bulletCount_;
 };
 

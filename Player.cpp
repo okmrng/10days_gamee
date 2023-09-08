@@ -5,7 +5,7 @@ Player::~Player()
 	delete bullet_;
 }
 
-void Player::Initialize(int32_t canShoot)
+void Player::Initialize()
 {
 	radius_ = 20.0f;
 	pos_ = Vector2{ radius_ + 30.0f,360.0f };
@@ -14,7 +14,7 @@ void Player::Initialize(int32_t canShoot)
 
 	charge_ = 0;
 	power_ = 0;
-	canShoot_ = canShoot;
+	canShoot_ = 0;
 	isBullet_ = true;
 }
 

@@ -19,7 +19,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(int32_t canShoot);
+	void Initialize();
 
 	/// <summary>
 	///  更新
@@ -50,6 +50,7 @@ public:
 
 	// セッター
 	void SetIsBullet(bool isBullet) { isBullet_ = isBullet; }
+	void SetCanShoot(int32_t canShoot) { canShoot_ = canShoot; }
 
 private:
 	// 自機情報

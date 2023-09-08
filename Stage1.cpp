@@ -29,7 +29,7 @@ void Stage1::Initialize()
 {
 	// 自機
 	player_ = new Player();
-	player_->Initialize(100);
+	player_->Initialize();
 
 	// クリア
 	clear_ = new Clear();
@@ -93,6 +93,7 @@ void Stage1::Update(char* keys, char* preKeys)
 {
 	if(isStart_){
 		--playCount_;
+		player_->SetCanShoot(bulletCount_);
 		if (playCount_ <= 0) {
 			canPlay_ = true;
 			isStart_ = false;
@@ -443,6 +444,11 @@ void Stage1::UpdateBoxComands()
 		else if (word.find("COUNT") == 0) {
 			getline(line_stream, word, ',');
 			boxCount_ = atoi(word.c_str());
+		}
+		// BULLETコマンド
+		else if (word.find("BULLET") == 0) {
+			getline(line_stream, word, ',');
+			bulletCount_ = atoi(word.c_str());
 		}
 	}
 }
