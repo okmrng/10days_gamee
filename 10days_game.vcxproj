@@ -110,6 +110,7 @@
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="IceBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtility.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Clear.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="HitEffect.h" />
     <ClInclude Include="IceBox.h" />
     <ClInclude Include="MathUtility.h" />
     <ClInclude Include="MetalBox.h" />
