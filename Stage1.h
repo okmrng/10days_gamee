@@ -8,6 +8,7 @@
 #include "TvBox.h"
 #include "Clear.h"
 #include "GameOver.h"
+#include "Pause.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -99,6 +100,8 @@ private:
 
 	GameOver* gameOver_; // ゲームオーバー
 
+	Pause* pause_; // ポーズ
+
 	std::stringstream boxPopComands_; // 発生コマンド
 
 	int32_t clearCount_; // クリア判定
@@ -110,5 +113,7 @@ private:
 	bool isGameOver_; // ゲームオーバーフラグ
 
 	bool canPlay_; // プレイフラグ
+
+	bool isPause_; // ポーズ
 };
 

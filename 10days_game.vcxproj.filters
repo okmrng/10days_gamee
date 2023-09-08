@@ -95,6 +95,9 @@
     <ClCompile Include="Title.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -197,5 +200,6 @@
     <ClInclude Include="Title.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
+    <ClInclude Include="Pause.h" />
   </ItemGroup>
 </Project>

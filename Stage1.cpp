@@ -22,6 +22,7 @@ Stage1::~Stage1()
 	}
 	delete clear_;
 	delete gameOver_;
+	delete pause_;
 }
 
 void Stage1::Initialize()
@@ -35,6 +36,9 @@ void Stage1::Initialize()
 
 	// ゲームオーバー
 	gameOver_ = new GameOver();
+
+	// ポーズ
+	pause_ = new Pause();
 
 	// コマンド
 	LoadData("resource/csv/boxData1.csv", boxPopComands_);
@@ -51,6 +55,9 @@ void Stage1::Initialize()
 
 	// プレイフラグ
 	canPlay_ = true;
+
+	// ポーズフラグ
+	isPause_ = false;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -123,6 +130,12 @@ void Stage1::Update(char* keys, char* preKeys)
 		if (player_->GetCanShoot() <= 0 && player_->GetBulletIsDead()) {
 			canPlay_ = false;
 			isGameOver_ = true;
+		}
+
+		// ポーズ
+		if (keys[DIK_P] && preKeys[DIK_P] == 0) {
+			canPlay_ = false;
+			isPause_ = true;
 		}
 	}
 }
@@ -455,8 +468,14 @@ void Stage1::Draw()
 		clear_->Draw();
 	}
 
+	// ゲームオーバー
 	if (isGameOver_) {
 		gameOver_->Draw();
+	}
+
+	// ポーズ
+	if (isPause_) {
+		pause_->Draw();
 	}
 
 	// デバッグテキスト
