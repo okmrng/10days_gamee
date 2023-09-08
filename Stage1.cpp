@@ -56,6 +56,7 @@ void Stage1::Initialize()
 	// プレイ
 	canPlay_ = false;
 	playCount_ = 5;
+	isStart_ = true;
 
 	// ポーズフラグ
 	isPause_ = false;
@@ -90,16 +91,21 @@ void Stage1::LoadData(const std::string& filename, std::stringstream& targetStre
 
 void Stage1::Update(char* keys, char* preKeys)
 {
-	if (--playCount_ <= 0) {
-		canPlay_ = true;
+	if(isStart_){
+		--playCount_;
+		if (playCount_ <= 0) {
+			canPlay_ = true;
+			isStart_ = false;
+		}
 	}
+
+	// 箱
+	UpdateBoxComands();
 
 	if(canPlay_){
 		// 自機
 		player_->Upadate(keys, preKeys);
 
-		// 箱
-		UpdateBoxComands();
 		// 木箱
 		for (Box* box : box_) {
 			box->Update();
@@ -486,6 +492,7 @@ void Stage1::Draw()
 	// デバッグテキスト
 	#ifdef _DEBUG
 	Novice::ScreenPrintf(0, 60, "clearCount:%d", clearCount_);
+	Novice::ScreenPrintf(0, 80, "playCount:%d", playCount_);
 	#endif // _DEBUG
 
 }

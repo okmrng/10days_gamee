@@ -115,6 +115,7 @@ private:
 	// プレイ
 	bool canPlay_;	    // プレイフラグ
 	int32_t playCount_; // プレイできるようになるまでのカウント
+	bool isStart_;      // スタートフラグ
 
 	bool isPause_; // ポーズ
 };
