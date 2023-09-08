@@ -39,6 +39,7 @@ void Stage1::Initialize()
 
 	// ポーズ
 	pause_ = new Pause();
+	pause_->Initialize();
 
 	// コマンド
 	LoadData("resource/csv/boxData1.csv", boxPopComands_);
@@ -159,7 +160,7 @@ void Stage1::Update(char* keys, char* preKeys)
 			canPlay_ = false;
 		}
 
-		// ポーズ
+		// ポーズへ
 		if (keys[DIK_P] && preKeys[DIK_P] == 0) {
 			isPause_ = true;
 			canPlay_ = false;
@@ -172,6 +173,11 @@ void Stage1::Update(char* keys, char* preKeys)
 		
 		// 制限時間減らす
 		--timeLimit_;
+	}
+
+	// ポーズ
+	if (isPause_) {
+		//pause_->Update();
 	}
 }
 
