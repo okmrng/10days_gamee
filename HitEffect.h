@@ -13,6 +13,13 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
+	/// /// <param name="texture">テクスチャハンドル</param>
+	/// <param name="anim">アニメーションの数</param>
+	/// <param name="animMax">アニメーションの最大値</param>
+	/// <param name="flame">フレーム数</param>
+	/// <param name="flameMax">最大フレーム数</param>
+	/// <param name="pos">位置</param>
+	/// <param name="size">幅</param>
 	void Initialize(uint32_t texture, uint32_t anim, uint32_t animMax, uint32_t flame, uint32_t flameMax,
 		Vector2 pos, Vector2 size);
 

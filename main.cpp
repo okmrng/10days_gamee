@@ -21,7 +21,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		STGAESELECT, // ステージセレクト
 		STAGE1		 // ステージ1
 	};
-	Scene scene = Scene::TITLE;
+	Scene scene = Scene::STAGE1;
 
 	// タイトル
 	Title* title = new Title();

@@ -9,6 +9,7 @@
 #include "Clear.h"
 #include "GameOver.h"
 #include "Pause.h"
+#include "HitEffect.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -78,6 +79,19 @@ public:
 	void AddTvBox(Vector2 pos, Vector2 size);
 
 	/// <summary>
+	/// ヒットエフェクト生成
+	/// </summary>
+	/// <param name="texture">テクスチャハンドル</param>
+	/// <param name="anim">アニメーションの数</param>
+	/// <param name="animMax">アニメーションの最大値</param>
+	/// <param name="flame">フレーム数</param>
+	/// <param name="flameMax">最大フレーム数</param>
+	/// <param name="pos">位置</param>
+	/// <param name="size">幅</param>
+	void AddHitEffect(uint32_t texture, uint32_t anim, uint32_t animMax, uint32_t flame, uint32_t flameMax,
+		Vector2 pos, Vector2 size);
+
+	/// <summary>
 	/// 敵発生コマンドの更新
 	/// </summary>
 	void UpdateBoxComands();
@@ -102,6 +116,8 @@ private:
 
 	Pause* pause_; // ポーズ
 
+	HitEffect* hitEffect_; // ヒットエフェクト
+
 	std::stringstream boxPopComands_; // 発生コマンド
 
 	int32_t boxCount_; // 箱の数
@@ -122,5 +138,8 @@ private:
 	bool isPause_; // ポーズ
 
 	int32_t bulletCount_;
+
+	// テクスチャハンドル
+	uint32_t metalHitEffect_; // 金属製の箱のヒットエフェクト
 };
 

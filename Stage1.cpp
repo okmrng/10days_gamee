@@ -60,6 +60,9 @@ void Stage1::Initialize()
 
 	// ポーズフラグ
 	isPause_ = false;
+
+	// テクスチャハンドル
+	metalHitEffect_ = Novice::LoadTexture("./resource/effect/metal-Effect.png");
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -149,6 +152,11 @@ void Stage1::Update(char* keys, char* preKeys)
 			isPause_ = true;
 			canPlay_ = false;
 		}
+
+		// ヒットエフェクト
+		if(hitEffect_){
+			hitEffect_->Update();
+		}
 	}
 }
 
@@ -215,6 +223,8 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			// ヒットエフェクト
+			AddHitEffect(metalHitEffect_, 0, 3, 0, 3, Vector2(posB.x, posB.y - 42), Vector2(52, 100));
 			// 箱
 			metalBox->OnCollision();
 			// 自弾
@@ -383,6 +393,15 @@ void Stage1::AddTvBox(Vector2 pos, Vector2 size)
 	tvBox_.push_back(obj);
 }
 
+void Stage1::AddHitEffect(uint32_t texture, uint32_t anim, uint32_t animMax, 
+	uint32_t flame, uint32_t flameMax, Vector2 pos, Vector2 size)
+{
+	// 生成
+	hitEffect_ = new HitEffect();
+	// 初期化
+	hitEffect_->Initialize(texture,  anim,  animMax, flame, flameMax, pos, size);
+}
+
 void Stage1::UpdateBoxComands()
 {
 	// 1行分の文字列を入れる変数
@@ -498,6 +517,11 @@ void Stage1::Draw()
 	// ポーズ
 	if (isPause_) {
 		pause_->Draw();
+	}
+
+	// ヒットエフェクト
+	if(hitEffect_){
+		hitEffect_->Draw();
 	}
 
 	// デバッグテキスト
