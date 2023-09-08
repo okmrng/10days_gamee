@@ -65,6 +65,8 @@ void Stage1::Initialize()
 	// テクスチャハンドル
 	metalHitEffect_ = Novice::LoadTexture("./resource/effect/metal-Effect.png");
 	iceHitEffect_ = Novice::LoadTexture("./resource/effect/ice-Effect.png");
+	woodHitEffect_ = Novice::LoadTexture("./resource/effect/wood-Effect.png");
+	tvHitEffect_ = Novice::LoadTexture("./resource/effect/tv-Effect.png");
 
 	// 制限時間
 	time_ = 9999999;
@@ -192,6 +194,8 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			// ヒットエフェクト
+			AddHitEffect(woodHitEffect_, 0, 3, 0, 3, Vector2(posB.x, posB.y - 42), Vector2(52, 100));
 			// 箱
 			box->OnCollision();
 			// 自弾
@@ -328,6 +332,8 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
+			// ヒットエフェクト
+			AddHitEffect(tvHitEffect_, 0, 3, 0, 4, Vector2(posB.x, posB.y - 42), Vector2(60, 100));
 			// 箱
 			tvBox->OnCollision();
 			// 自弾

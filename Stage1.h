@@ -143,7 +143,9 @@ private:
 
 	// テクスチャハンドル
 	uint32_t metalHitEffect_; // 金属製の箱のヒットエフェクト
-	uint32_t iceHitEffect_; // 氷のヒットエフェクト
+	uint32_t iceHitEffect_;   // 氷のヒットエフェクト
+	uint32_t woodHitEffect_;  // 木箱のヒットエフェクト
+	uint32_t tvHitEffect_;    // tvのヒットエフェクト
 
 	int32_t timeLimit_; // 制限時間
 	int32_t time_;      // 制限時間csv入力用
