@@ -12,16 +12,25 @@ Player::~Player()
 
 void Player::Initialize()
 {
+	// 本体
 	radius_ = 20.0f;
 	pos_ = Vector2{ radius_ + 30.0f,360.0f };
 	velocity_ = 5.0f;
-	color_ = BLUE;
 	texture_ = Novice::LoadTexture("./resource/sprite/player.png");
 
+	// 弾
 	charge_ = 0;
 	power_ = 0;
 	canShoot_ = 0;
 	isBullet_ = true;
+
+	// HUD
+	powerPos_ = Vector2(pos_.x + 42.0f, pos_.y + 26.0f);
+	power1Texture_ = Novice::LoadTexture("./resource/HUD/power1.png");
+	power2Texture_ = Novice::LoadTexture("./resource/HUD/power2.png");
+	power3Texture_ = Novice::LoadTexture("./resource/HUD/power3.png");
+	power4Texture_ = Novice::LoadTexture("./resource/HUD/power4.png");
+	power5Texture_ = Novice::LoadTexture("./resource/HUD/power5.png");
 }
 
 void Player::Update(char* keys, char* preKeys)
@@ -53,21 +62,24 @@ void Player::Update(char* keys, char* preKeys)
 		}
 	}
 
-	// パワーによって自機の色を変化
-	if (charge_ < 30) {
-		color_ = BLUE;
+	// パワー
+	if (charge_ <= 0) {
+		power_ = 0;
+	}
+	if (charge_ > 0 && charge_ < 30) {
+		power_ = 1;
 	}
 	else if ((charge_ >= 30) && (charge_ < 60)) {
-		color_ = 0x00bfff;
+		power_ = 2;
 	}
 	else if ((charge_ >= 60) && (charge_ < 90)) {
-		color_ = 0x87cefa;
+		power_ = 3;
 	}
 	else if ((charge_ >= 90) && (charge_ < 120)) {
-		color_ = 0xafeeee;
+		power_ = 4;
 	}
 	else if (charge_ >= 120) {
-		color_ = WHITE;
+		power_ = 5;
 	}
 
 	// 弾
@@ -93,6 +105,10 @@ void Player::Update(char* keys, char* preKeys)
 	if (canShoot_ <= 0) {
 		charge_ = 0;
 	}
+
+	// HUD
+	//座標
+	powerPos_ = Vector2(pos_.x + 42.0f, pos_.y + 26.0f);
 }
 
 void Player::Attack(char* keys, char* preKeys)
@@ -100,27 +116,6 @@ void Player::Attack(char* keys, char* preKeys)
 	if (!bullet_) {
 		if (isBullet_) {
 			if (!keys[DIK_SPACE] && preKeys[DIK_SPACE]) {
-				// パワー
-				if (charge_ < 30) {
-					power_ = 1;
-					color_ = 0x1e90ff;
-				}
-				else if ((charge_ >= 30) && (charge_ < 60)) {
-					power_ = 2;
-					color_ = 0x00bfff;
-				}
-				else if ((charge_ >= 60) && (charge_ < 90)) {
-					power_ = 3;
-					color_ = 0x87cefa;
-				}
-				else if ((charge_ >= 90) && (charge_ < 120)) {
-					power_ = 4;
-					color_ = 0xafeeee;
-				}
-				else if (charge_ >= 120) {
-					power_ = 5;
-					color_ = WHITE;
-				}
 
 				// 弾の生成と初期化
 				PlayerBullet* newBullet = new PlayerBullet();
@@ -154,10 +149,25 @@ void Player::Draw(bool gameOver)
 	// 自機
 	Novice::DrawSprite(int(pos_.x - 55), int(pos_.y - 33), texture_, 0.5, 0.5, 0.0f, WHITE);
 
+	// HUD
+	if (power_ >= 1) {
+		Novice::DrawSprite(int(powerPos_.x), int(powerPos_.y), power1Texture_, 1, 1, 0.0f, WHITE);
+	}
+	if (power_ >= 2) {
+		Novice::DrawSprite(int(powerPos_.x), int(powerPos_.y - 10), power2Texture_, 1, 1, 0.0f, WHITE);
+	}
+	if (power_ >= 3) {
+		Novice::DrawSprite(int(powerPos_.x), int(powerPos_.y - 20), power3Texture_, 1, 1, 0.0f, WHITE);
+	}
+	if (power_ >= 4) {
+		Novice::DrawSprite(int(powerPos_.x), int(powerPos_.y - 30), power4Texture_, 1, 1, 0.0f, WHITE);
+	}
+	if (power_ >= 5) {
+		Novice::DrawSprite(int(powerPos_.x), int(powerPos_.y - 40), power5Texture_, 1, 1, 0.0f, WHITE);
+	}
+
 	// デバッグ用
 #ifdef _DEBUG
-	Novice::DrawEllipse(int(pos_.x), int(pos_.y), int(radius_), int(radius_), 0.0f, color_, kFillModeWireFrame);
-
 	Novice::ScreenPrintf(0, 0, "charge:%d", charge_);
 	Novice::ScreenPrintf(0, 20, "canShoot:%d", canShoot_);
 	Novice::ScreenPrintf(0, 180, "power:%d", power_);

@@ -63,7 +63,6 @@ private:
 	float radius_;     // 半径
 	Vector2 pos_;      // 座標
 	float velocity_;   // 速度
-	uint32_t color_;   // 色
 	uint32_t texture_; // テクスチャハンドル
 
 	// 弾
@@ -72,5 +71,13 @@ private:
 	int32_t power_;                   // 弾のパワー
 	int32_t canShoot_;                // 弾を撃つことができる回数
 	bool isBullet_;                   // 弾フラグ
+
+	//HUD
+	Vector2 powerPos_; // 座標
+	uint32_t power1Texture_;  // パワー1のテクスチャハンドル
+	uint32_t power2Texture_;  // パワー2のテクスチャハンドル
+	uint32_t power3Texture_;  // パワー3のテクスチャハンドル
+	uint32_t power4Texture_;  // パワー4のテクスチャハンドル
+	uint32_t power5Texture_;  // パワー5のテクスチャハンドル
 };
 
