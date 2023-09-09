@@ -60,8 +60,9 @@ void Stage1::Initialize()
 	playCount_ = 5;
 	isStart_ = true;
 
-	// ポーズフラグ
+	// ポーズ
 	isPause_ = false;
+	replay_ = false;
 
 	// テクスチャハンドル
 	metalHitEffect_ = Novice::LoadTexture("./resource/effect/metal-Effect.png");
@@ -103,6 +104,7 @@ void Stage1::LoadData(const std::string& filename, std::stringstream& targetStre
 
 void Stage1::Update(char* keys, char* preKeys)
 {
+	// スタート
 	if(isStart_){
 		--playCount_;
 		player_->SetCanShoot(bulletCount_);
@@ -160,6 +162,9 @@ void Stage1::Update(char* keys, char* preKeys)
 			canPlay_ = false;
 		}
 
+		// プレイ中はポーズを初期化
+		pause_->Initialize();
+
 		// ポーズへ
 		if (keys[DIK_P] && preKeys[DIK_P] == 0) {
 			isPause_ = true;
@@ -178,6 +183,22 @@ void Stage1::Update(char* keys, char* preKeys)
 	// ポーズ
 	if (isPause_) {
 		pause_->Update(keys, preKeys);
+
+		// 再開
+		if (pause_->GetToPlay()) {
+			if(!replay_){
+				playCount_ = 5;
+				replay_ = true;
+			}
+			else if (replay_) {
+				--playCount_;
+				if (playCount_ <= 0) {
+					replay_ = false;
+					canPlay_ = true;
+					isPause_ = false;
+				}
+			}
+		}
 	}
 }
 
