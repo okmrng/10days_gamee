@@ -107,10 +107,8 @@ public:
 	void Retry();
 
 	// ゲッター
+	Pause* GetPause() { return pause_; }
 	bool GetToEnemyInfo() { return pause_->GetToEnemyInfo(); }
-
-	// セッター
-	void SetToEnemyInfo(bool toEnemyInfo) { pause_->SetToEnemyInfo(toEnemyInfo); }
 
 private:
 	Player* player_ = nullptr; // 自機

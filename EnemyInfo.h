@@ -37,11 +37,19 @@ public:
 	/// </summary>
 	void Draw();
 
-public:
+	// ゲッター
+	bool GetToBack() { return toBack_; }
+
+	// セッター
+	void SetToBack(bool toBack) { toBack_ = toBack; }
+
+private:
 	// 敵
 	uint32_t woodTexture_;  // 木のテクスチャハンドル
 	uint32_t metalTexture_; // 金属製の箱のテクスチャハンドル
 	uint32_t iceTexture_;   // 氷のテクスチャハンドル
 	uint32_t tvTexture_;    // tvのテクスチャハンドル
+
+	bool toBack_;                     // 戻る
 };
 

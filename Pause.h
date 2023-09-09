@@ -55,6 +55,7 @@ public:
 
 	// セッター
 	void SetToEnemyInfo(bool toEnemyInfo) { toEnemyInfo_ = toEnemyInfo; }
+	void SetToPlay(bool toPlay) { toPlay_ = toPlay; }
 
 private:
 	// 文字

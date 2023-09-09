@@ -2,6 +2,7 @@
 #include "Title.h"
 #include "StageSelect.h"
 #include "Stage1.h"
+#include "EnemyInfo.h"
 
 const char kWindowTitle[] = "10days_game";
 
@@ -21,7 +22,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		STGAESELECT, // ステージセレクト
 		STAGE1,		 // ステージ1
 		STAGE1LOAD,  // ステージ1初期化
-		ENEMYINFO    // 敵情報
+		ENEMYINFO,   // 敵情報
+		INITIALIZE   // 初期化
 	};
 	Scene scene = Scene::STAGE1;
 
@@ -37,7 +39,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Stage1* stage1 = new Stage1();
 	stage1->Initialize();
 
-	bool beforeStage1 = false;
+	// ステージがいくつか
+	Scene beforeStage = Scene::STAGE1;
+
+	// 敵情報
+	EnemyInfo* enemyInfo = new EnemyInfo();
+	enemyInfo->Initialize();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -55,6 +62,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// タイトル
 		if (scene == Scene::TITLE) {
 			title->Update(keys);
+			enemyInfo->SetToBack(false);
 
 			// 次のシーンへ
 			if (title->GetToNext()) {
@@ -81,17 +89,37 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// ステージ1
 		if(scene==Scene::STAGE1){
 			stage1->Update(keys, preKeys);
-
+			
+			if (stage1->GetPause()->GetToEnemyInfo() == false) {
+				enemyInfo->Initialize();
+			}
 			// 敵情報へ
-			if (stage1->GetToEnemyInfo()) {
-				beforeStage1 = true;
+			if (stage1->GetPause()->GetToEnemyInfo()) {
+				beforeStage = Scene::STAGE1;
 				scene = Scene::ENEMYINFO;
 			}
 		}
 
 		// 敵情報
 		if (scene == Scene::ENEMYINFO) {
+			enemyInfo->Update(keys, preKeys);
+			stage1->GetPause()->SetToPlay(true);
 
+			// 戻る
+			if (enemyInfo->GetToBack()) {
+				switch (beforeStage)
+				{
+				case Scene::STAGE1:
+					scene = Scene::STAGE1;
+					break;
+				}
+			}
+		}
+
+		// 初期化
+		if (scene == Scene::INITIALIZE) {
+			//enemyInfo->Initialize();
+			
 		}
 
 		///
@@ -113,9 +141,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		// ステージ1
-		if(scene==Scene::STAGE1){
+		if(scene == Scene::STAGE1){
 			stage1->Draw();
 		}
+
+		// 敵情報
+		if (scene == Scene::ENEMYINFO) {
+			enemyInfo->Draw();
+		}
+
+		if (stage1->GetPause()->GetToEnemyInfo()) {
+			Novice::ScreenPrintf(0, 500, "true");
+		}else{ Novice::ScreenPrintf(0, 500, "false"); }
+		if (enemyInfo->GetToBack()) {
+			Novice::ScreenPrintf(0, 520, "true");
+		}
+		else { Novice::ScreenPrintf(0, 520, "false"); }
 
 		///
 		/// ↑描画処理ここまで
@@ -134,6 +175,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete title;
 	delete stageSelect;
 	delete stage1;
+	delete enemyInfo;
 
 	// ライブラリの終了
 	Novice::Finalize();
