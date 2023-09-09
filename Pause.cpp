@@ -30,6 +30,98 @@ void Pause::Initialize()
 	choosePlay_ = false;
 	chooseRetry_ = false;
 	chooseEnemyInfo_ = false;
+
+	toPlay_ = false;
+	toRetry_ = false;
+	toEnemyInfo_ = false;
+
+	pushCount_ = 5;
+	choose_ = Choose::PLAY;
+}
+
+void Pause::Update(char* keys, char* preKeys)
+{
+	--pushCount_;
+
+	// 選択
+	if (pushCount_ <= 0) {
+		switch (choose_) {
+		case Choose::PLAY:
+			PlayUpdate(keys, preKeys);
+			break;
+
+		case Choose::RETRY:
+			RetryUpdate(keys, preKeys);
+			break;
+
+		case Choose::ENEMYINFO:
+			EnemyInfoUpdate(keys, preKeys);
+			break;
+		}
+	}
+}
+
+void Pause::PlayUpdate(char* keys, char* preKeys)
+{
+	// フラグ切り替え
+	choosePlay_ = true;
+	chooseRetry_ = false;
+	chooseEnemyInfo_ = false;
+
+	// 他選択
+	if (keys[DIK_DOWN] && preKeys[DIK_DOWN] == 0) {
+		choose_ = Choose::RETRY;
+	}
+	else if (keys[DIK_UP] && preKeys[DIK_UP] == 0) {
+		choose_ = Choose::ENEMYINFO;
+	}
+
+	// 実行
+	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toPlay_ = true;
+	}
+}
+
+void Pause::RetryUpdate(char* keys, char* preKeys)
+{
+	// フラグ切り替え
+	choosePlay_ = false;
+	chooseRetry_ = true;
+	chooseEnemyInfo_ = false;
+
+	// 他選択
+	if (keys[DIK_DOWN] && preKeys[DIK_DOWN] == 0) {
+		choose_ = Choose::ENEMYINFO;
+	}
+	else if (keys[DIK_UP] && preKeys[DIK_UP] == 0) {
+		choose_ = Choose::PLAY;
+	}
+
+	// 実行
+	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toRetry_ = true;
+	}
+}
+
+void Pause::EnemyInfoUpdate(char* keys, char* preKeys)
+{
+	// フラグ切り替え
+	choosePlay_ = false;
+	chooseRetry_ = false;
+	chooseEnemyInfo_ = true;
+
+	// 他選択
+	if (keys[DIK_DOWN] && preKeys[DIK_DOWN] == 0) {
+		choose_ = Choose::PLAY;
+	}
+	else if (keys[DIK_UP] && preKeys[DIK_UP] == 0) {
+		choose_ = Choose::RETRY;
+	}
+
+	// 実行
+	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toEnemyInfo_ = true;
+	}
 }
 
 void Pause::Draw()

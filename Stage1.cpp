@@ -177,7 +177,7 @@ void Stage1::Update(char* keys, char* preKeys)
 
 	// ポーズ
 	if (isPause_) {
-		//pause_->Update();
+		pause_->Update(keys, preKeys);
 	}
 }
 
