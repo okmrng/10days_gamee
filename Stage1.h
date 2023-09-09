@@ -139,7 +139,6 @@ private:
 
 	// ポーズ
 	bool isPause_; // ポーズ
-	bool replay_;  // 再開
 
 	int32_t bulletCount_;
 

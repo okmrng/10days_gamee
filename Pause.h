@@ -87,6 +87,9 @@ private:
 	bool toRetry_;					  // リトライへ
 	bool toEnemyInfo_;				  // 敵情報へ
 
+	int32_t toCount_;                 // 連続受け付け防止
+	bool toCoundDown_;				  // toCount_のカウントダウン
+
 	int32_t pushCount_;               // キー入力を受け付けるまでのカウント
 	enum class Choose {               // 選択列挙体
 		PLAY,

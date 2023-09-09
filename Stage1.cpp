@@ -62,7 +62,6 @@ void Stage1::Initialize()
 
 	// ポーズ
 	isPause_ = false;
-	replay_ = false;
 
 	// テクスチャハンドル
 	metalHitEffect_ = Novice::LoadTexture("./resource/effect/metal-Effect.png");
@@ -186,18 +185,8 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// 再開
 		if (pause_->GetToPlay()) {
-			if(!replay_){
-				playCount_ = 5;
-				replay_ = true;
-			}
-			else if (replay_) {
-				--playCount_;
-				if (playCount_ <= 0) {
-					replay_ = false;
-					canPlay_ = true;
-					isPause_ = false;
-				}
-			}
+			canPlay_ = true;
+			isPause_ = false;
 		}
 	}
 }

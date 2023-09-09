@@ -35,6 +35,9 @@ void Pause::Initialize()
 	toRetry_ = false;
 	toEnemyInfo_ = false;
 
+	toCount_ = 5;
+	toCoundDown_ = false;
+
 	pushCount_ = 5;
 	choose_ = Choose::PLAY;
 }
@@ -78,7 +81,14 @@ void Pause::PlayUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toPlay_ = true;
+		toCoundDown_ = true;
+	}
+
+	if (toCoundDown_) {
+		--toCount_;
+		if (toCount_ <= 0) {
+			toPlay_ = true;
+		}
 	}
 }
 
@@ -99,7 +109,13 @@ void Pause::RetryUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toRetry_ = true;
+		toCoundDown_ = true;
+	}
+	if (toCoundDown_) {
+		--toCount_;
+		if (toCount_ <= 0) {
+			toRetry_ = true;
+		}
 	}
 }
 
@@ -120,7 +136,13 @@ void Pause::EnemyInfoUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toEnemyInfo_ = true;
+		toCoundDown_ = true;
+	}
+	if (toCoundDown_) {
+		--toCount_;
+		if (toCount_ <= 0) {
+			toEnemyInfo_ = true;
+		}
 	}
 }
 
