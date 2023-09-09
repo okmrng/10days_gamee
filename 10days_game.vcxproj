@@ -108,6 +108,7 @@
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
     <ClCompile Include="Clear.cpp" />
+    <ClCompile Include="EnemyInfo.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="HitEffect.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
     <ClInclude Include="Clear.h" />
+    <ClInclude Include="EnemyInfo.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="HitEffect.h" />

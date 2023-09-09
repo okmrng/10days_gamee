@@ -53,6 +53,9 @@ public:
 	bool GetToRetry() { return toRetry_; }
 	bool GetToEnemyInfo() { return toEnemyInfo_; }
 
+	// セッター
+	void SetToEnemyInfo(bool toEnemyInfo) { toEnemyInfo_ = toEnemyInfo; }
+
 private:
 	// 文字
 	Vector2 PPos_;      // Pの座標

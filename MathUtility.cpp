@@ -1,5 +1,13 @@
 ﻿#include "MathUtility.h"
 
+float EaseOutCirc(float startPoint, float endPoint, float t) {
+	float easedT = sqrt(1.0f - pow(t - 1.0f, 2.0f));
+
+	float pos = (float)(1.0 - easedT) * startPoint + easedT * endPoint;
+
+	return pos;
+}
+
 Vector2& operator+=(Vector2& v, float s) {
 	v.x += s;
 	v.y += s;

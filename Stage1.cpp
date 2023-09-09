@@ -72,8 +72,6 @@ void Stage1::Initialize()
 	iceHitEffect_ = Novice::LoadTexture("./resource/effect/ice-Effect.png");
 	woodHitEffect_ = Novice::LoadTexture("./resource/effect/wood-Effect.png");
 	tvHitEffect_ = Novice::LoadTexture("./resource/effect/tv-Effect.png");
-
-	toStageLoad_ = false;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -193,7 +191,6 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// リトライ
 		if (pause_->GetToRetry()) {
-			//toStageLoad_ = true;
 			Retry();
 		}
 	}

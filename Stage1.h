@@ -107,7 +107,10 @@ public:
 	void Retry();
 
 	// ゲッター
-	bool GetToStageLoad() { return toStageLoad_; }
+	bool GetToEnemyInfo() { return pause_->GetToEnemyInfo(); }
+
+	// セッター
+	void SetToEnemyInfo(bool toEnemyInfo) { pause_->SetToEnemyInfo(toEnemyInfo); }
 
 private:
 	Player* player_ = nullptr; // 自機
@@ -161,7 +164,5 @@ private:
 
 	int32_t timeLimit_; // 制限時間
 	int32_t time_;      // 制限時間csv入力用
-
-	bool toStageLoad_; // ステージ1初期化画面へ
 };
 

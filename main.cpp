@@ -20,7 +20,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TITLE,		 // タイトル
 		STGAESELECT, // ステージセレクト
 		STAGE1,		 // ステージ1
-		STAGE1LOAD   // ステージ1初期化
+		STAGE1LOAD,  // ステージ1初期化
+		ENEMYINFO    // 敵情報
 	};
 	Scene scene = Scene::STAGE1;
 
@@ -35,6 +36,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ステージ1
 	Stage1* stage1 = new Stage1();
 	stage1->Initialize();
+
+	bool beforeStage1 = false;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -79,10 +82,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if(scene==Scene::STAGE1){
 			stage1->Update(keys, preKeys);
 
-			// リトライ
-			if (stage1->GetToStageLoad()) {
-				scene = Scene::STAGE1LOAD;
+			// 敵情報へ
+			if (stage1->GetToEnemyInfo()) {
+				beforeStage1 = true;
+				scene = Scene::ENEMYINFO;
 			}
+		}
+
+		// 敵情報
+		if (scene == Scene::ENEMYINFO) {
+
 		}
 
 		///
