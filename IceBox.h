@@ -17,7 +17,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 pos, Vector2 size);
+	void Initialize(Vector2 pos, Vector2 size, Player* player);
 
 	/// <summary>
 	/// 更新

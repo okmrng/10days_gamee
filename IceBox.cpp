@@ -2,7 +2,7 @@
 
 #include "Player.h"
 
-void IceBox::Initialize(Vector2 pos, Vector2 size)
+void IceBox::Initialize(Vector2 pos, Vector2 size, Player* player)
 {
 	pos_ = pos;
 	size_ = size;
@@ -14,6 +14,8 @@ void IceBox::Initialize(Vector2 pos, Vector2 size)
 	startPoint_ = pos_.x;
 	isGoal_ = false;
 	t_ = 0.0f;
+
+	player_ = player;
 
 	// ゴール
 	goal_ = new Goal();
@@ -99,4 +101,33 @@ void IceBox::Draw()
 
 	// 本体
 	Novice::DrawSprite(int(pos_.x), int(pos_.y), texture_, 1, 1, 0.0f, WHITE);
+
+	// デバッグ
+#ifdef _DEBUG
+	Novice::ScreenPrintf(0, 220, "pos_.x:%0.0f", pos_.x);
+	Novice::ScreenPrintf(0, 240, "velocity:%0.0f", velocity_);
+	Novice::ScreenPrintf(0, 260, "acceleration:%0.1f", acceleration_);
+	if (hit_) {
+		Novice::ScreenPrintf(0, 280, "hit:true");
+	}
+	else{ Novice::ScreenPrintf(0, 280, "hit:false"); }
+	if (stop_) {
+		Novice::ScreenPrintf(0, 300, "stop:true");
+	}
+	else { Novice::ScreenPrintf(0, 300, "stop:false"); }
+	Novice::ScreenPrintf(0, 320, "startPoint:%0.0f", startPoint_);
+	if (goal_) {
+		Novice::ScreenPrintf(0, 340, "goal:true");
+	}
+	else { Novice::ScreenPrintf(0, 340, "goal:false"); }
+	Novice::ScreenPrintf(0, 360, "t:%0.0f", t_);
+	Novice::ScreenPrintf(0, 380, "power:%d", player_->GetBulletPower());
+	if (player_->GetBullet()) {
+		Novice::ScreenPrintf(0, 400, "bullet:true");
+	}else{ Novice::ScreenPrintf(0, 400, "bullet:false"); }
+	if (player_) {
+		Novice::ScreenPrintf(0, 440, "player:true");
+	}
+	else { Novice::ScreenPrintf(0, 440, "player:false"); }
+#endif // _DEBUG
 }

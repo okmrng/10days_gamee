@@ -1,5 +1,10 @@
 ﻿#include "Player.h"
 
+Player::Player()
+{
+	bullet_ = nullptr;
+}
+
 Player::~Player()
 {
 	delete bullet_;
@@ -19,7 +24,7 @@ void Player::Initialize()
 	isBullet_ = true;
 }
 
-void Player::Upadate(char* keys, char* preKeys)
+void Player::Update(char* keys, char* preKeys)
 {
 	// 移動
 	if (keys[DIK_DOWN]) {
@@ -155,6 +160,11 @@ void Player::Draw(bool gameOver)
 
 	Novice::ScreenPrintf(0, 0, "charge:%d", charge_);
 	Novice::ScreenPrintf(0, 20, "canShoot:%d", canShoot_);
+	Novice::ScreenPrintf(0, 180, "power:%d", power_);
+	Novice::ScreenPrintf(0, 200, "bulletPower:%d", GetBulletPower());
+	if (bullet_) {
+		Novice::ScreenPrintf(0, 460, "bullet:true");
+	}else{ Novice::ScreenPrintf(0, 460, "bullet:false"); }
 #endif // _DEBUG
 }
 

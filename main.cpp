@@ -19,7 +19,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enum class Scene {
 		TITLE,		 // タイトル
 		STGAESELECT, // ステージセレクト
-		STAGE1		 // ステージ1
+		STAGE1,		 // ステージ1
+		STAGE1LOAD   // ステージ1初期化
 	};
 	Scene scene = Scene::STAGE1;
 
@@ -64,13 +65,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			// 次のシーンへ
 			if (stageSelect->GetToNext()) {
-				scene = Scene::STAGE1;
+				scene = Scene::STAGE1LOAD;
 			}
+		}
+
+		// ステージ1初期化
+		if (scene == Scene::STAGE1LOAD) {
+			stage1->Initialize();
+			scene = Scene::STAGE1;
 		}
 
 		// ステージ1
 		if(scene==Scene::STAGE1){
 			stage1->Update(keys, preKeys);
+
+			// リトライ
+			if (stage1->GetToStageLoad()) {
+				scene = Scene::STAGE1LOAD;
+			}
 		}
 
 		///

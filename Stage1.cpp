@@ -43,6 +43,10 @@ void Stage1::Initialize()
 
 	// コマンド
 	LoadData("resource/csv/boxData1.csv", boxPopComands_);
+
+	boxPos_ = Vector2(0.0f, 0.0f);
+	boxSize_ = Vector2(0.0f, 0.0f);
+	boxKinds_ = 0;
 	 
 	// クリア判定
 	clearCount_ = 0;
@@ -69,16 +73,14 @@ void Stage1::Initialize()
 	woodHitEffect_ = Novice::LoadTexture("./resource/effect/wood-Effect.png");
 	tvHitEffect_ = Novice::LoadTexture("./resource/effect/tv-Effect.png");
 
-	// 制限時間
-	time_ = 9999999;
-	timeLimit_ = time_;
+	toStageLoad_ = false;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
 {
 	std::ifstream file;
 	// ファイルを開く
-	file.open(filename);
+	file.open(filename.c_str());
 	assert(file.is_open());
 
 	// ファイルの内容を文字列ストリームにコピー
@@ -115,11 +117,11 @@ void Stage1::Update(char* keys, char* preKeys)
 	}
 
 	// 箱
-	UpdateBoxComands();
+	UpdateBoxComands(boxPopComands_);
 
 	if(canPlay_){
 		// 自機
-		player_->Upadate(keys, preKeys);
+		player_->Update(keys, preKeys);
 
 		// 木箱
 		for (Box* box : box_) {
@@ -187,6 +189,12 @@ void Stage1::Update(char* keys, char* preKeys)
 		if (pause_->GetToPlay()) {
 			canPlay_ = true;
 			isPause_ = false;
+		}
+
+		// リトライ
+		if (pause_->GetToRetry()) {
+			//toStageLoad_ = true;
+			Retry();
 		}
 	}
 }
@@ -411,7 +419,7 @@ void Stage1::AddIceBox(Vector2 pos, Vector2 size)
 	// 弾の生成
 	IceBox* obj = new IceBox();
 	// 初期化
-	obj->Initialize(pos, size);
+	obj->Initialize(pos, size, player_);
 	// 自機をセット
 	obj->SetPlayer(player_);
 
@@ -439,13 +447,13 @@ void Stage1::AddHitEffect(uint32_t texture, uint32_t anim, uint32_t animMax,
 	hitEffect_->Initialize(texture,  anim,  animMax, flame, flameMax, pos, size);
 }
 
-void Stage1::UpdateBoxComands()
+void Stage1::UpdateBoxComands(std::stringstream& boxPopComands)
 {
 	// 1行分の文字列を入れる変数
 	std::string line;
 
 	// コマンド実行ループ
-	while (getline(boxPopComands_, line)) {
+	while (getline(boxPopComands, line)) {
 		// 1行分の文字列をストリームに変換して解析しやすくする
 		std::istringstream line_stream(line);
 
@@ -464,36 +472,42 @@ void Stage1::UpdateBoxComands()
 			// 座標
 			// x座標
 			getline(line_stream, word, ',');
-			float posX = (float)std::atof(word.c_str());
+			float posX = (float)atof(word.c_str());
 
 			// y座標
 			getline(line_stream, word, ',');
-			float posY = (float)std::atof(word.c_str());
+			float posY = (float)atof(word.c_str());
 
 			// サイズ
 			// 横幅
 			getline(line_stream, word, ',');
-			float width = (float)std::atof(word.c_str());
+			float sizeX = (float)atof(word.c_str());
 
 			// 縦幅
 			getline(line_stream, word, ',');
-			float height = (float)std::atof(word.c_str());
+			float sizeY = (float)atof(word.c_str());
 
 			// 敵の種類
 			getline(line_stream, word, ',');
-			int32_t kinds = atoi(word.c_str());
+			int32_t kinds_ = atoi(word.c_str());
 
-			if(kinds == 1){
-				AddBox(Vector2(posX, posY), Vector2(width, height));
+			boxPos_.x = posX;
+			boxPos_.y = posY;
+			boxSize_.x = sizeX;
+			boxSize_.y = sizeY;
+			boxKinds_ = kinds_;
+
+			if(boxKinds_ == 1){
+				AddBox(boxPos_, boxSize_);
 			}
-			if (kinds == 2) {
-				AddMetalBox(Vector2(posX, posY), Vector2(width, height));
+			if (boxKinds_ == 2) {
+				AddMetalBox(boxPos_, boxSize_);
 			}
-			if (kinds == 3) {
-				AddIceBox(Vector2(posX, posY), Vector2(width, height));
+			if (boxKinds_ == 3) {
+				AddIceBox(boxPos_, boxSize_);
 			}
-			if (kinds == 4) {
-				AddTvBox(Vector2(posX, posY), Vector2(width, height));
+			if (boxKinds_ == 4) {
+				AddTvBox(boxPos_, boxSize_);
 			}
 		}
 		// COUNTコマンド
@@ -572,6 +586,41 @@ void Stage1::Draw()
 	Novice::ScreenPrintf(0, 80, "playCount:%d", playCount_);
 	Novice::ScreenPrintf(0, 140, "time:%d", timeLimit_);
 	Novice::ScreenPrintf(0, 160, "inGameOverCount:%d", inGameOverCount_);
+	Novice::ScreenPrintf(0, 420, "power:%d", player_->GetBulletPower());
+	if (player_->GetBullet()) {
+		Novice::ScreenPrintf(0, 60, "true");
+	}
 	#endif // _DEBUG
 
+}
+
+void Stage1::Retry()
+{
+	Initialize();
+
+	// ボックス関連データを削除
+	for (Box* box : box_) {
+		delete box;
+	}
+	for (MetalBox* metalBox : metalBox_) {
+		delete metalBox;
+	}
+	for (IceBox* iceBox : iceBox_) {
+		delete iceBox;
+	}
+	for (TvBox* tvBox : tvBox_) {
+		delete tvBox;
+	}
+	box_.clear();
+	metalBox_.clear();
+	iceBox_.clear();
+	tvBox_.clear();
+
+	// CSVファイルを再度読み込む
+	std::string csvFilePath = "resource/csv/boxData1.csv";
+	std::stringstream boxPopComands; // リトライ時に新たなストリームを用意
+	LoadData(csvFilePath, boxPopComands);
+
+	// コマンド実行
+	UpdateBoxComands(boxPopComands);
 }

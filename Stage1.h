@@ -94,12 +94,20 @@ public:
 	/// <summary>
 	/// 敵発生コマンドの更新
 	/// </summary>
-	void UpdateBoxComands();
+	void UpdateBoxComands(std::stringstream& boxPopComands);
 
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
+
+	/// <summary>
+	/// リトライ
+	/// </summary>
+	void Retry();
+
+	// ゲッター
+	bool GetToStageLoad() { return toStageLoad_; }
 
 private:
 	Player* player_ = nullptr; // 自機
@@ -118,9 +126,12 @@ private:
 
 	HitEffect* hitEffect_; // ヒットエフェクト
 
-	std::stringstream boxPopComands_; // 発生コマンド
+	std::stringstream boxPopComands_; // コマンド
 
-	int32_t boxCount_; // 箱の数
+	int32_t boxCount_; // 箱
+	Vector2 boxPos_;   // 箱の位置
+	Vector2 boxSize_;  // 箱の幅
+	int32_t boxKinds_; // 箱の種類
 
 	int32_t clearCount_; // クリア判定
 
@@ -150,5 +161,7 @@ private:
 
 	int32_t timeLimit_; // 制限時間
 	int32_t time_;      // 制限時間csv入力用
+
+	bool toStageLoad_; // ステージ1初期化画面へ
 };
 

@@ -36,6 +36,9 @@ public:
 	Vector2 GetCollisionPos() { return collisionPos_; }
 	Vector2 GetSize() { return size_; }
 	int32_t GetPower() { return power_; }
+
+	// セッター
+
 	
 private:
 	float radius_;         // 半径

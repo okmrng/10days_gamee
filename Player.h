@@ -12,6 +12,11 @@ class Player
 {
 public:
 	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	Player();
+
+	/// <summary>
 	/// デストラクタ
 	/// </summary>
 	~Player();
@@ -24,7 +29,7 @@ public:
 	/// <summary>
 	///  更新
 	/// </summary>
-	void Upadate(char* keys, char* preKeys);
+	void Update(char* keys, char* preKeys);
 
 	/// <summary>
 	/// 攻撃
@@ -51,6 +56,7 @@ public:
 	// セッター
 	void SetIsBullet(bool isBullet) { isBullet_ = isBullet; }
 	void SetCanShoot(int32_t canShoot) { canShoot_ = canShoot; }
+	PlayerBullet* GetBullet() { return bullet_; }
 
 private:
 	// 自機情報
