@@ -19,8 +19,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// シーン列挙体
 	enum class Scene {
 		TITLE,			 // タイトル
-		STGAESELECTLOAD, // ステージセレクト初期化
-		STGAESELECT,	 // ステージセレクト
+		STAGESELECTLOAD, // ステージセレクト初期化
+		STAGESELECT,	 // ステージセレクト
 		STAGE1LOAD,		 // ステージ1初期化
 		STAGE1,			 // ステージ1
 		STAGE2LOAD,		 // ステージ2初期化
@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		STAGE8,			 // ステージ8
 		ENEMYINFO,		 // 敵情報
 	};
-	Scene scene = Scene::STGAESELECT;
+	Scene scene = Scene::STAGE1;
 
 	// タイトル
 	Title* title = new Title();
@@ -80,18 +80,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			// 次のシーンへ
 			if (title->GetToNext()) {
-				scene = Scene::STGAESELECT;
+				scene = Scene::STAGESELECT;
 			}
 		}
 
 		// ステージセレクト初期化
-		if (scene == Scene::STGAESELECTLOAD) {
+		if (scene == Scene::STAGESELECTLOAD) {
 			stageSelect->Initiallize();
-			scene = Scene::STGAESELECT;
+			scene = Scene::STAGESELECT;
 		}
 
 		// ステージセレクト
-		if (scene == Scene::STGAESELECT) {
+		if (scene == Scene::STAGESELECT) {
 			stageSelect->Update(keys, preKeys);
 
 			// 次のシーンへ
@@ -142,7 +142,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			// ステージセレクトへ
 			if (stage1->GetClear()->GetToNext() || stage1->GetGameOver()->GetToStageSelect()) {
-				scene = Scene::STGAESELECTLOAD;
+				scene = Scene::STAGESELECTLOAD;
 			}
 		}
 
@@ -176,7 +176,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		// ステージセレクト
-		if (scene == Scene::STGAESELECT) {
+		if (scene == Scene::STAGESELECT) {
 			stageSelect->Draw();
 		}
 
