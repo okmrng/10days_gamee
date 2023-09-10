@@ -394,10 +394,18 @@ void Stage1::CheckAllCollision()
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (tvBox->GetVelocity() <= 15) {
-				if (!tvBox->GetAddStop()) {
-					clearCount_++;
+				if (tvBox->GetCount() <= 0) {
+					if (!tvBox->GetAddStop()) {
+						clearCount_++;
+					}
+					tvBox->IsGoal();
 				}
-				tvBox->IsGoal();
+				else if (tvBox->GetCount() >= 1) {
+					if (tvBox->GetVelocity() <= 0.0f) {
+						isGameOver_ = true;
+						canPlay_ = false;
+					}
+				}
 			}
 		}
 	}

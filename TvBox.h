@@ -46,6 +46,7 @@ public:
 	Vector2 GetGoalCollisionSize() { return goal_->GetCollisionSize(); }
 	float GetVelocity() { return velocity_; }
 	bool GetAddStop() { return addStop_; }
+	int32_t GetCount() { return count_; }
 
 	// セッター
 	void SetPlayer(Player* player) { player_ = player; }
