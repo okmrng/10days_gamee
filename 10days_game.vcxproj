@@ -113,6 +113,7 @@
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="IceBox.cpp" />
+    <ClCompile Include="IceInfo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtility.cpp" />
     <ClCompile Include="MetalBox.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Goal.h" />
     <ClInclude Include="HitEffect.h" />
     <ClInclude Include="IceBox.h" />
+    <ClInclude Include="IceInfo.h" />
     <ClInclude Include="MathUtility.h" />
     <ClInclude Include="MetalBox.h" />
     <ClInclude Include="MetalInfo.h" />

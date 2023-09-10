@@ -115,6 +115,9 @@
     <ClCompile Include="MetalInfo.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
+    <ClCompile Include="IceInfo.cpp">
+      <Filter>ソース\シーン</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -235,6 +238,9 @@
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
     <ClInclude Include="MetalInfo.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="IceInfo.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
   </ItemGroup>
