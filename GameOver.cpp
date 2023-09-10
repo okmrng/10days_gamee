@@ -48,15 +48,29 @@ void GameOver::Update(char* keys, char* preKeys)
 	// フェードイン
 	alpha_ = FadeIn(alpha_, 0x00000002, 0x000000ff);
 
-	switch (choose_)
-	{
-	case Choose::RETRY:
-		RetryUpdate(keys, preKeys);
-		break;
+	// UI
+	// 波移動
+	retryPos_.x = sinf(retryTheta_) * 3.0f + 505.5f;
+	retryPos_.y = cosf(retryTheta_) * 3.0f + 350.5f;
 
-	case Choose::STAGESELECT:
-		StageSelectUpdate(keys, preKeys);
-		break;
+	retryTheta_ += (float)M_PI / 45.0f;
+
+	stageSelectPos_.x = cosf(stageSelectTheta_) * 3.0f + 370.0f;
+	stageSelectPos_.y = sinf(stageSelectTheta_) * 3.0f + 474.0f;
+
+	stageSelectTheta_ += (float)M_PI / 45.0f;
+
+	if (alpha_ >= 0x000000ff) {
+		switch (choose_)
+		{
+		case Choose::RETRY:
+			RetryUpdate(keys, preKeys);
+			break;
+
+		case Choose::STAGESELECT:
+			StageSelectUpdate(keys, preKeys);
+			break;
+		}
 	}
 }
 
