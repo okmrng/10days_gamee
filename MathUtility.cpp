@@ -8,6 +8,19 @@ float EaseOutCirc(float startPoint, float endPoint, float t) {
 	return pos;
 }
 
+uint32_t FadeIn(uint32_t alpha, uint32_t addAlpha, uint32_t maxAlpha)
+{
+	uint32_t temp = alpha;
+	if (temp <= maxAlpha) {
+		temp +=addAlpha;
+	}
+	if (temp >= maxAlpha) {
+		temp = maxAlpha;
+	}
+
+	return temp;
+}
+
 Vector2& operator+=(Vector2& v, float s) {
 	v.x += s;
 	v.y += s;

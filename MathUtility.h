@@ -2,6 +2,7 @@
 
 #include <Vector2.h>
 #include <cmath>
+#include <stdint.h>
 
 /// <summary>
 /// easeOutCirc
@@ -10,6 +11,15 @@
 /// <param name="endPoint">終点</param>
 /// <param name="t">フレーム</param>
 float EaseOutCirc(float startPoint, float endPoint, float t);
+
+/// <summary>
+/// フェードイン
+/// </summary>
+/// <param name="alpha">現在の透明度</param>
+/// <param name="addAlpha">足していく透明度</param>
+/// <param name="maxAlpha">どこまでフェードインするか</param>
+/// <returns></returns>
+uint32_t FadeIn(uint32_t alpha, uint32_t addAlpha, uint32_t maxAlpha);
 
 // 演算子オーバーロード
 Vector2& operator+=(Vector2& v, float s);
