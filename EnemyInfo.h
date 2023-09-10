@@ -50,6 +50,6 @@ private:
 	uint32_t iceTexture_;   // 氷のテクスチャハンドル
 	uint32_t tvTexture_;    // tvのテクスチャハンドル
 
-	bool toBack_;                     // 戻る
+	bool toBack_;           // 戻る
 };
 

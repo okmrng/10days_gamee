@@ -33,6 +33,7 @@ void Stage1::Initialize()
 
 	// クリア
 	clear_ = new Clear();
+	clear_->Initialize();
 
 	// ゲームオーバー
 	gameOver_ = new GameOver();
@@ -51,7 +52,7 @@ void Stage1::Initialize()
 	// クリア判定
 	clearCount_ = 0;
 
-	// クリア関連
+	// クリア
 	isClear_ = false;
 	toClearCount_ = 30;
 
@@ -146,8 +147,8 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// クリア
 		if (clearCount_ == boxCount_) {
-			isClear_ = true;
 			if(--toClearCount_<=0){
+				isClear_ = true;
 				canPlay_ = false;
 			}
 		}
@@ -193,6 +194,11 @@ void Stage1::Update(char* keys, char* preKeys)
 		if (pause_->GetToRetry()) {
 			Retry();
 		}
+	}
+
+	// クリア
+	if (isClear_) {
+		clear_->Update(keys, preKeys);
 	}
 }
 

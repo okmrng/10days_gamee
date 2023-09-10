@@ -150,13 +150,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			enemyInfo->Draw();
 		}
 
+#ifdef _DEBUG
 		if (stage1->GetPause()->GetToEnemyInfo()) {
 			Novice::ScreenPrintf(0, 500, "true");
-		}else{ Novice::ScreenPrintf(0, 500, "false"); }
+		}
+		else { Novice::ScreenPrintf(0, 500, "false"); }
 		if (enemyInfo->GetToBack()) {
 			Novice::ScreenPrintf(0, 520, "true");
 		}
 		else { Novice::ScreenPrintf(0, 520, "false"); }
+#endif // _DEBUG
 
 		///
 		/// ↑描画処理ここまで
