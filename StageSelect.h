@@ -94,6 +94,13 @@ public:
 
 	// ゲッター
 	bool GetToStage1() { return toStage1_; }
+	bool GetToStage2() { return toStage2_; }
+	bool GetToStage3() { return toStage3_; }
+	bool GetToStage4() { return toStage4_; }
+	bool GetToStage5() { return toStage5_; }
+	bool GetToStage6() { return toStage6_; }
+	bool GetToStage7() { return toStage7_; }
+	bool GetToStage8() { return toStage8_; }
 
 private:
 	// UI

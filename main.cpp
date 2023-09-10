@@ -21,8 +21,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TITLE,			 // タイトル
 		STGAESELECTLOAD, // ステージセレクト初期化
 		STGAESELECT,	 // ステージセレクト
-		STAGE1,			 // ステージ1
 		STAGE1LOAD,		 // ステージ1初期化
+		STAGE1,			 // ステージ1
+		STAGE2LOAD,		 // ステージ2初期化
+		STAGE2,			 // ステージ2
+		STAGE3LOAD,		 // ステージ3初期化
+		STAGE3,			 // ステージ3
+		STAGE4LOAD,		 // ステージ4初期化
+		STAGE4,			 // ステージ4
+		STAGE5LOAD,		 // ステージ5初期化
+		STAGE5,			 // ステージ5
+		STAGE6LOAD,		 // ステージ6初期化
+		STAGE6,			 // ステージ6
+		STAGE7LOAD,		 // ステージ7初期化
+		STAGE7,			 // ステージ7
+		STAGE8LOAD,		 // ステージ8初期化
+		STAGE8,			 // ステージ8
 		ENEMYINFO,		 // 敵情報
 	};
 	Scene scene = Scene::STGAESELECT;
@@ -83,6 +97,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			// 次のシーンへ
 			if (stageSelect->GetToStage1()) {
 				scene = Scene::STAGE1LOAD;
+			}
+			if (stageSelect->GetToStage2()) {
+				scene = Scene::STAGE2LOAD;
+			}
+			if (stageSelect->GetToStage3()) {
+				scene = Scene::STAGE3LOAD;
+			}
+			if (stageSelect->GetToStage4()) {
+				scene = Scene::STAGE4LOAD;
+			}
+			if (stageSelect->GetToStage5()) {
+				scene = Scene::STAGE5LOAD;
+			}
+			if (stageSelect->GetToStage6()) {
+				scene = Scene::STAGE6LOAD;
+			}
+			if (stageSelect->GetToStage7()) {
+				scene = Scene::STAGE7LOAD;
+			}
+			if (stageSelect->GetToStage8()) {
+				scene = Scene::STAGE8LOAD;
 			}
 		}
 
