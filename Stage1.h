@@ -108,7 +108,7 @@ public:
 
 	// ゲッター
 	Pause* GetPause() { return pause_; }
-	bool GetToEnemyInfo() { return pause_->GetToEnemyInfo(); }
+	Clear* GetClear() { return clear_; }
 
 private:
 	Player* player_ = nullptr; // 自機

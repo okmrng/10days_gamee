@@ -27,7 +27,7 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update(char* keys);
+	void Update(char* keys, char* preKeys);
 
 	/// <summary>
 	/// 描画

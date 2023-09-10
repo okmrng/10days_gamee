@@ -15,10 +15,10 @@ void StageSelect::Initiallize()
 	pushCount_ = 5;
 }
 
-void StageSelect::Update(char* keys)
+void StageSelect::Update(char* keys, char* preKeys)
 {
 	if (--pushCount_ <= 0) {
-		if(keys[DIK_SPACE]){
+		if(keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
 			toNext_ = true;
 		}
 	}
