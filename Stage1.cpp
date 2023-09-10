@@ -37,6 +37,7 @@ void Stage1::Initialize()
 
 	// ゲームオーバー
 	gameOver_ = new GameOver();
+	gameOver_->Initialize();
 
 	// ポーズ
 	pause_ = new Pause();
@@ -199,6 +200,11 @@ void Stage1::Update(char* keys, char* preKeys)
 	// クリア
 	if (isClear_) {
 		clear_->Update(keys, preKeys);
+	}
+
+	// ゲームオーバー
+	if (isGameOver_) {
+		gameOver_->Update(keys, preKeys);
 	}
 }
 
