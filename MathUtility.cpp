@@ -10,15 +10,14 @@ float EaseOutCirc(float startPoint, float endPoint, float t) {
 
 uint32_t FadeIn(uint32_t alpha, uint32_t addAlpha, uint32_t maxAlpha)
 {
-	uint32_t temp = alpha;
-	if (temp <= maxAlpha) {
-		temp +=addAlpha;
+	if (alpha <= maxAlpha) {
+		alpha +=addAlpha;
 	}
-	if (temp >= maxAlpha) {
-		temp = maxAlpha;
+	if (alpha >= maxAlpha) {
+		alpha = maxAlpha;
 	}
 
-	return temp;
+	return alpha;
 }
 
 Vector2& operator+=(Vector2& v, float s) {

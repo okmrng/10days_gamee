@@ -23,6 +23,20 @@ public:
 	void Update(char* keys, char* preKeys);
 
 	/// <summary>
+	/// リトライ更新
+	/// </summary>
+	/// <param name="keys">キー1</param>
+	/// <param name="preKeys">キー2</param>
+	void RetryUpdate(char* keys, char* preKeys);
+
+	/// <summary>
+	/// ステージセレクト更新
+	/// </summary>
+	/// <param name="keys">キー1</param>
+	/// <param name="preKeys">キー2</param>
+	void StageSelectUpdate(char* keys, char* preKeys);
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
@@ -36,5 +50,33 @@ private:
 	uint32_t failedTexture_; // テクスチャハンドル
 	uint32_t color_;         // 色
 	uint32_t alpha_;         // 透明度
+
+	// UI
+	// RETRY
+	Vector2 retryPos_;		      // 座標
+	uint32_t retryTexture_;       // テクスチャハンドル
+	uint32_t chooseRetryTexture_; // 選択中のテクスチャハンドル
+	bool chooseRetry_;            // 選択中
+	bool toRetry_;                // リトライへ
+	float retryTheta_;
+	
+	// STAGE SELECT
+	Vector2 stageSelectPos_;		    // 座標
+	uint32_t stageSelectTexture_;       // テクスチャハンドル
+	uint32_t chooseStageSelectTexture_; // 選択中のテクスチャハンドル
+	bool chooseStageSelect_;            // 選択中
+	bool toStageSelect_;                // ステージセレクトへ
+	float stageSelectTheta_;
+
+	int32_t toCount_;  // 次のシーンへ遷移するまでのカウント
+	bool toCountDown_; // toCount_のカウントダウン開始フラグ
+
+	int32_t pushCount_; // キー受付までのカウント
+
+	enum class Choose {
+		RETRY,
+		STAGESELECT
+	};
+	Choose choose_; // 何を選択しているか
 };
 
