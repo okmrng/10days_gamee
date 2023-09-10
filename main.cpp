@@ -6,6 +6,7 @@
 #include "WoodInfo.h"
 #include "MetalInfo.h"
 #include "IceInfo.h"
+#include "tvInfo.h"
 
 const char kWindowTitle[] = "10days_game";
 
@@ -50,7 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TVINFOLOAD,		 // tv情報初期化
 		TVINFO			 // tv情報
 	};
-	Scene scene = Scene::STAGE1;
+	Scene scene = Scene::TVINFOLOAD;
 
 	// タイトル
 	Title* title = new Title();
@@ -82,6 +83,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 氷情報
 	IceInfo* iceInfo = new IceInfo();
 	iceInfo->Initialize();
+
+	// tv情報
+	TvInfo* tvInfo = new TvInfo();
+	tvInfo->Initialize();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -199,6 +204,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (enemyInfo->GetToIce()) {
 				scene = Scene::ICEINFOLOAD;
 			}
+
+			// tv
+			if (enemyInfo->GetToTv()) {
+				scene = Scene::TVINFOLOAD;
+			}
 		}
 
 		// 木箱情報初期化
@@ -242,12 +252,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			scene = Scene::ICEINFO;
 		}
 
-		// 木箱情報
+		// 氷情報
 		if (scene == Scene::ICEINFO) {
 			iceInfo->Update(keys, preKeys);
 
 			// シーン遷移
 			if (iceInfo->GetToBack()) {
+				scene = Scene::ENEMYINFO;
+			}
+		}
+
+		// tv情報初期化
+		if (scene == Scene::TVINFOLOAD) {
+			tvInfo->Initialize();
+			enemyInfo->Initialize();
+			scene = Scene::TVINFO;
+		}
+
+		// tv情報
+		if (scene == Scene::TVINFO) {
+			tvInfo->Update(keys, preKeys);
+
+			// シーン遷移
+			if (tvInfo->GetToBack()) {
 				scene = Scene::ENEMYINFO;
 			}
 		}
@@ -295,6 +322,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			iceInfo->Draw();
 		}
 
+		// tv情報
+		if (scene == Scene::TVINFO) {
+			tvInfo->Draw();
+		}
+
 #ifdef _DEBUG
 		if (stage1->GetPause()->GetToEnemyInfo()) {
 			Novice::ScreenPrintf(0, 500, "true");
@@ -327,6 +359,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete woodInfo;
 	delete metalInfo;
 	delete iceInfo;
+	delete tvInfo;
 
 	// ライブラリの終了
 	Novice::Finalize();

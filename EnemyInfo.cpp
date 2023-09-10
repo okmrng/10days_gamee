@@ -106,8 +106,10 @@ void EnemyInfo::WoodUpdate(char* keys, char* preKeys)
 	}
 
 	// 実行
-	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toWood_ = true;
+	if (canPush_) {
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toWood_ = true;
+		}
 	}
 }
 
@@ -153,8 +155,10 @@ void EnemyInfo::MetalUpdate(char* keys, char* preKeys)
 	}
 
 	// 実行
-	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toMetal_ = true;
+	if (canPush_) {
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toMetal_ = true;
+		}
 	}
 }
 
@@ -200,8 +204,10 @@ void EnemyInfo::IceUpdate(char* keys, char* preKeys)
 	}
 
 	// 実行
-	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toIce_ = true;
+	if (canPush_) {
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toIce_ = true;
+		}
 	}
 }
 
@@ -247,8 +253,10 @@ void EnemyInfo::TvUpdate(char* keys, char* preKeys)
 	}
 
 	// 実行
-	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toTv_ = true;
+	if (canPush_) {
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toTv_ = true;
+		}
 	}
 }
 

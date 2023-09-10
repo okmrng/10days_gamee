@@ -125,6 +125,7 @@
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="TvBox.cpp" />
+    <ClCompile Include="TvInfo.cpp" />
     <ClCompile Include="WoodInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="TvBox.h" />
+    <ClInclude Include="TvInfo.h" />
     <ClInclude Include="WoodInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
