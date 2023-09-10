@@ -123,6 +123,7 @@
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="TvBox.cpp" />
+    <ClCompile Include="WoodInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="TvBox.h" />
+    <ClInclude Include="WoodInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

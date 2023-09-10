@@ -68,6 +68,10 @@ public:
 
 	// ゲッター
 	bool GetToBack() { return toBack_; }
+	bool GetToWood() { return toWood_; }
+	bool GetToMetal() { return toMetal_; }
+	bool GetToIce() { return toIce_; }
+	bool GetToTv() { return toTv_; }
 
 	// セッター
 	void SetToBack(bool toBack) { toBack_ = toBack; }

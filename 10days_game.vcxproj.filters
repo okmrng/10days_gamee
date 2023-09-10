@@ -109,6 +109,9 @@
     <ClCompile Include="EnemyInfo.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="WoodInfo.cpp">
+      <Filter>ソース\シーン</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -225,5 +228,8 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="EnemyInfo.h" />
+    <ClInclude Include="WoodInfo.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

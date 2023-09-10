@@ -3,6 +3,7 @@
 #include "StageSelect.h"
 #include "Stage1.h"
 #include "EnemyInfo.h"
+#include "WoodInfo.h"
 
 const char kWindowTitle[] = "10days_game";
 
@@ -37,9 +38,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		STAGE7,			 // ステージ7
 		STAGE8LOAD,		 // ステージ8初期化
 		STAGE8,			 // ステージ8
-		ENEMYINFO,		 // 敵情報
+		ENEMYINFO,		 // 箱情報
+		WOODINFOLOAD,	 // 木箱情報初期化
+		WOODINFO,		 // 木箱情報
+		METALINFOLOAD,	 // 金属製の箱情報初期化
+		METALINFO,		 // 金属製の箱情報
+		ICEINFOLOAD,	 // 氷情報初期化
+		ICEINFO,		 // 氷情報
+		TVINFOLOAD,		 // tv情報初期化
+		TVINFO			 // tv情報
 	};
-	Scene scene = Scene::STAGE1;
+	Scene scene = Scene::WOODINFO;
 
 	// タイトル
 	Title* title = new Title();
@@ -56,9 +65,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ステージがいくつか
 	Scene beforeStage = Scene::STAGE1;
 
-	// 敵情報
+	// 箱情報
 	EnemyInfo* enemyInfo = new EnemyInfo();
 	enemyInfo->Initialize();
+
+	// 木箱情報
+	WoodInfo* woodInfo = new WoodInfo();
+	woodInfo->Initialize();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -160,6 +173,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					break;
 				}
 			}
+
+			// 説明へ
+			// 木箱
+			if (enemyInfo->GetToWood()) {
+				scene = Scene::WOODINFOLOAD;
+			}
+		}
+
+		// 木箱情報初期化
+		if (scene == Scene::WOODINFOLOAD) {
+			woodInfo->Initialize();
+			enemyInfo->Initialize();
+			scene = Scene::WOODINFO;
+		}
+
+		// 木箱情報
+		if (scene == Scene::WOODINFO) {
+			woodInfo->Update(keys, preKeys);
+
+			// シーン遷移
+			if (woodInfo->GetToBack()) {
+				scene = Scene::ENEMYINFO;
+			}
 		}
 
 		///
@@ -185,9 +221,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage1->Draw();
 		}
 
-		// 敵情報
+		// 箱情報
 		if (scene == Scene::ENEMYINFO) {
 			enemyInfo->Draw();
+		}
+
+		// 木箱情報
+		if (scene == Scene::WOODINFO) {
+			woodInfo->Draw();
 		}
 
 #ifdef _DEBUG
@@ -219,6 +260,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete stageSelect;
 	delete stage1;
 	delete enemyInfo;
+	delete woodInfo;
 
 	// ライブラリの終了
 	Novice::Finalize();
