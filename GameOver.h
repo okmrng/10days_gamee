@@ -41,6 +41,10 @@ public:
 	/// </summary>
 	void Draw();
 
+	// ゲッター
+	bool GetToRetry() { return toRetry_; }
+	bool GetToStageSelect() { return toStageSelect_; }
+
 private:
 	// 背景
 	uint32_t backgroundColor_; // 色

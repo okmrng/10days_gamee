@@ -106,7 +106,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 
 			// ステージセレクトへ
-			if (stage1->GetClear()->GetToNext()) {
+			if (stage1->GetClear()->GetToNext() || stage1->GetGameOver()->GetToStageSelect()) {
 				scene = Scene::STGAESELECTLOAD;
 			}
 		}

@@ -109,6 +109,7 @@ public:
 	// ゲッター
 	Pause* GetPause() { return pause_; }
 	Clear* GetClear() { return clear_; }
+	GameOver* GetGameOver() { return gameOver_; }
 
 private:
 	Player* player_ = nullptr; // 自機

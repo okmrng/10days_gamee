@@ -205,6 +205,11 @@ void Stage1::Update(char* keys, char* preKeys)
 	// ゲームオーバー
 	if (isGameOver_) {
 		gameOver_->Update(keys, preKeys);
+
+		// リトライ
+		if (gameOver_->GetToRetry()) {
+			Retry();
+		}
 	}
 }
 
