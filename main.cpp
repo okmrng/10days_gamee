@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		STAGE1LOAD,		 // ステージ1初期化
 		ENEMYINFO,		 // 敵情報
 	};
-	Scene scene = Scene::STAGE1;
+	Scene scene = Scene::STGAESELECT;
 
 	// タイトル
 	Title* title = new Title();
@@ -81,7 +81,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stageSelect->Update(keys, preKeys);
 
 			// 次のシーンへ
-			if (stageSelect->GetToNext()) {
+			if (stageSelect->GetToStage1()) {
 				scene = Scene::STAGE1LOAD;
 			}
 		}
