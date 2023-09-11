@@ -121,6 +121,9 @@
     <ClCompile Include="TvInfo.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
+    <ClCompile Include="InScene.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -249,5 +252,6 @@
     <ClInclude Include="TvInfo.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
+    <ClInclude Include="InScene.h" />
   </ItemGroup>
 </Project>

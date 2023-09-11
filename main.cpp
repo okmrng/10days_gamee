@@ -8,7 +8,7 @@
 #include "IceInfo.h"
 #include "tvInfo.h"
 
-const char kWindowTitle[] = "boxine";
+const char kWindowTitle[] = "6007_boxine";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
