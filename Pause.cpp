@@ -51,6 +51,11 @@ void Pause::Initialize()
 
 	onEase_ = true;
 	leaveEase_ = false;
+
+	// シーン遷移演出
+	outScene_ = new OutScene();
+	outScene_->Initialize();
+	toOutScene_ = false;
 }
 
 void Pause::Update(char* keys, char* preKeys)
@@ -122,6 +127,11 @@ void Pause::Update(char* keys, char* preKeys)
 			EnemyInfoUpdate(keys, preKeys);
 			break;
 		}
+	}
+
+	// シーン遷移演出
+	if (toOutScene_) {
+		outScene_->Update();
 	}
 }
 
@@ -223,13 +233,10 @@ void Pause::RetryUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toCoundDown_ = true;
+		toOutScene_ = true;
 	}
-	if (toCoundDown_) {
-		--toCount_;
-		if (toCount_ <= 0) {
-			toRetry_ = true;
-		}
+	if (outScene_->GetToNext()) {
+		toRetry_ = true;
 	}
 }
 
@@ -250,13 +257,10 @@ void Pause::EnemyInfoUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toCoundDown_ = true;
+		toOutScene_ = true;
 	}
-	if (toCoundDown_) {
-		--toCount_;
-		if (toCount_ <= 0) {
-			toEnemyInfo_ = true;
-		}
+	if (outScene_->GetToNext()) {
+		toEnemyInfo_ = true;
 	}
 }
 
@@ -293,6 +297,9 @@ void Pause::Draw()
 	else if (chooseEnemyInfo_) {
 		Novice::DrawSprite(int(enemyInfoPos_.x), int(enemyInfoPos_.y), chooseEnemyInfoTexture_, 1, 1, 0.0f, WHITE);
 	}
+
+	// シーン遷移演出
+	outScene_->Draw();
 
 #ifdef _DEBUG
 	Novice::ScreenPrintf(0, 580, "%f", charT_);

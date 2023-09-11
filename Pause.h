@@ -4,6 +4,7 @@
 #include <Vector2.h>
 #include <stdint.h>
 #include <MathUtility.h>
+#include "OutScene.h"
 
 /// <summary>
 /// ポーズ
@@ -112,5 +113,9 @@ private:
 
 	bool onEase_;    // イージングフラグ
 	bool leaveEase_; // 離脱イージングフラグ
+
+	// シーン遷移演出
+	OutScene* outScene_; // シーン遷移演出
+	bool toOutScene_;    // シーン遷移の更新を管理
 };
 
