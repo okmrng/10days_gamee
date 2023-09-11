@@ -3,6 +3,7 @@
 #include <Novice.h>
 #include <stdint.h>
 #include <MathUtility.h>
+#include "OutScene.h"
 
 /// <summary>
 /// ゲームオーバー
@@ -72,9 +73,6 @@ private:
 	bool toStageSelect_;                // ステージセレクトへ
 	float stageSelectTheta_;
 
-	int32_t toCount_;  // 次のシーンへ遷移するまでのカウント
-	bool toCountDown_; // toCount_のカウントダウン開始フラグ
-
 	int32_t pushCount_; // キー受付までのカウント
 
 	enum class Choose {
@@ -82,5 +80,9 @@ private:
 		STAGESELECT
 	};
 	Choose choose_; // 何を選択しているか
+
+	// シーン遷移演出
+	OutScene* outScene_;
+	bool toOutScene_;    // シーン遷移演出の更新を管理
 };
 

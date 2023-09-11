@@ -294,6 +294,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		// ステージセレクト
+		if (scene == Scene::STAGESELECTLOAD) {
+			Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
+		}
 		if (scene == Scene::STAGESELECT) {
 			stageSelect->Draw();
 		}

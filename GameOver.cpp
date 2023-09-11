@@ -28,12 +28,14 @@ void GameOver::Initialize()
 	toRetry_ = false;
 	stageSelectTheta_ = 0.0f;
 
-	toCount_ = 5;
-	toCountDown_ = false;
-
 	pushCount_ = 5;
 	
 	choose_ = Choose::RETRY;
+
+	// シーン遷移演出
+	outScene_ = new OutScene();
+	outScene_->Initialize();
+	toOutScene_ = false;
 }
 
 void GameOver::Update(char* keys, char* preKeys)
@@ -72,6 +74,11 @@ void GameOver::Update(char* keys, char* preKeys)
 			break;
 		}
 	}
+
+	// シーン遷移演出
+	if (toOutScene_) {
+		outScene_->Update();
+	}
 }
 
 void GameOver::RetryUpdate(char* keys, char* preKeys)
@@ -90,13 +97,10 @@ void GameOver::RetryUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toCountDown_ = true;
+		toOutScene_ = true;
 	}
-	if (toCountDown_) {
-		--toCount_;
-		if (toCount_ <= 0) {
-			toRetry_ = true;
-		}
+	if (outScene_->GetToNext()) {
+		toRetry_ = true;
 	}
 }
 
@@ -116,13 +120,10 @@ void GameOver::StageSelectUpdate(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-		toCountDown_ = true;
+		toOutScene_ = true;
 	}
-	if (toCountDown_) {
-		--toCount_;
-		if (toCount_ <= 0) {
-			toStageSelect_ = true;
-		}
+	if (outScene_->GetToNext()) {
+		toStageSelect_ = true;
 	}
 }
 
@@ -150,6 +151,9 @@ void GameOver::Draw()
 		Novice::DrawSprite(int(stageSelectPos_.x), int(stageSelectPos_.y), stageSelectTexture_,
 			1, 1, 0.0f, color_ + alpha_);
 	}
+
+	// シーン遷移演出
+	outScene_->Draw();
 
 	#ifdef _DEBUG
 	Novice::ScreenPrintf(0, 100, "GAMEOVER");
