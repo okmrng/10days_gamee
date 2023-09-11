@@ -136,7 +136,9 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// 自機
 		if (canPlayCount_ <= 0) {
-			player_->Update(keys, preKeys);
+			if (inScene_->GetCanPlay()) {
+				player_->Update(keys, preKeys);
+			}
 		}
 
 		// 木箱
@@ -197,7 +199,9 @@ void Stage1::Update(char* keys, char* preKeys)
 		}
 		
 		// 制限時間減らす
-		--timeLimit_;
+		if (inScene_->GetCanPlay()) {
+			--timeLimit_;
+		}
 	}
 
 	// ポーズ

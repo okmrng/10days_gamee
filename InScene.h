@@ -25,13 +25,13 @@ public:
 	/// </summary>
 	void Draw();
 
-private:
-	// 弾
-	float fistPosX_;       // 位置
-	float t_;              // フレーム
-	uint32_t fistTexture_; // テクスチャ
+	// ゲッター
+	bool GetCanPlay() { return canPlay_; }
 
+private:
 	// 黒
 	float blackPosX_; // 位置
+	float t_;         // フレーム
+	bool canPlay_;    // プレイ開始フラグ
 };
 

@@ -59,32 +59,34 @@ void EnemyInfo::Update(char* keys, char* preKeys)
 		outScene_->Update();
 	}
 
-	if (--pushCount_ <= 0) {
-		if (keys[DIK_BACKSPACE] && preKeys[DIK_BACKSPACE] == 0) {
-			toOutSceneBack_ = true;
-		}
-		if (outScene_->GetToNext()) {
-			if (toOutSceneBack_) {
-				toBack_ = true;
+	if (inScene_->GetCanPlay()) {
+		if (--pushCount_ <= 0) {
+			if (keys[DIK_BACKSPACE] && preKeys[DIK_BACKSPACE] == 0) {
+				toOutSceneBack_ = true;
 			}
-		}
+			if (outScene_->GetToNext()) {
+				if (toOutSceneBack_) {
+					toBack_ = true;
+				}
+			}
 
-		switch (choose_)
-		{
-		case EnemyInfo::Choose::WOOD:
-			WoodUpdate(keys, preKeys);
-			break;
-		case EnemyInfo::Choose::METAL:
-			MetalUpdate(keys, preKeys);
-			break;
-		case EnemyInfo::Choose::ICE:
-			IceUpdate(keys, preKeys);
-			break;
-		case EnemyInfo::Choose::TV:
-			TvUpdate(keys, preKeys);
-			break;
-		default:
-			break;
+			switch (choose_)
+			{
+			case EnemyInfo::Choose::WOOD:
+				WoodUpdate(keys, preKeys);
+				break;
+			case EnemyInfo::Choose::METAL:
+				MetalUpdate(keys, preKeys);
+				break;
+			case EnemyInfo::Choose::ICE:
+				IceUpdate(keys, preKeys);
+				break;
+			case EnemyInfo::Choose::TV:
+				TvUpdate(keys, preKeys);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }

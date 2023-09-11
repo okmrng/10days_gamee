@@ -106,9 +106,6 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyInfo.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="WoodInfo.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
@@ -125,6 +122,9 @@
       <Filter>ソース\シーン</Filter>
     </ClCompile>
     <ClCompile Include="OutScene.cpp">
+      <Filter>ソース\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInfo.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
   </ItemGroup>
@@ -242,7 +242,6 @@
     <ClInclude Include="HitEffect.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyInfo.h" />
     <ClInclude Include="WoodInfo.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
@@ -259,6 +258,9 @@
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
     <ClInclude Include="OutScene.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInfo.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
   </ItemGroup>

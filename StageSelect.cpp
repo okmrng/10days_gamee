@@ -70,50 +70,52 @@ void StageSelect::Update(char* keys, char* preKeys)
 	if (toOutScene_) {
 		outScene_->Update();
 	}
+	
+	if (inScene_->GetCanPlay()) {
+		// 選択
+		if (--pushCount_ <= 0) {
+			switch (choose_)
+			{
+			case StageSelect::Choose::STAGE1:
+				Stage1Update(keys, preKeys);
 
-	// 選択
-	if (--pushCount_ <= 0) {
-		switch (choose_)
-		{
-		case StageSelect::Choose::STAGE1:
-			Stage1Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE2:
+				Stage2Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE2:
-			Stage2Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE3:
+				Stage3Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE3:
-			Stage3Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE4:
+				Stage4Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE4:
-			Stage4Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE5:
+				Stage5Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE5:
-			Stage5Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE6:
+				Stage6Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE6:
-			Stage6Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE7:
+				Stage7Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE7:
-			Stage7Update(keys, preKeys);
+				break;
 
-			break;
+			case StageSelect::Choose::STAGE8:
+				Stage8Update(keys, preKeys);
 
-		case StageSelect::Choose::STAGE8:
-			Stage8Update(keys, preKeys);
-
-			break;
+				break;
+			}
 		}
 	}
 }
