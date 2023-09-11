@@ -51,7 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TVINFOLOAD,		 // tv情報初期化
 		TVINFO			 // tv情報
 	};
-	Scene scene = Scene::TITLE;
+	Scene scene = Scene::STAGE1;
 
 	// タイトル
 	Title* title = new Title();

@@ -75,22 +75,25 @@ private:
 	// UI
 	Vector2 playPos_;				  // 再開の位置
 	Vector2 retryPos_;				  // リトライの位置
-	Vector2 enemyInfoPos_;			  // 敵情報の位置
+	Vector2 enemyInfoPos_;			  // 箱情報の位置
+	float playT_;                     // 再開のフレーム
+	float retryT_;                    // リトライのフレーム
+	float enemyInfoT_;                // 箱情報のフレーム
 									  
 	uint32_t playTexture_;			  // 再開のテクスチャハンドル
 	uint32_t retryTexture_;			  // リトライのテクスチャハンドル
-	uint32_t enemyInfoTexture_;		  // 敵情報のテクスチャハンドル
+	uint32_t enemyInfoTexture_;		  // 箱情報のテクスチャハンドル
 	uint32_t choosePlayTexture_;      // 再開選択中のテクスチャハンドル
 	uint32_t chooseRetryTexture_;     // リトライ選択中のテクスチャハンドル
-	uint32_t chooseEnemyInfoTexture_; // 敵情報選択中のテクスチャハンドル
+	uint32_t chooseEnemyInfoTexture_; // 箱情報選択中のテクスチャハンドル
 
 	bool choosePlay_;				  // 再開選択中フラグ
 	bool chooseRetry_;				  // リトライ選択中フラグ
-	bool chooseEnemyInfo_;			  // 敵情報選択中フラグ
+	bool chooseEnemyInfo_;			  // 箱情報選択中フラグ
 
 	bool toPlay_;					  // 再開へ
 	bool toRetry_;					  // リトライへ
-	bool toEnemyInfo_;				  // 敵情報へ
+	bool toEnemyInfo_;				  // 箱情報へ
 
 	int32_t toCount_;                 // 連続受け付け防止
 	bool toCoundDown_;				  // toCount_のカウントダウン
@@ -106,5 +109,7 @@ private:
 	// 背景
 	uint32_t color_; // 色
 	uint32_t alpha_; // 透明度
+
+	bool onEase_; // イージングフラグ
 };
 

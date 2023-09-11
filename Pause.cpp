@@ -3,11 +3,11 @@
 void Pause::Initialize()
 {
 	// 文字
-	PPos_ = Vector2(392.5f, 100.0f);
-	APos_ = Vector2(493.5f, 100.0f);
-	UPos_ = Vector2(594.5f, 100.0f);
-	SPos_ = Vector2(695.5f, 100.0f);
-	EPos_ = Vector2(796.5f, 100.0f);
+	PPos_ = Vector2(-91.0f, 100.0f);
+	APos_ = Vector2(-91.0f, 100.0f);
+	UPos_ = Vector2(-91.0f, 100.0f);
+	SPos_ = Vector2(-91.0f, 100.0f);
+	EPos_ = Vector2(-91.0f, 100.0f);
 	charT_ = 0.0f;
 	
 	PTexture_ = Novice::LoadTexture("./resource/sprite/P.png");
@@ -17,9 +17,12 @@ void Pause::Initialize()
 	ETexture_ = Novice::LoadTexture("./resource/sprite/E.png");
 
 	// UI
-	playPos_ = Vector2(528.0f, 271.0f);
-	retryPos_ = Vector2(505.5f, 375.0f);
-	enemyInfoPos_ = Vector2(414.0f, 479.0f);
+	playPos_ = Vector2(-224.0f, 271.0f);
+	retryPos_ = Vector2(-269.0f, 375.0f);
+	enemyInfoPos_ = Vector2(-452.0f, 479.0f);
+	playT_ = 0.0f;
+	retryT_ = 0.0f;
+	enemyInfoT_ = 0.0f;
 
 	playTexture_ = Novice::LoadTexture("./resource/UI/play.png");
 	retryTexture_ = Novice::LoadTexture("./resource/UI/retry.png");
@@ -45,6 +48,8 @@ void Pause::Initialize()
 	// 背景
 	color_ = 0x00000000;
 	alpha_ = 0x00000000;
+
+	onEase_ = true;
 }
 
 void Pause::Update(char* keys, char* preKeys)
@@ -52,7 +57,52 @@ void Pause::Update(char* keys, char* preKeys)
 	// 背景フェード
 	alpha_ = FadeIn(alpha_, 0x00000010, 0x000000f0);
 
-	--pushCount_;
+	// イージング
+	if (onEase_) {
+		if (charT_ < 1.0f) {
+			charT_ += 1.0f / 45.0f;
+		}
+		if (charT_ >= 1.0f) {
+			charT_ = 1.0f;
+		}
+		PPos_.x = EaseOutCirc(-91.0f, 392.5f, charT_);
+		APos_.x = EaseOutCirc(-91.0f, 493.5f, charT_);
+		UPos_.x = EaseOutCirc(-91.0f, 594.5f, charT_);
+		SPos_.x = EaseOutCirc(-91.0f, 695.5f, charT_);
+		EPos_.x = EaseOutCirc(-91.0f, 796.5f, charT_);
+
+		if (PPos_.x >= 300.0f) {
+			if (playT_ < 1.0f) {
+				playT_ += 1.0f / 30.0f;
+			}
+			if (playT_ >= 1.0f) {
+				playT_ = 1.0f;
+			}
+			playPos_.x = EaseOutCirc(-224.0f, 528.0f, playT_);
+		}
+		if (playPos_.x >= 264.0f) {
+			if (retryT_ < 1.0f) {
+				retryT_ += 1.0f / 30.0f;
+			}
+			if (retryT_ >= 1.0f) {
+				retryT_ = 1.0f;
+			}
+			retryPos_.x = EaseOutCirc(-269.0f, 505.5f, retryT_);
+		}
+		if (retryPos_.x >= 252.75f) {
+			if (enemyInfoT_ < 1.0f) {
+				enemyInfoT_ += 1.0f / 30.0f;
+			}
+			if (enemyInfoT_ >= 1.0f) {
+				enemyInfoT_ = 1.0f;
+			}
+			enemyInfoPos_.x = EaseOutCirc(-452.0f, 414.0f, enemyInfoT_);
+		}
+		if (enemyInfoPos_.x >= 414.0f) {
+			onEase_ = false;
+		}
+	}
+	else{ --pushCount_; }
 
 	// 選択
 	if (pushCount_ <= 0) {
