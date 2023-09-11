@@ -177,7 +177,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// 敵情報
 		if (scene == Scene::ENEMYINFO) {
 			enemyInfo->Update(keys, preKeys);
-			stage1->GetPause()->SetToPlay(true);
+			stage1->SetCanPlay(true);
+			stage1->SetIsPause(false);
 
 			// 戻る
 			if (enemyInfo->GetToBack()) {

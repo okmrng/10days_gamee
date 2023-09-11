@@ -111,6 +111,10 @@ public:
 	Clear* GetClear() { return clear_; }
 	GameOver* GetGameOver() { return gameOver_; }
 
+	// セッター
+	void SetCanPlay(bool canPlay) { canPlay_ = canPlay; }
+	void SetIsPause(bool isPause) { isPause_ = isPause; }
+
 private:
 	Player* player_ = nullptr; // 自機
 
@@ -163,5 +167,7 @@ private:
 
 	int32_t timeLimit_; // 制限時間
 	int32_t time_;      // 制限時間csv入力用
+
+	int32_t canPlayCount_; // 誤射対策
 };
 

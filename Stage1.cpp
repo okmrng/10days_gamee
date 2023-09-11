@@ -74,6 +74,8 @@ void Stage1::Initialize()
 	iceHitEffect_ = Novice::LoadTexture("./resource/effect/ice-Effect.png");
 	woodHitEffect_ = Novice::LoadTexture("./resource/effect/wood-Effect.png");
 	tvHitEffect_ = Novice::LoadTexture("./resource/effect/tv-Effect.png");
+
+	canPlayCount_ = 5;
 }
 
 void Stage1::LoadData(const std::string& filename, std::stringstream& targetStream)
@@ -111,6 +113,7 @@ void Stage1::Update(char* keys, char* preKeys)
 		player_->SetCanShoot(bulletCount_);
 		timeLimit_ = time_;
 		if (playCount_ <= 0) {
+			canPlayCount_ = 5;
 			canPlay_ = true;
 			isStart_ = false;
 		}
@@ -120,8 +123,12 @@ void Stage1::Update(char* keys, char* preKeys)
 	UpdateBoxComands(boxPopComands_);
 
 	if(canPlay_){
+		--canPlayCount_;
+
 		// 自機
-		player_->Update(keys, preKeys);
+		if (canPlayCount_ <= 0) {
+			player_->Update(keys, preKeys);
+		}
 
 		// 木箱
 		for (Box* box : box_) {
@@ -149,6 +156,7 @@ void Stage1::Update(char* keys, char* preKeys)
 		// クリア
 		if (clearCount_ == boxCount_) {
 			if(--toClearCount_<=0){
+				canPlayCount_ = 5;
 				isClear_ = true;
 				canPlay_ = false;
 			}
@@ -159,6 +167,7 @@ void Stage1::Update(char* keys, char* preKeys)
 			--inGameOverCount_;
 		}
 		if (inGameOverCount_ <= 0) {
+			canPlayCount_ = 5;
 			isGameOver_ = true;
 			canPlay_ = false;
 		}
@@ -168,6 +177,7 @@ void Stage1::Update(char* keys, char* preKeys)
 
 		// ポーズへ
 		if (keys[DIK_P] && preKeys[DIK_P] == 0) {
+			canPlayCount_ = 5;
 			isPause_ = true;
 			canPlay_ = false;
 		}
