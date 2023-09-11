@@ -50,6 +50,7 @@ void Pause::Initialize()
 	alpha_ = 0x00000000;
 
 	onEase_ = true;
+	leaveEase_ = false;
 }
 
 void Pause::Update(char* keys, char* preKeys)
@@ -102,7 +103,9 @@ void Pause::Update(char* keys, char* preKeys)
 			onEase_ = false;
 		}
 	}
-	else{ --pushCount_; }
+	else{ 
+		--pushCount_;
+	}
 
 	// 選択
 	if (pushCount_ <= 0) {
@@ -144,8 +147,61 @@ void Pause::PlayUpdate(char* keys, char* preKeys)
 
 	if (toCoundDown_) {
 		--toCount_;
+		if (toCount_ > 0) {
+			charT_ = 0.0f;
+			playT_ = 0.0f;
+			retryT_ = 0.0f;
+			enemyInfoT_ = 0.0f;
+		}
+
 		if (toCount_ <= 0) {
-			toPlay_ = true;
+			leaveEase_ = true;
+
+			// 離脱イージング
+			if (leaveEase_) {
+				if (charT_ < 1.0f) {
+					charT_ += 1.0f / 45.0f;
+				}
+				if (charT_ >= 1.0f) {
+					charT_ = 1.0f;
+				}
+				PPos_.x = EaseOutCirc(392.5f, 1371.0f, charT_);
+				APos_.x = EaseOutCirc(493.5f, 1371.0f, charT_);
+				UPos_.x = EaseOutCirc(594.5f, 1371.0f, charT_);
+				SPos_.x = EaseOutCirc(695.5f, 1371.0f, charT_);
+				EPos_.x = EaseOutCirc(796.5f, 1371.0f, charT_);
+
+				if (PPos_.x >= 850.0f) {
+					if (playT_ < 1.0f) {
+						playT_ += 1.0f / 30.0f;
+					}
+					if (playT_ >= 1.0f) {
+						playT_ = 1.0f;
+					}
+					playPos_.x = EaseOutCirc(528.0f, 1504.0f, playT_);
+				}
+				if (playPos_.x >= 1028.0f) {
+					if (retryT_ < 1.0f) {
+						retryT_ += 1.0f / 30.0f;
+					}
+					if (retryT_ >= 1.0f) {
+						retryT_ = 1.0f;
+					}
+					retryPos_.x = EaseOutCirc(505.5f, 1549.0f, retryT_);
+				}
+				if (retryPos_.x >= 1000.5f) {
+					if (enemyInfoT_ < 1.0f) {
+						enemyInfoT_ += 1.0f / 30.0f;
+					}
+					if (enemyInfoT_ >= 1.0f) {
+						enemyInfoT_ = 1.0f;
+					}
+					enemyInfoPos_.x = EaseOutCirc(414.0f, 1732.0f, enemyInfoT_);
+				}
+				if (enemyInfoPos_.x >= 1732.0f) {
+					toPlay_ = true;
+				}
+			}
 		}
 	}
 }
@@ -237,4 +293,12 @@ void Pause::Draw()
 	else if (chooseEnemyInfo_) {
 		Novice::DrawSprite(int(enemyInfoPos_.x), int(enemyInfoPos_.y), chooseEnemyInfoTexture_, 1, 1, 0.0f, WHITE);
 	}
+
+#ifdef _DEBUG
+	Novice::ScreenPrintf(0, 580, "%f", charT_);
+	if (leaveEase_) {
+		Novice::ScreenPrintf(0, 600, "true");
+	}else{ Novice::ScreenPrintf(0, 600, "false"); }
+#endif // _DEBUG
+
 }

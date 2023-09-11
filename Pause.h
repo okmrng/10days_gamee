@@ -110,6 +110,7 @@ private:
 	uint32_t color_; // 色
 	uint32_t alpha_; // 透明度
 
-	bool onEase_; // イージングフラグ
+	bool onEase_;    // イージングフラグ
+	bool leaveEase_; // 離脱イージングフラグ
 };
 

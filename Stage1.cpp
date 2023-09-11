@@ -44,7 +44,7 @@ void Stage1::Initialize()
 	pause_->Initialize();
 
 	// コマンド
-	LoadData("resource/csv/boxData6.csv", boxPopComands_);
+	LoadData("resource/csv/boxData7.csv", boxPopComands_);
 
 	boxPos_ = Vector2(0.0f, 0.0f);
 	boxSize_ = Vector2(0.0f, 0.0f);
@@ -663,7 +663,7 @@ void Stage1::Retry()
 	tvBox_.clear();
 
 	// CSVファイルを再度読み込む
-	std::string csvFilePath = "resource/csv/boxData6.csv";
+	std::string csvFilePath = "resource/csv/boxData7.csv";
 	std::stringstream boxPopComands; // リトライ時に新たなストリームを用意
 	LoadData(csvFilePath, boxPopComands);
 
