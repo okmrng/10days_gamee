@@ -4,6 +4,7 @@
 #include <stdint.h> 
 #include <Vector2.h>
 #include <MathUtility.h>
+#include "OutScene.h"
 
 /// <summary>
 /// クリア
@@ -44,5 +45,9 @@ private:
 	bool canPush_;		   // キー受付フラグ
 	int32_t canPushCount_; // キー受付までのカウント
 	bool toNext_;		   // 次のシーンへ
+
+	// シーン遷移演出
+	OutScene* outScene_;
+	bool toOutScene_;    // シーン遷移演出の更新を管理
 };
 

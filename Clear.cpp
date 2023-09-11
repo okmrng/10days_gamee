@@ -14,6 +14,11 @@ void Clear::Initialize()
 	canPush_ = false;
 	canPushCount_ = 45;
 	toNext_ = false;
+
+	// シーン遷移演出
+	outScene_ = new OutScene();
+	outScene_->Initialize();
+	toOutScene_ = false;
 }
 
 void Clear::Update(char* keys, char* preKeys)
@@ -42,8 +47,16 @@ void Clear::Update(char* keys, char* preKeys)
 	if (canPush_) {
 		// 次のシーンへ
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
-			toNext_ = true;
+			toOutScene_ = true;
 		}
+	}
+
+	// シーン遷移演出
+	if (toOutScene_) {
+		outScene_->Update();
+	}
+	if (outScene_->GetToNext()) {
+		toNext_ = true;
 	}
 }
 
@@ -56,6 +69,9 @@ void Clear::Draw()
 	if (canPush_) {
 		Novice::DrawSprite(int(430.5f), 400, spaceTexture_, 1, 1, 0.0f, WHITE);
 	}
+
+	// シーン遷移演出
+	outScene_->Draw();
 
 	// デバッグテキスト
 	#ifdef _DEBUG
