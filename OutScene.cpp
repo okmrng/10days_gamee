@@ -5,6 +5,7 @@ void OutScene::Initialize()
 	posX_ = -1280.0f;
 	t_ = 0.0f;
 
+	toNextCount_ = 15;
 	toNext_ = false;
 }
 
@@ -20,7 +21,11 @@ void OutScene::Update()
 	posX_ = EaseOutCirc(-1280.0f, 0.0f, t_);
 
 	if (posX_ >= 0.0f) {
-		toNext_ = true;
+		--toNextCount_;
+
+		if (toNextCount_ <= 0) {
+			toNext_ = true;
+		}
 	}
 }
 

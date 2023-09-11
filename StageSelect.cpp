@@ -52,10 +52,26 @@ void StageSelect::Initiallize()
 	pushCount_ = 5;
 
 	choose_ = Choose::STAGE1;
+
+	// シーン遷移
+	inScene_ = new InScene();
+	inScene_->Initialize();
+
+	outScene_ = new OutScene();
+	outScene_->Initialize();
+	toOutScene_ = false;
 }
 
 void StageSelect::Update(char* keys, char* preKeys)
 {
+	// シーン遷移(入)
+	inScene_->Update();
+
+	if (toOutScene_) {
+		outScene_->Update();
+	}
+
+	// 選択
 	if (--pushCount_ <= 0) {
 		switch (choose_)
 		{
@@ -130,6 +146,9 @@ void StageSelect::Stage1Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage1_ = true;
 	}
 }
@@ -162,6 +181,9 @@ void StageSelect::Stage2Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage2_ = true;
 	}
 }
@@ -194,6 +216,9 @@ void StageSelect::Stage3Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage3_ = true;
 	}
 }
@@ -226,6 +251,9 @@ void StageSelect::Stage4Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage4_ = true;
 	}
 }
@@ -258,6 +286,9 @@ void StageSelect::Stage5Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage5_ = true;
 	}
 }
@@ -290,6 +321,9 @@ void StageSelect::Stage6Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage6_ = true;
 	}
 }
@@ -322,6 +356,9 @@ void StageSelect::Stage7Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage7_ = true;
 	}
 }
@@ -354,6 +391,9 @@ void StageSelect::Stage8Update(char* keys, char* preKeys)
 
 	// 実行
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+		toOutScene_ = true;
+	}
+	if (outScene_->GetToNext()) {
 		toStage8_ = true;
 	}
 }
@@ -399,4 +439,9 @@ void StageSelect::Draw()
 		Novice::DrawSprite(int(cosPos_.x + 600.0f), int(cosPos_.y + 300.0f), stage8Texture_, 1, 1, 0.0f, WHITE);
 	}
 	else { Novice::DrawSprite(int(cosPos_.x + 600.0f), int(cosPos_.y + 300.0f), chooseStage8Texture_, 1, 1, 0.0f, WHITE); }
+
+	// シーン遷移
+	inScene_->Draw();
+
+	outScene_->Draw();
 }

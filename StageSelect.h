@@ -4,6 +4,8 @@
 #include <Novice.h>
 #include <Vector2.h>
 #include "MathUtility.h"
+#include "InScene.h"
+#include "OutScene.h"
 
 /// <summary>
 /// ステージセレクト
@@ -158,5 +160,11 @@ private:
 		STAGE8
 	};
 	Choose choose_; // どれを選択中か
+
+	// シーン遷移
+	InScene* inScene_;   // 入
+
+	OutScene* outScene_; // 出
+	bool toOutScene_;    // シーン遷移(出)の更新処理を管理するためのフラグ
 };
 

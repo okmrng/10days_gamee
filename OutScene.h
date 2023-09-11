@@ -31,6 +31,7 @@ private:
 	float posX_; // 位置
 	float t_;    // フレーム
 
-	bool toNext_; // 次のシーンへ
+	int32_t toNextCount_; // 次のシーンへ遷移するまでのカウント
+	bool toNext_;         // 次のシーンへ
 };
 
