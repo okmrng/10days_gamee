@@ -8,7 +8,7 @@
 #include "IceInfo.h"
 #include "tvInfo.h"
 
-const char kWindowTitle[] = "10days_game";
+const char kWindowTitle[] = "boxine";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -104,7 +104,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// タイトル
 		if (scene == Scene::TITLE) {
 			title->Update(keys);
-			enemyInfo->SetToBack(false);
+			//enemyInfo->SetToBack(false);
 
 			// 次のシーンへ
 			if (title->GetToNext()) {

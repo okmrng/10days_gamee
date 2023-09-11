@@ -56,6 +56,7 @@ void Stage1::Initialize()
 	// クリア
 	isClear_ = false;
 	toClearCount_ = 30;
+	addClearCount_ = 1;
 
 	// ゲームオーバー
 	isGameOver_ = false;
@@ -149,13 +150,13 @@ void Stage1::Update(char* keys, char* preKeys)
 		for (TvBox* tvBox : tvBox_) {
 			tvBox->Update();
 		}
-
+		addClearCount_ = 1;
 		// 当たり判定
 		CheckAllCollision();
 
 		// クリア
-		if (clearCount_ == boxCount_) {
-			if(--toClearCount_<=0){
+		if (clearCount_ == boxCount_ || clearCount_ == (boxCount_ * 2)) {
+			if(--toClearCount_ <= 0){
 				canPlayCount_ = 5;
 				isClear_ = true;
 				canPlay_ = false;
@@ -267,7 +268,11 @@ void Stage1::CheckAllCollision()
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (box->GetVelocity() <= 15) {
 				if (!box->GetAddStop()) {
-					clearCount_++;
+					if (addClearCount_ == 1) {
+						clearCount_ += 1;
+						addClearCount_ = 0;
+					}
+
 				}
 				box->IsGoal();
 			}
@@ -313,7 +318,10 @@ void Stage1::CheckAllCollision()
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (metalBox->GetVelocity() <= 15) {
 				if (!metalBox->GetAddStop()) {
-					clearCount_++;
+					if (addClearCount_ == 1) {
+						clearCount_ += 1;
+						addClearCount_ = 0;
+					}
 				}
 				metalBox->IsGoal();
 			}
@@ -359,7 +367,10 @@ void Stage1::CheckAllCollision()
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
 			if (iceBox->GetVelocity() <= 15) {
 				if (!iceBox->GetAddStop()) {
-					clearCount_++;
+					if (addClearCount_ == 1) {
+						clearCount_ += 1;
+						addClearCount_ = 0;
+					}
 				}
 				iceBox->IsGoal();
 			}
@@ -406,7 +417,10 @@ void Stage1::CheckAllCollision()
 			if (tvBox->GetVelocity() <= 15) {
 				if (tvBox->GetCount() <= 0) {
 					if (!tvBox->GetAddStop()) {
-						clearCount_++;
+						if (addClearCount_ == 1) {
+							clearCount_ += 1;
+							addClearCount_ = 0;
+						}
 					}
 					tvBox->IsGoal();
 				}
@@ -614,7 +628,7 @@ void Stage1::Draw()
 
 	// デバッグテキスト
 	#ifdef _DEBUG
-	Novice::ScreenPrintf(0, 60, "clearCount:%d", clearCount_);
+	Novice::ScreenPrintf(0, 60, "clearCount:%d,boxCount_:%d", clearCount_,boxCount_);
 	Novice::ScreenPrintf(0, 80, "playCount:%d", playCount_);
 	Novice::ScreenPrintf(0, 140, "time:%d", timeLimit_);
 	Novice::ScreenPrintf(0, 160, "inGameOverCount:%d", inGameOverCount_);

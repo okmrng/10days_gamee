@@ -3,6 +3,7 @@
 #include <Novice.h>
 #include <Vector2.h>
 #include <stdint.h>
+#include <MathUtility.h>
 
 /// <summary>
 /// ポーズ
@@ -63,6 +64,7 @@ private:
 	Vector2 UPos_;      // Uの座標
 	Vector2 SPos_;      // Sの座標
 	Vector2 EPos_;      // Eの座標
+	float charT_;       // フレーム
 
 	uint32_t PTexture_; // Pのテクスチャハンドル
 	uint32_t ATexture_; // Aのテクスチャハンドル
@@ -100,5 +102,9 @@ private:
 		ENEMYINFO
 	};
 	Choose choose_;                  // 選択
+
+	// 背景
+	uint32_t color_; // 色
+	uint32_t alpha_; // 透明度
 };
 

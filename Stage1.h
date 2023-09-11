@@ -142,8 +142,9 @@ private:
 	int32_t clearCount_; // クリア判定
 
 	//	クリア
-	bool isClear_;		   // クリアフラグ
-	int32_t toClearCount_; // クリアに入るまでの時間
+	bool isClear_;		    // クリアフラグ
+	int32_t toClearCount_;  // クリアに入るまでの時間
+	int32_t addClearCount_; // クリアカウントを足す時間
 
 	// ゲームオーバー
 	bool isGameOver_;		  // ゲームオーバーフラグ

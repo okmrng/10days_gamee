@@ -8,6 +8,7 @@ void Pause::Initialize()
 	UPos_ = Vector2(594.5f, 100.0f);
 	SPos_ = Vector2(695.5f, 100.0f);
 	EPos_ = Vector2(796.5f, 100.0f);
+	charT_ = 0.0f;
 	
 	PTexture_ = Novice::LoadTexture("./resource/sprite/P.png");
 	ATexture_ = Novice::LoadTexture("./resource/sprite/A.png");
@@ -40,10 +41,17 @@ void Pause::Initialize()
 
 	pushCount_ = 5;
 	choose_ = Choose::PLAY;
+	
+	// 背景
+	color_ = 0x00000000;
+	alpha_ = 0x00000000;
 }
 
 void Pause::Update(char* keys, char* preKeys)
 {
+	// 背景フェード
+	alpha_ = FadeIn(alpha_, 0x00000010, 0x000000f0);
+
 	--pushCount_;
 
 	// 選択
@@ -148,6 +156,9 @@ void Pause::EnemyInfoUpdate(char* keys, char* preKeys)
 
 void Pause::Draw()
 {
+	// 背景
+	Novice::DrawBox(0, 0, 1280, 720, 0.0f, color_ + alpha_, kFillModeSolid);
+
 	// 文字
 	Novice::DrawSprite(int(PPos_.x), int(PPos_.y), PTexture_, 1, 1, 0.0f, WHITE);
 	Novice::DrawSprite(int(APos_.x), int(APos_.y), ATexture_, 1, 1, 0.0f, WHITE);
