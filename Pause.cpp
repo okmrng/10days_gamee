@@ -26,10 +26,10 @@ void Pause::Initialize()
 
 	playTexture_ = Novice::LoadTexture("./resource/UI/play.png");
 	retryTexture_ = Novice::LoadTexture("./resource/UI/retry.png");
-	enemyInfoTexture_ = Novice::LoadTexture("./resource/UI/enemyInfo.png");
+	enemyInfoTexture_ = Novice::LoadTexture("./resource/UI/boxInfo.png");
 	choosePlayTexture_ = Novice::LoadTexture("./resource/UI/play_choose.png");
 	chooseRetryTexture_ = Novice::LoadTexture("./resource/UI/retry_choose.png");
-	chooseEnemyInfoTexture_ = Novice::LoadTexture("./resource/UI/enemyInfo_choose.png");
+	chooseEnemyInfoTexture_ = Novice::LoadTexture("./resource/UI/boxInfo_choose.png");
 
 	choosePlay_ = false;
 	chooseRetry_ = false;
@@ -102,9 +102,9 @@ void Pause::Update(char* keys, char* preKeys)
 			if (enemyInfoT_ >= 1.0f) {
 				enemyInfoT_ = 1.0f;
 			}
-			enemyInfoPos_.x = EaseOutCirc(-452.0f, 414.0f, enemyInfoT_);
+			enemyInfoPos_.x = EaseOutCirc(-374.0f, 453.0f, enemyInfoT_);
 		}
-		if (enemyInfoPos_.x >= 414.0f) {
+		if (enemyInfoPos_.x >= 453.0f) {
 			onEase_ = false;
 		}
 	}
@@ -206,9 +206,9 @@ void Pause::PlayUpdate(char* keys, char* preKeys)
 					if (enemyInfoT_ >= 1.0f) {
 						enemyInfoT_ = 1.0f;
 					}
-					enemyInfoPos_.x = EaseOutCirc(414.0f, 1732.0f, enemyInfoT_);
+					enemyInfoPos_.x = EaseOutCirc(453.0f, 1654.0f, enemyInfoT_);
 				}
-				if (enemyInfoPos_.x >= 1732.0f) {
+				if (enemyInfoPos_.x >= 1654.0f) {
 					toPlay_ = true;
 				}
 			}
