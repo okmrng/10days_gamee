@@ -19,16 +19,34 @@ void IceInfo::Initialize()
 	infoTexture_ = Novice::LoadTexture("./resource/sprite/iceInfo.png");
 
 	toBack_ = false;
+
+	// シーン遷移演出
+	inScene_ = new InScene();
+	inScene_->Initialize();
+
+	outScene_ = new OutScene();
+	outScene_->Initialize();
+	toOutScene_ = false;
 }
 
 void IceInfo::Update(char* keys, char* preKeys)
 {
+	// シーン遷移演出
+	inScene_->Update();
+
+	if (toOutScene_) {
+		outScene_->Update();
+	}
+	if (outScene_->GetToNext()) {
+		toBack_ = true;
+	}
+
 	pos_.y = sinf(theta_) * 20.0f + 240.0f;
 	theta_ += (float)M_PI / 120.0f;
 
 	// 戻る
 	if (keys[DIK_BACKSPACE] && preKeys[DIK_BACKSPACE] == 0) {
-		toBack_ = true;
+		toOutScene_ = true;
 	}
 }
 
@@ -39,4 +57,9 @@ void IceInfo::Draw()
 
 	// 説明
 	Novice::DrawSprite(400, int(152.5), infoTexture_, 1, 1, 0.0f, WHITE);
+
+	// シーン遷移演出
+	inScene_->Draw();
+
+	outScene_->Draw();
 }
