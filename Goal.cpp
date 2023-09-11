@@ -7,15 +7,24 @@ void Goal::Initialize(float posY)
 	collisionP_ = Vector2{ 38.0f,38.0f };
 	collisionPos_ = pos_ + collisionP_;
 	collisionSize_ = size_ / 2;
+	drawCount_ = 4;
+}
+
+void Goal::Update()
+{
+	--drawCount_;
+	if (drawCount_ <= 0) {
+		drawCount_ = 4;
+	}
 }
 
 void Goal::Draw()
 {
-	Novice::DrawBox(int(pos_.x + 25), int(pos_.y + 25), int(size_.x), int(size_.y), 0.0f, 
-		GREEN, kFillModeWireFrame);
+	if (drawCount_ >= 2) {
+		Novice::DrawBox(int(pos_.x + 25), int(pos_.y + 25), int(size_.x), int(size_.y), 0.0f,
+			GREEN, kFillModeWireFrame);
+	}
 
-#ifdef _DEBUG
 	Novice::DrawBox(int(collisionPos_.x), int(collisionPos_.y), int(collisionSize_.x), int(collisionSize_.y), 0.0f,
 		GREEN, kFillModeWireFrame);
-#endif // _DEBUG
 }

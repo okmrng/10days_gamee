@@ -78,6 +78,8 @@ void Box::Update()
 
 		pos_.x = (1.0f - easedT_) * startPoint_ + easedT_ * (goal_->GetPos().x);
 	}
+
+	goal_->Update();
 }
 
 void Box::OnCollision()
