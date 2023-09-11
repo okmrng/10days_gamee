@@ -23,6 +23,7 @@ Stage1::~Stage1()
 	delete clear_;
 	delete gameOver_;
 	delete pause_;
+	delete inScene_;
 }
 
 void Stage1::Initialize()
@@ -42,6 +43,10 @@ void Stage1::Initialize()
 	// ポーズ
 	pause_ = new Pause();
 	pause_->Initialize();
+
+	// シーン遷移演出
+	inScene_ = new InScene();
+	inScene_->Initialize();
 
 	// コマンド
 	LoadData("resource/csv/boxData7.csv", boxPopComands_);
@@ -108,6 +113,9 @@ void Stage1::LoadData(const std::string& filename, std::stringstream& targetStre
 
 void Stage1::Update(char* keys, char* preKeys)
 {
+	// シーン遷移演出
+	inScene_->Update();
+
 	// スタート
 	if(isStart_){
 		--playCount_;
@@ -625,6 +633,9 @@ void Stage1::Draw()
 	if(hitEffect_){
 		hitEffect_->Draw();
 	}
+
+	// シーン遷移演出
+	inScene_->Draw();
 
 	// デバッグテキスト
 	#ifdef _DEBUG

@@ -10,6 +10,7 @@
 #include "GameOver.h"
 #include "Pause.h"
 #include "HitEffect.h"
+#include "InScene.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -131,6 +132,8 @@ private:
 	Pause* pause_; // ポーズ
 
 	HitEffect* hitEffect_; // ヒットエフェクト
+
+	InScene* inScene_; // シーン遷移演出
 
 	std::stringstream boxPopComands_; // コマンド
 
