@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <Novice.h>
+#include <OutScene.h>
 
 /// <summary>
 /// タイトル
@@ -41,12 +42,12 @@ public:
 private:
 	// 画像
 	uint32_t texture_; // テクスチャハンドル
-	uint32_t color_;   // 色
-	uint32_t alpha_;   // 透明度
-	bool isFade_;      // フェードアウトフラグ
+	bool out_;      // フェードアウトフラグ
 
 	// シーン遷移
 	int32_t nextCount_; // 次のシーンへ遷移するまでのカウント
 	bool toNext_;       // 次のシーンへ遷移するためのフラグ
+
+	OutScene* outScene_; // シーン遷移(出)
 };
 

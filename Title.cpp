@@ -12,30 +12,27 @@ void Title::Initialize()
 {
 	// 画像
 	texture_ = Novice::LoadTexture("./resource/background/title.png");
-	color_ = 0xffffff;
-	alpha_ = 0x000004;
-	isFade_ = false;
+	out_ = false;
 
 	// シーン遷移
 	nextCount_ = 45;
 	toNext_ = false;
+
+	outScene_ = new OutScene();
+	outScene_->Initialize();
 }
 
 void Title::Update(char* keys)
 {
 	if (keys[DIK_SPACE]) {
-		isFade_ = true;
+		out_ = true;
 	}
 
-	// フェードアウト
-	if (isFade_) {
-		color_ -= alpha_;
-	}
+	// シーン遷移
+	if (out_) {
+		outScene_->Update();
 
-	// フェードアウトしきったら次のシーンへ
-	if (color_ <= 0xffff00) {
-		color_ = 0xffff00;
-		if(--nextCount_<=0){
+		if (outScene_->GetToNext()) {
 			toNext_ = true;
 		}
 	}
@@ -43,6 +40,6 @@ void Title::Update(char* keys)
 
 void Title::Draw()
 {
-	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
-	Novice::DrawSprite(0, 0, texture_, 1, 1, 0.0f, color_);
+	Novice::DrawSprite(0, 0, texture_, 1, 1, 0.0f, WHITE);
+	outScene_->Draw();
 }

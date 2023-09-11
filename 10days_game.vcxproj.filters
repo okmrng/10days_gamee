@@ -122,7 +122,10 @@
       <Filter>ソース\シーン</Filter>
     </ClCompile>
     <ClCompile Include="InScene.cpp">
-      <Filter>KamataEngine</Filter>
+      <Filter>ソース\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="OutScene.cpp">
+      <Filter>ソース\シーン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +255,11 @@
     <ClInclude Include="TvInfo.h">
       <Filter>ヘッダー\シーン</Filter>
     </ClInclude>
-    <ClInclude Include="InScene.h" />
+    <ClInclude Include="InScene.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="OutScene.h">
+      <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
