@@ -5,6 +5,8 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <Novice.h>
+#include "InScene.h"
+#include "OutScene.h"
 
 /// <summary>
 /// 木箱情報
@@ -52,5 +54,11 @@ private:
 	uint32_t infoTexture_; // テクスチャ
 
 	bool toBack_; // 画面遷移フラグ
+
+	// シーン遷移演出
+	InScene* inScene_;   // 入
+
+	OutScene* outScene_; // 出
+	bool toOutScene_;    // シーン遷移演出(出)の更新を管理
 };
 
