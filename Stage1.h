@@ -111,6 +111,7 @@ public:
 	Pause* GetPause() { return pause_; }
 	Clear* GetClear() { return clear_; }
 	GameOver* GetGameOver() { return gameOver_; }
+	InScene* GetInScene() { return inScene_; }
 
 	// セッター
 	void SetCanPlay(bool canPlay) { canPlay_ = canPlay; }

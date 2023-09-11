@@ -179,6 +179,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			enemyInfo->Update(keys, preKeys);
 			stage1->SetCanPlay(true);
 			stage1->SetIsPause(false);
+			stage1->GetInScene()->Initialize();
 
 			// 戻る
 			if (enemyInfo->GetToBack()) {
