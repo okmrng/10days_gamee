@@ -4,6 +4,8 @@
 #include <Vector2.h>
 #include <Novice.h>
 #include "MathUtility.h"
+#include "InScene.h"
+#include "OutScene.h"
 
 /// <summary>
 /// 敵情報
@@ -109,5 +111,12 @@ private:
 		TV
 	};
 	Choose choose_; // 選択中
+
+	// シーン遷移演出追加
+	InScene* inScene_;   // 入
+
+	OutScene* outScene_;  // 出
+	bool toOutScene_;     // シーン遷移演出(出)の更新を管理
+	bool toOutSceneBack_; // 前のシーンへの遷移演出(出)の更新を管理
 };
 

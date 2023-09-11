@@ -35,13 +35,38 @@ void EnemyInfo::Initialize()
 	canPush_ = true;
 
 	choose_ = Choose::WOOD;
+
+	// シーン遷移演出
+	// 入
+	inScene_ = new InScene();
+	inScene_->Initialize();
+
+	// 出
+	outScene_ = new OutScene();
+	outScene_->Initialize();
+	toOutScene_ = false;
+	toOutSceneBack_ = false;
 }
 
 void EnemyInfo::Update(char* keys, char* preKeys)
 {
+	// シーン遷移演出
+	// 入
+	inScene_->Update();
+
+	// 出
+	if (toOutScene_ || toOutSceneBack_) {
+		outScene_->Update();
+	}
+
 	if (--pushCount_ <= 0) {
 		if (keys[DIK_BACKSPACE] && preKeys[DIK_BACKSPACE] == 0) {
-			toBack_ = true;
+			toOutSceneBack_ = true;
+		}
+		if (outScene_->GetToNext()) {
+			if (toOutSceneBack_) {
+				toBack_ = true;
+			}
 		}
 
 		switch (choose_)
@@ -108,6 +133,11 @@ void EnemyInfo::WoodUpdate(char* keys, char* preKeys)
 	// 実行
 	if (canPush_) {
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toOutScene_ = true;
+		}
+	}
+	if (outScene_->GetToNext()) {
+		if (!toOutSceneBack_) {
 			toWood_ = true;
 		}
 	}
@@ -157,6 +187,11 @@ void EnemyInfo::MetalUpdate(char* keys, char* preKeys)
 	// 実行
 	if (canPush_) {
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toOutScene_ = true;
+		}
+	}
+	if (outScene_->GetToNext()) {
+		if (!toOutSceneBack_) {
 			toMetal_ = true;
 		}
 	}
@@ -206,6 +241,11 @@ void EnemyInfo::IceUpdate(char* keys, char* preKeys)
 	// 実行
 	if (canPush_) {
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toOutScene_ = true;
+		}
+	}
+	if (outScene_->GetToNext()) {
+		if (!toOutSceneBack_) {
 			toIce_ = true;
 		}
 	}
@@ -255,6 +295,11 @@ void EnemyInfo::TvUpdate(char* keys, char* preKeys)
 	// 実行
 	if (canPush_) {
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) {
+			toOutScene_ = true;
+		}
+	}
+	if (outScene_->GetToNext()) {
+		if (!toOutSceneBack_) {
 			toTv_ = true;
 		}
 	}
@@ -273,6 +318,13 @@ void EnemyInfo::Draw()
 
 	// UI
 	Novice::DrawSprite(int(choosePos_.x), int(choosePos_.y), chooseTexture_, 1, 1, 0.0f, WHITE);
+
+	// シーン遷移演出
+	// 入
+	inScene_->Draw();
+
+	// 出
+	outScene_->Draw();
 
 #ifdef _DEBUG
 	if (onEaseIce_) {
