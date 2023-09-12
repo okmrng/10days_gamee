@@ -69,5 +69,15 @@ private:
 
 	// 自機
 	Player* player_ = nullptr;
+
+	// SE
+	// 被弾音
+	uint32_t hitSound_; // サウンドハンドル
+	uint32_t hitVoice_; // ボイスハンドル
+
+	// ゴール
+	uint32_t goalSound_;         // サウンドハンドル
+	uint32_t goalVoice_;         // ボイスハンドル
+	int32_t stopGoalSoundCount_; // サウンド止める
 };
 
