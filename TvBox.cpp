@@ -25,6 +25,16 @@ void TvBox::Initialize(Vector2 pos, Vector2 size)
 	goal_ = new Goal();
 	goal_->Initialize(pos_.y);
 	addStop_ = false;
+
+	// SE
+	// 被弾
+	hitSound_ = Novice::LoadAudio("./resource/SE/damage.wav");
+	hitVoice_ = 0u;
+
+	// ゴール
+	goalSound_ = Novice::LoadAudio("./resource/SE/goal.wav");
+	goalVoice_ = 0u;
+	stopGoalSoundCount_ = 15;
 }
 
 void TvBox::Update()
@@ -88,6 +98,13 @@ void TvBox::Update()
 		float easedT_ = sqrt(1.0f - pow(t_ - 1.0f, 2.0f));
 
 		pos_.x = (1.0f - easedT_) * startPoint_ + easedT_ * (goal_->GetPos().x);
+
+		if (!Novice::IsPlayingAudio(goalVoice_)) {
+			goalVoice_ = Novice::PlayAudio(goalSound_, 0, 1);
+		}
+		if (--stopGoalSoundCount_ <= 0) {
+			Novice::StopAudio(goalVoice_);
+		}
 	}
 
 	goal_->Update();
@@ -99,6 +116,8 @@ void TvBox::OnCollision()
 	stop_ = false;
 	player_->SetIsBullet(false);
 	count_ -= 1;
+
+	hitVoice_ = Novice::PlayAudio(hitSound_, 0, 1);
 }
 
 void TvBox::IsGoal()
