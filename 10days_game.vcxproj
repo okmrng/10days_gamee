@@ -125,6 +125,7 @@
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="TimeLimit.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="TvBox.cpp" />
     <ClCompile Include="TvInfo.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Stage1.h" />
     <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="TimeLimit.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="TvBox.h" />
     <ClInclude Include="TvInfo.h" />

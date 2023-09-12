@@ -127,6 +127,9 @@
     <ClCompile Include="EnemyInfo.cpp">
       <Filter>ソース\シーン</Filter>
     </ClCompile>
+    <ClCompile Include="TimeLimit.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -262,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="EnemyInfo.h">
       <Filter>ヘッダー\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeLimit.h">
+      <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ void TvBox::Initialize(Vector2 pos, Vector2 size)
 	count0_ = false;
 	count_ = 3;
 	texture_ = Novice::LoadTexture("./resource/sprite/tv-Box.png");
-	texture0_ = Novice::LoadTexture("./resource/sprite/tv-count_0.png");
+	//texture0_ = Novice::LoadTexture("./resource/sprite/tv-count_0.png");
 	texture1_ = Novice::LoadTexture("./resource/sprite/tv-count_1.png");
 	texture2_ = Novice::LoadTexture("./resource/sprite/tv-count_2.png");
 	texture3_ = Novice::LoadTexture("./resource/sprite/tv-count_3.png");

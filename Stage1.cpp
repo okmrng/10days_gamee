@@ -24,6 +24,7 @@ Stage1::~Stage1()
 	delete gameOver_;
 	delete pause_;
 	delete inScene_;
+	delete timeLimitC_;
 }
 
 void Stage1::Initialize()
@@ -47,6 +48,10 @@ void Stage1::Initialize()
 	// シーン遷移演出
 	inScene_ = new InScene();
 	inScene_->Initialize();
+
+	// 制限時間
+	timeLimitC_ = new TimeLimit();
+	timeLimitC_->Initialize(timeLimit_);
 
 	// コマンド
 	LoadData("resource/csv/boxData2.csv", boxPopComands_);
@@ -202,6 +207,9 @@ void Stage1::Update(char* keys, char* preKeys)
 		if (inScene_->GetCanPlay()) {
 			--timeLimit_;
 		}
+
+		// 制限時間
+		timeLimitC_->Update();
 	}
 
 	// ポーズ
@@ -642,6 +650,9 @@ void Stage1::Draw()
 
 	// シーン遷移演出
 	inScene_->Draw();
+
+	// 制限時間
+	timeLimitC_->Draw();
 
 	// デバッグテキスト
 	#ifdef _DEBUG

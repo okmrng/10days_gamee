@@ -11,6 +11,7 @@
 #include "Pause.h"
 #include "HitEffect.h"
 #include "InScene.h"
+#include "TimeLimit.h"
 #include <list>
 #include <sstream>
 #include <cassert>
@@ -135,6 +136,8 @@ private:
 	HitEffect* hitEffect_; // ヒットエフェクト
 
 	InScene* inScene_; // シーン遷移演出
+
+	TimeLimit* timeLimitC_; // 制限時間
 
 	std::stringstream boxPopComands_; // コマンド
 
