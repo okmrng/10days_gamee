@@ -49,7 +49,7 @@ void Stage1::Initialize()
 	inScene_->Initialize();
 
 	// コマンド
-	LoadData("resource/csv/boxData7.csv", boxPopComands_);
+	LoadData("resource/csv/boxData4.csv", boxPopComands_);
 
 	boxPos_ = Vector2(0.0f, 0.0f);
 	boxSize_ = Vector2(0.0f, 0.0f);
@@ -177,7 +177,7 @@ void Stage1::Update(char* keys, char* preKeys)
 		if (player_->GetCanShoot() <= 0) {
 			--inGameOverCount_;
 		}
-		if (inGameOverCount_ <= 0) {
+		if (inGameOverCount_ <= 0 || timeLimit_ <= 0) {
 			canPlayCount_ = 5;
 			isGameOver_ = true;
 			canPlay_ = false;
@@ -377,7 +377,7 @@ void Stage1::CheckAllCollision()
 
 		if (posB.x < posA.x + sizeA.x && posA.x < posB.x + sizeB.x &&
 			posB.y < posA.y + sizeA.y && posA.y < posB.y + sizeB.y) {
-			if (iceBox->GetVelocity() <= 15) {
+			if (iceBox->GetVelocity() <= 7) {
 				if (!iceBox->GetAddStop()) {
 					if (addClearCount_ == 1) {
 						clearCount_ += 1;
@@ -598,24 +598,26 @@ void Stage1::Draw()
 	Novice::DrawBox(1047, 0, 5, 720, 0.0f, GREEN, kFillModeSolid);
 
 	// 箱
-	// 木箱
-	for (Box* box : box_) {
-		box->Draw();
-	}
+	if (!isPause_) {
+		// 木箱
+		for (Box* box : box_) {
+			box->Draw();
+		}
 
-	// 金属製の箱
-	for (MetalBox* metalBox : metalBox_) {
-		metalBox->Draw();
-	}
+		// 金属製の箱
+		for (MetalBox* metalBox : metalBox_) {
+			metalBox->Draw();
+		}
 
-	// 氷
-	for (IceBox* iceBox : iceBox_) {
-		iceBox->Draw();
-	}
+		// 氷
+		for (IceBox* iceBox : iceBox_) {
+			iceBox->Draw();
+		}
 
-	// tv
-	for (TvBox* tvBox : tvBox_) {
-		tvBox->Draw();
+		// tv
+		for (TvBox* tvBox : tvBox_) {
+			tvBox->Draw();
+		}
 	}
 
 	// クリア
@@ -678,7 +680,7 @@ void Stage1::Retry()
 	tvBox_.clear();
 
 	// CSVファイルを再度読み込む
-	std::string csvFilePath = "resource/csv/boxData7.csv";
+	std::string csvFilePath = "resource/csv/boxData4.csv";
 	std::stringstream boxPopComands; // リトライ時に新たなストリームを用意
 	LoadData(csvFilePath, boxPopComands);
 
